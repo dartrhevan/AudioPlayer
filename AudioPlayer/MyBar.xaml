@@ -5,33 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AudioPlayer"
              mc:Ignorable="d" Height="166.387" Width="918.487">
-    <!--<DockPanel LastChildFill="True">
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Left">
-            <Button Background="Blue" Content="1" />
-            <Button Background="White" Content="2" />
-            <Button Background="Red" Content="3" />
-        </StackPanel>
-        <Image DockPanel.Dock="Left" Width="50" Height="50"></Image>
-        <StackPanel Orientation="Vertical" DockPanel.Dock="Right">
-            <Button Background="Blue" Content="4" />
-            <Button Background="White" Content="5" />
-            <Button Background="Red" Content="6" />
-        </StackPanel>
-    </DockPanel>-->
-    <!--<Canvas>
-        <Button Background="AliceBlue" Content="Top 20 Left 40" Canvas.Top="30" Canvas.Left="30" Width="99" />
-        <Button Background="LightSkyBlue" Content="Top 20 Right 20" Canvas.Top="30" Canvas.Right="20" Width="107"/>
-        <Button Background="Aquamarine" Content="Bottom 30 Left 20" Canvas.Bottom="30" Canvas.Left="30"/>
-        <Button Background="LightCyan" Content="Bottom 20 Right 40" Canvas.Bottom="30" Canvas.Right="20"/>
-        <Image Name ="CurrentCover" Source="D:\Data\Интерфйсы\WpfApp1\WpfApp1\bin\Debug\1.png" Canvas.Top="30" Canvas.Left="166" Height="106" Width="159"></Image>
-        <Label Name="CurrentName" Canvas.Top="30" Canvas.Left="333" FontFamily="Times new roman" FontSize="18"></Label>
-        <ProgressBar Canvas.Top="70" Canvas.Left="333" Name="Progress" Minimum="0" Maximum="100" Value="50" Width="200" Height="15"></ProgressBar>
-        <StackPanel Orientation="Horizontal" Canvas.Top="100" Canvas.Left="400" Height="25">
-            <Button Width="25"></Button>
-            <Button Width="25"></Button>
-            <Button Width="25"></Button>
-        </StackPanel>        
-    </Canvas>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"></ColumnDefinition>
@@ -41,7 +14,6 @@
         <Canvas Grid.Column="0">
             <Button Background="Aquamarine" Content="Bottom 30 Left 20" Canvas.Bottom="30" Canvas.Left="30" Width="80"/>
             <Button Background="AliceBlue" Content="Top 20 Left 40" Canvas.Top="30" Canvas.Left="30" Width="80" />
-            <!--<Image Name ="CurrentCover" Source="D:\Data\Интерфйсы\WpfApp1\WpfApp1\bin\Debug\1.png" Canvas.Top="30" Canvas.Left="125" Canvas.Right="10" Height="106" Width="127"></Image>-->
         </Canvas>
         
         <Grid Grid.Column="1">
@@ -56,15 +28,22 @@
                 <ColumnDefinition Width="*">
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Name ="CurrentCover" Source="D:\Data\Интерфйсы\WpfApp1\WpfApp1\bin\Debug\1.png" Margin="0,0,0,2" Grid.RowSpan="3" ></Image>
+            <Image Grid.Column="0" Name ="CurrentCover" Source="C:\Users\User\OneDrive\Документы\Учёба\Интерфйсы\MediaPlayer\AudioPlayer\bin\Debug\1.png" Margin="0,0,0,2" Grid.RowSpan="3" ></Image>
             <Label Grid.Row="0" Grid.Column="1" Name="CurrentName" FontFamily="Times new roman" FontSize="18"></Label>
             <ProgressBar Grid.Row="1" Grid.Column="1" Canvas.Top="70" Canvas.Left="333" Name="Progress" Minimum="0" Maximum="100" Value="50"  Height="15"></ProgressBar>
-            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Canvas.Top="100" Canvas.Left="400" Height="25">
-                
-                <Button Width="25" Margin="150, 0, 10, 0"></Button>
-                <Button Width="25" Margin="0, 0, 10, 0"></Button>
-                <Button Width="25" Margin="0, 0, 10, 0"></Button>
-            </StackPanel>
+            <Grid Grid.Row="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.5*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Row ="0" Grid.Column="0" Width="25"></Button>
+                <Button Grid.Row ="0" Grid.Column="1" Width="25"></Button>
+                <Button Grid.Row ="0" Grid.Column="2" Width="25"></Button>
+            </Grid>
         </Grid>
         <Canvas Grid.Column="2">
             <Button Background="LightSkyBlue" Content="Top 20 Right 20" Canvas.Top="30" Canvas.Right="20" Width="80"/>
