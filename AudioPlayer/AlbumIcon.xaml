@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:AudioPlayer"
              mc:Ignorable="d" 
              d:DesignHeight="260" d:DesignWidth="260 ">
-    <Grid Background="AliceBlue" RenderTransformOrigin="0.519,0.685" >
+    <Grid Background="White" RenderTransformOrigin="0.519,0.685" >
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -14,7 +14,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Width ="200" Height=" 200" VerticalAlignment="Bottom">Cover</Button>
+        <Button Grid.Row="0" Grid.Column="0" Width ="200" Height=" 200" VerticalAlignment="Bottom">Обложка</Button>
         <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Top">Название альбома</Label>
         <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Bottom">Исполнитель</Label>
     </Grid>
