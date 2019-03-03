@@ -58,9 +58,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Album.cs" />
-    <Compile Include="AlbumIcon.xaml.cs">
-      <DependentUpon>AlbumIcon.xaml</DependentUpon>
+    <Compile Include="Album.xaml.cs">
+      <DependentUpon>Album.xaml</DependentUpon>
     </Compile>
     <Page Include="MainPage.xaml">
       <SubType>Designer</SubType>
@@ -86,7 +85,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AlbumIcon.xaml">
+    <Page Include="Album.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

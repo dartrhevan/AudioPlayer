@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AudioPlayer.AlbumIcon"
+﻿<UserControl x:Class="AudioPlayer.Album"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,14 +8,15 @@
              d:DesignHeight="260" d:DesignWidth="260 ">
     <Grid Background="AliceBlue" RenderTransformOrigin="0.519,0.685" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Button Grid.Row="0" Grid.Column="0" Width ="200" Height=" 200" VerticalAlignment="Bottom">Cover</Button>
-        <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Top">Название альбома</Label>
-        <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Bottom">Исполнитель</Label>
+        <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Name="AlbumName">Название альбома</Label>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Name="Author">Исполнитель</Label>
     </Grid>
 </UserControl>

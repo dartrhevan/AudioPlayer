@@ -26,6 +26,8 @@ namespace AudioPlayer
         {
             Player = player;
             InitializeComponent();
+            foreach (var album in player.Albums)
+                AlbumsPanel.Children.Add(album);
         }
     }
 }
