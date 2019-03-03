@@ -41,7 +41,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row ="0" Grid.Column="0" Width="25"></Button>
-                <Button Grid.Row ="0" Grid.Column="1" Width="25"></Button>
+                <Button Grid.Row ="0" Grid.Column="1" Width="25" Click="PlayStartButtonClick"></Button>
                 <Button Grid.Row ="0" Grid.Column="2" Width="25"></Button>
             </Grid>
         </Grid>

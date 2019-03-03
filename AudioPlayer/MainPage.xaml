@@ -16,6 +16,7 @@
         </Grid.ColumnDefinitions>
         <ScrollViewer Grid.Row="0" Grid.Column="0">
             <WrapPanel Margin="0,0,-220,0">
+                <!--<local:AlbumIcon Width="260" Height="260"/>
                 <local:AlbumIcon Width="260" Height="260"/>
                 <local:AlbumIcon Width="260" Height="260"/>
                 <local:AlbumIcon Width="260" Height="260"/>
@@ -23,8 +24,7 @@
                 <local:AlbumIcon Width="260" Height="260"/>
                 <local:AlbumIcon Width="260" Height="260"/>
                 <local:AlbumIcon Width="260" Height="260"/>
-                <local:AlbumIcon Width="260" Height="260"/>
-                <local:AlbumIcon Width="260" Height="260"/>
+                <local:AlbumIcon Width="260" Height="260"/>-->
             </WrapPanel>
         </ScrollViewer>
     </Grid>

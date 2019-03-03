@@ -25,5 +25,10 @@ namespace AudioPlayer
             InitializeComponent();
             CurrentName.Content = "Name";
         }
+
+        private void PlayStartButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
