@@ -11,7 +11,7 @@ using File = TagLib.File;
 
 namespace AudioPlayer
 {
-    class MyPlayer
+    public class MyPlayer
     {
         public Album CurrAlbum { get; set; }
         public TagLib.File CurrentSong { get; set; }

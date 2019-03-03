@@ -20,8 +20,11 @@ namespace AudioPlayer
     /// </summary>
     public partial class MainPage : UserControl
     {
-        public MainPage()
+        public readonly MyPlayer Player;
+
+        public MainPage(MyPlayer player)
         {
+            Player = player;
             InitializeComponent();
         }
     }

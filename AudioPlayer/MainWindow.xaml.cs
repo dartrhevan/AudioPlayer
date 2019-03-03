@@ -20,9 +20,13 @@ namespace AudioPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        public readonly MyPlayer Player = new MyPlayer();
+        public readonly MainPage MainPage;// = new MainPage();
         public MainWindow()
         {
             InitializeComponent();
+            MainPage = new MainPage(Player);
+            Panel.Children.Add(MainPage);
         }
     }
 }

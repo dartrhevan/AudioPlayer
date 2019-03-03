@@ -9,7 +9,7 @@ using System.IO;
 
 namespace AudioPlayer
 {
-    class Album
+    public class Album
     {
         public readonly List<TagLib.File> Songs;// = new List<TagLib.File>();
         public readonly AlbumIcon Cover;//хз где брать обложку, просто чтобы не забыть, что она должна здесь быть
