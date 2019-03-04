@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AudioPlayer"
              mc:Ignorable="d" 
-             d:DesignHeight="260" d:DesignWidth="260 ">
-    <Grid Background="AliceBlue" RenderTransformOrigin="0.519,0.685" >
+             d:DesignHeight="300" d:DesignWidth="300 ">
+    <Grid Background="AliceBlue"  RenderTransformOrigin="0.519,0.685">
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -15,8 +15,8 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="0" Width ="200" Height=" 200" VerticalAlignment="Bottom">Cover</Button>
-        <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Name="AlbumName">Название альбома</Label>
-        <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Name="Author">Исполнитель</Label>
+        <Button Grid.Row="0" Grid.Column="0" Width ="240" Height=" 240" VerticalAlignment="Center" Name="Picture"></Button>
+        <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Name="AlbumName" Width="250">Название альбома</Label>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Name="Author" Width="250">Исполнитель</Label>
     </Grid>
 </UserControl>

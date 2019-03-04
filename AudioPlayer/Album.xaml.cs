@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TagLib;
+using System.IO;
+using System.Drawing;
 
 namespace AudioPlayer
 {
@@ -20,15 +23,25 @@ namespace AudioPlayer
     /// </summary>
     public partial class Album : UserControl
     {
+        ImageSourceConverter ic = new ImageSourceConverter();
         public readonly List<TagLib.File> Songs;// = new List<TagLib.File>();
-        public readonly Album Cover;//хз где брать обложку, просто чтобы не забыть, что она должна здесь быть
+        public readonly ImageSource Cover;//хз где брать обложку, просто чтобы не забыть, что она должна здесь быть
         //public readonly string AlbumName;
         //public readonly string Author;
 
+            //RenderTransformOrigin="0.519,0.685" не знаю что это, но я этого в гриде не писал
 
-        public Album(IEnumerable<TagLib.File> songs, string albumName, string author)
+
+        public Album(IEnumerable<TagLib.File> songs, string albumName, string author, IPicture[] pictures)
         {
             InitializeComponent();
+
+            if (pictures != null)
+            {
+                Cover = (ImageSource)ic.ConvertFrom(pictures[0].Data.Data);
+                var bg = new ImageBrush(Cover);
+                Picture.Background = bg;
+            }
             Songs = new List<TagLib.File>(songs);
             AlbumName.Content = albumName;
             Author.Content = author;
