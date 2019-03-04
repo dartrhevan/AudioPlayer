@@ -21,13 +21,22 @@ namespace AudioPlayer
     public partial class MainPage : UserControl
     {
         public readonly MyPlayer Player;
+        //readonly List<Album> Albums;
 
         public MainPage(MyPlayer player)
         {
             Player = player;
             InitializeComponent();
-            foreach (var album in player.Albums)
+            //Albums = Player.Albums;
+            foreach (var album in Player.Albums)
                 AlbumsPanel.Children.Add(album);
+        }
+
+        public void Update()
+        {
+            if (AlbumsPanel.Children.Count < Player.Albums.Count)
+                for(var i = AlbumsPanel.Children.Count; i < Player.Albums.Count; ++i)
+                    AlbumsPanel.Children.Add(Player.Albums[i]);
         }
     }
 }

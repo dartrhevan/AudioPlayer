@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace AudioPlayer
 {
@@ -25,11 +26,24 @@ namespace AudioPlayer
         {
             InitializeComponent();
             Player = player;
-        }
+        }/*
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)
         {
 
+        }*/
+        private void PlayStartButtonClick(object sender, RoutedEventArgs e)
+        {
+            if(Player.CurrePlayer.Position.Equals(new TimeSpan(0)))
+                Player.CurrePlayer.Play();
+            else Player.CurrePlayer.Pause();
+        }
+
+        private void OpenSongClick(object sender, RoutedEventArgs e)
+        {
+            var openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+                Player.AddSong(openFileDialog.FileName);
         }
     }
 }
