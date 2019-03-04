@@ -44,6 +44,10 @@ namespace AudioPlayer
             var openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
                 Player.AddSong(openFileDialog.FileName);
+            var par = Parent as DockPanel;
+            var albums = par.Children[par.Children.Count - 1] as MainPage;
+            albums.Update();
+            InvalidateVisual();
         }
     }
 }
