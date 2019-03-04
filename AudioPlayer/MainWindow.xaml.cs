@@ -20,13 +20,24 @@ namespace AudioPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        public readonly MyBar Bar;// = new MyBar();
         public readonly MyPlayer Player = new MyPlayer();
         public readonly MainPage MainPage;// = new MainPage();
         public MainWindow()
         {
             InitializeComponent();
             MainPage = new MainPage(Player);
+            Bar = new MyBar(Player);
+            Panel.Children.Add(Bar);
             Panel.Children.Add(MainPage);
+            DockPanel.SetDock(Bar, Dock.Top);
+            Bar.Height = 150;
+            Bar.Width = this.Width;
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Bar.Width = this.Width;
         }
     }
 }

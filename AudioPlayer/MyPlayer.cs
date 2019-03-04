@@ -15,7 +15,7 @@ namespace AudioPlayer
     {
         public Album CurrAlbum { get; set; }
         public TagLib.File CurrentSong { get; set; }
-        public MediaPlayer CurrePlayer { get; private set; }
+        public readonly MediaPlayer CurrePlayer = new MediaPlayer();// { get; private set; }
         private static readonly DirectoryInfo MainDirectory = new DirectoryInfo(@"C:\MyPlayerDirectory");
         public readonly List<TagLib.File> Songs;// = new List<TagLib.File>();
         public List<Album> Albums { get; set; }
@@ -35,6 +35,16 @@ namespace AudioPlayer
                 .Select(f => TagLib.File.Create(Path.Combine(f.DirectoryName, f.Name)));
 
         }*/
-
+        public void AddSong(string path)
+        {
+            var song = TagLib.File.Create(path);
+            Songs.Add(song);
+            var album = new Album(new[] {song}, song.Tag.Album, String.Join(", ", song.Tag.Performers));
+            Albums.Add(album);
+            CurrAlbum = album;
+            CurrentSong = song;
+            CurrePlayer.Close();
+            CurrePlayer.Open(new Uri(path, UriKind.Relative));
+        }
     }
 }
