@@ -26,7 +26,7 @@ namespace AudioPlayer
                 .Select(f => TagLib.File.Create(Path.Combine(f.DirectoryName, f.Name)));
             Songs = new List<TagLib.File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
-                .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers))));
+                .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), g.First().Tag.Pictures)));
         }
         /*
         void InitialiseSongsList().
