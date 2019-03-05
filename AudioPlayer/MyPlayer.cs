@@ -40,7 +40,8 @@ namespace AudioPlayer
             var song = TagLib.File.Create(path);
             Songs.Add(song);
             var album = new Album(new[] {song}, song.Tag.Album, String.Join(", ", song.Tag.Performers));
-            Albums.Add(album);
+            if(!Albums.Contains(album))
+                Albums.Add(album);
             CurrAlbum = album;
             CurrentSong = song;
             CurrePlayer.Close();

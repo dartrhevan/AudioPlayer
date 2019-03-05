@@ -39,5 +39,12 @@ namespace AudioPlayer
         {
             Bar.Width = this.Width;
         }
+
+        private void OnStateChanged(object sender, EventArgs e)
+        {
+            //base.OnStateChanged(e);
+            InvalidateVisual();
+            Bar.Width = this.Width;
+        }
     }
 }
