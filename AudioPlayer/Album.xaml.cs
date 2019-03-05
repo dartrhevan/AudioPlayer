@@ -36,7 +36,7 @@ namespace AudioPlayer
         {
             InitializeComponent();
 
-            if (pictures != null)
+            if (pictures != null && pictures.Length > 0)
             {
                 Cover = (ImageSource)ic.ConvertFrom(pictures[0].Data.Data);
                 var bg = new ImageBrush(Cover);
