@@ -40,6 +40,7 @@ namespace AudioPlayer
             {
                 Cover = (ImageSource)ic.ConvertFrom(pictures[0].Data.Data);
                 var bg = new ImageBrush(Cover);
+                bg.Stretch = Stretch.Fill;
                 Picture.Background = bg;
             }
             Songs = new List<TagLib.File>(songs);
