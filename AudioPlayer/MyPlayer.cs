@@ -39,9 +39,11 @@ namespace AudioPlayer
         {
             var song = TagLib.File.Create(path);
             Songs.Add(song);
-            var album = new Album(new[] {song}, song.Tag.Album, String.Join(", ", song.Tag.Performers));
-            if(!Albums.Contains(album))
+            var album = new Album(new[] {song}, song.Tag.Album, String.Join(", ", song.Tag.Performers), song.Tag.Pictures);
+            var alb_ind = Albums.FindIndex(a => a.AlbumName.Content as string == album.AlbumName.Content as string && a.Author.Content as string  == album.Author.Content as string);
+            if (alb_ind == -1)
                 Albums.Add(album);
+            else Albums[alb_ind].Songs.Add(song);
             CurrAlbum = album;
             CurrentSong = song;
             CurrePlayer.Close();
