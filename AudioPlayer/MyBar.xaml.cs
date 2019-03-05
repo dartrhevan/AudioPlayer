@@ -21,11 +21,10 @@ namespace AudioPlayer
     /// </summary>
     public partial class MyBar : UserControl
     {
-        public readonly MyPlayer Player;
-        public MyBar(MyPlayer player)
+        public  MyPlayer Player { get; set; }
+        public MyBar()
         {
             InitializeComponent();
-            Player = player;
         }/*
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)

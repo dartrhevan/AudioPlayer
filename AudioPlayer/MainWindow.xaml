@@ -5,10 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioPlayer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"  MinWidth="600" SizeChanged="OnSizeChanged" StateChanged="OnStateChanged">
+        Title="MainWindow" Height="450" Width="800"  MinWidth="600">
     <DockPanel LastChildFill="True" Name="Panel">
-        <!--<local:MyBar Width="Auto" Height="150" DockPanel.Dock="Top"></local:MyBar>-->
-        <!--<Label></Label>-->
+        <local:MyBar Width="Auto" Height="150" DockPanel.Dock="Top" x:Name="Bar"></local:MyBar>
         <!--<local:MainPage></local:MainPage>-->
     </DockPanel>
 </Window>
