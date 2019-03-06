@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 using TagLib;
 using System.IO;
+using System.Runtime.CompilerServices;
 using File = TagLib.File;
 
 namespace AudioPlayer
@@ -17,18 +18,40 @@ namespace AudioPlayer
         public TagLib.File CurrentSong { get; set; }
         public readonly MediaPlayer CurrePlayer = new MediaPlayer();// { get; private set; }
         private static readonly DirectoryInfo MainDirectory = new DirectoryInfo(@"C:\MyPlayerDirectory");
-        //public DirectoryInfo CurreDirectory = MainDirectory;
-        public readonly List<TagLib.File> Songs;// = new List<TagLib.File>();
-        public readonly List<Album> Albums;// { get; set; }
+        DirectoryInfo curreDirectory = MainDirectory;
+        public List<File> Songs;// = new List<TagLib.File>();
+        public List<Album> Albums;// { get; set; }
 
         public MyPlayer()
         {
-            var files = MainDirectory.GetFiles()
-                .Select(f => TagLib.File.Create(Path.Combine(f.DirectoryName, f.Name)));
-            Songs = new List<TagLib.File>(files);
+            OpenCurrentDirectory();
+        }
+
+        private void OpenCurrentDirectory()
+        {
+            var files = curreDirectory.GetFiles()
+                .Select(f =>
+                {
+                    try
+                    {
+                        return File.Create(Path.Combine(f.DirectoryName, f.Name));
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                }).Where(f => f != null);
+            Songs = new List<File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
                 .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), g.First().Tag.Pictures)));
         }
+
+        public void OpenFolder(string folderPath)
+        {
+            curreDirectory = new DirectoryInfo(folderPath);
+            OpenCurrentDirectory();
+        }
+
         /*
         void InitialiseSongsList().
         {
@@ -38,7 +61,7 @@ namespace AudioPlayer
         }*/
         public void AddSong(string path)
         {
-            var song = TagLib.File.Create(path);
+            var song = File.Create(path);
             Songs.Add(song);
             var album = new Album(new[] {song}, song.Tag.Album, String.Join(", ", song.Tag.Performers), song.Tag.Pictures);
             var alb_ind = Albums.FindIndex(a => a.AlbumName.Content as string == album.AlbumName.Content as string && a.Author.Content as string  == album.Author.Content as string);
@@ -50,5 +73,6 @@ namespace AudioPlayer
             CurrePlayer.Close();
             CurrePlayer.Open(new Uri(path, UriKind.Relative));
         }
+        
     }
 }

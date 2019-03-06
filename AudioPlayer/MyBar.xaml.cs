@@ -7,12 +7,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Microsoft.Win32;
+using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace AudioPlayer
 {
@@ -41,11 +43,25 @@ namespace AudioPlayer
         private void OpenSongClick(object sender, RoutedEventArgs e)
         {
             var openFileDialog = new OpenFileDialog();
-            if (openFileDialog.ShowDialog() == true)
+            var res = openFileDialog.ShowDialog();
+            if (res == DialogResult.Yes || res == DialogResult.OK)
                 Player.AddSong(openFileDialog.FileName);
             var par = Parent as DockPanel;
             var albums = par.Children[par.Children.Count - 1] as MainPage;
             albums.Update();
+            InvalidateVisual();
+            playing = false;
+        }
+
+        private void OpenDirectoryClick(object sender, RoutedEventArgs e)
+        {
+            var openFolderDialog = new FolderBrowserDialog();
+            var res = openFolderDialog.ShowDialog();
+            if (res == DialogResult.Yes || res  == DialogResult.OK)
+                Player.OpenFolder(openFolderDialog.SelectedPath);
+            var par = Parent as DockPanel;
+            var albums = par.Children[par.Children.Count - 1] as MainPage;
+            albums.Reset();
             InvalidateVisual();
             playing = false;
         }

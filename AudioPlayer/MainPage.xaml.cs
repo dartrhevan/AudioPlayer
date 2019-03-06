@@ -38,5 +38,12 @@ namespace AudioPlayer
                 for(var i = AlbumsPanel.Children.Count; i < Player.Albums.Count; ++i)
                     AlbumsPanel.Children.Add(Player.Albums[i]);
         }
+
+        public void Reset()
+        {
+            AlbumsPanel.Children.Clear();
+            foreach (var album in Player.Albums)
+                AlbumsPanel.Children.Add(album);
+        }
     }
 }
