@@ -25,17 +25,17 @@ namespace AudioPlayer
         public MyBar()
         {
             InitializeComponent();
-        }/*
+        }
+
+
+        bool playing;
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)
         {
-
-        }*/
-        private void PlayStartButtonClick(object sender, RoutedEventArgs e)
-        {
-            if(Player.CurrePlayer.Position.Equals(new TimeSpan(0)))
+            if(!playing)
                 Player.CurrePlayer.Play();
             else Player.CurrePlayer.Pause();
+            playing = !playing;
         }
 
         private void OpenSongClick(object sender, RoutedEventArgs e)
@@ -47,6 +47,7 @@ namespace AudioPlayer
             var albums = par.Children[par.Children.Count - 1] as MainPage;
             albums.Update();
             InvalidateVisual();
+            playing = false;
         }
     }
 }

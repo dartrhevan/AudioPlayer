@@ -17,6 +17,7 @@ namespace AudioPlayer
         public TagLib.File CurrentSong { get; set; }
         public readonly MediaPlayer CurrePlayer = new MediaPlayer();// { get; private set; }
         private static readonly DirectoryInfo MainDirectory = new DirectoryInfo(@"C:\MyPlayerDirectory");
+        //public DirectoryInfo CurreDirectory = MainDirectory;
         public readonly List<TagLib.File> Songs;// = new List<TagLib.File>();
         public readonly List<Album> Albums;// { get; set; }
 
