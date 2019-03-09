@@ -5,6 +5,38 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AudioPlayer"
              mc:Ignorable="d" Height="166.387" Width="918.487">
+    <UserControl.Resources>
+        <ControlTemplate TargetType="Button" x:Key="btTemplate">
+            <Border CornerRadius="15"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Background="{TemplateBinding Background}"
+                    Height="{TemplateBinding Height}"
+                    Width="{TemplateBinding Width}" >
+                <ContentControl Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Content="{TemplateBinding Content}" />
+            </Border>
+        </ControlTemplate>
+        <Style TargetType="Button">
+            <Style.Setters>
+                <Setter Property="Template" Value="{StaticResource btTemplate}"></Setter>
+                <Setter Property="Button.Background" Value= "Aquamarine" />
+                <Setter Property="Button.Foreground" Value="Black" />
+                <Setter Property="Button.FontSize" Value="14"></Setter>
+                <Setter Property="Button.FontFamily" Value="Times new roman" />
+                <Setter Property="Button.Content" Value="156"></Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Aqua" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--<ControlTemplate TargetType="Button" x:Key="None">
+        </ControlTemplate>-->
+    </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"></ColumnDefinition>
@@ -12,10 +44,19 @@
             <ColumnDefinition Width="0.3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Canvas Grid.Column="0">
-            <Button Background="Aquamarine" Content="Open song" Canvas.Bottom="30" Canvas.Left="30" Width="80" Click="OpenSongClick"/>
-            <Button Background="AliceBlue" Content="Open directory" Canvas.Top="30" Canvas.Left="30" Width="80" Click="OpenDirectoryClick" />
+            <Button  Content="Open song" Canvas.Bottom="30" Canvas.Left="30" Width="96" Click="OpenSongClick" Canvas.Top="118"/>
+            <Button Content="Open directory" Canvas.Top="30" Canvas.Left="30" Width="96" Click="OpenDirectoryClick" >
+                <!--<Button.Template>
+                    <ControlTemplate >
+                        <Border CornerRadius="10" BorderBrush="CadetBlue" BorderThickness="2"
+                                Background="LightBlue" Height="20" Width="80" >
+                            <ContentControl Content="{TemplateBinding Content}"/>
+                        </Border>
+                    </ControlTemplate>
+                 </Button.Template>-->
+            </Button>
         </Canvas>
-        
+
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.4*"></RowDefinition>
@@ -40,14 +81,14 @@
                     <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row ="0" Grid.Column="0" Width="25"></Button>
+                <Button Grid.Row ="0" Grid.Column="0" Width="25" ></Button>
                 <Button Grid.Row ="0" Grid.Column="1" Width="25" Click="PlayStartButtonClick">P/S</Button>
                 <Button Grid.Row ="0" Grid.Column="2" Width="25"></Button>
             </Grid>
         </Grid>
         <Canvas Grid.Column="2">
-            <Button Background="LightSkyBlue" Content="Top 20 Right 20" Canvas.Top="30" Canvas.Right="20" Width="80"/>
-            <Button Background="LightCyan" Content="Bottom 20 Right 40" Canvas.Bottom="30" Canvas.Right="20" Width="80"/>
+            <Button Content="Top 20 Right 20" Canvas.Top="30" Canvas.Right="20" Width="80"/>
+            <Button Content="Bottom 20 Right 40" Canvas.Bottom="30" Canvas.Right="20" Width="80"/>
         </Canvas>
     </Grid>
 </UserControl>
