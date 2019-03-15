@@ -23,13 +23,13 @@ namespace AudioPlayer
             set
             {
                 currentSong = value;
-                CurrePlayer.Close();
-                CurrePlayer.Open(new Uri(currentSong.Name, UriKind.Relative));
-                CurrentSongAnimation.Duration = CurrePlayer.NaturalDuration;
+                CurrentPlayer.Close();
+                CurrentPlayer.Open(new Uri(currentSong.Name, UriKind.Relative));
+                CurrentSongAnimation.Duration = CurrentPlayer.NaturalDuration;
             }
         }
 
-        public readonly MediaPlayer CurrePlayer = new MediaPlayer();// { get; private set; }
+        public readonly MediaPlayer CurrentPlayer = new MediaPlayer();// { get; private set; }
         private static readonly DirectoryInfo MainDirectory = new DirectoryInfo(@"C:\MyPlayerDirectory");
         DirectoryInfo curreDirectory = MainDirectory;
         public List<File> Songs;// = new List<TagLib.File>();

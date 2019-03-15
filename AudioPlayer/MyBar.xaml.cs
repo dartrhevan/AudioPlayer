@@ -27,9 +27,19 @@ namespace AudioPlayer
         public  MyPlayer Player { get; set; }
         public MyBar()
         {
+            //Player.CurrentSong.Tag.
             InitializeComponent();
+            timer.Tick += (sender, args) =>
+            {
+                if (playing && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
+                    Progress.Value = Player.CurrentPlayer.Position.TotalSeconds /
+                                     Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds * 100;
+                InvalidateVisual();
+            };
+            timer.Start();
         }
 
+        private Timer timer = new Timer {Interval = 100};
 
         bool playing;
 
@@ -37,9 +47,9 @@ namespace AudioPlayer
         {
             if (!playing)
             {
-                Player.CurrePlayer.Play();
+                Player.CurrentPlayer.Play();
             }
-            else Player.CurrePlayer.Pause();
+            else Player.CurrentPlayer.Pause();
             playing = !playing;
         }
 
@@ -72,14 +82,14 @@ namespace AudioPlayer
         }
 
         private void ProgressValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            if (Player.CurrePlayer != null)
+        {/*
+            if (Player.CurrentPlayer != null)
             {
-                Player.CurrePlayer.Pause();
+                Player.CurrentPlayer.Pause();
                 playing = false;
-                Player.CurrePlayer.Position =
-                    new TimeSpan((long) (Player.CurrePlayer.NaturalDuration.TimeSpan.Ticks * e.NewValue / 100));
-            }
+                Player.CurrentPlayer.Position =
+                    new TimeSpan((long) (Player.CurrentPlayer.NaturalDuration.TimeSpan.Ticks * e.NewValue / 100));
+            }*/
         }
     }
 }
