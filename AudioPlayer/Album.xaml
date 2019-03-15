@@ -6,6 +6,15 @@
              xmlns:local="clr-namespace:AudioPlayer"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300 ">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <!--<Setter Property=""></Setter>-->
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid Background="AliceBlue"  RenderTransformOrigin="0.519,0.685">
         <Grid.RowDefinitions>
             <RowDefinition Height="9*"></RowDefinition>

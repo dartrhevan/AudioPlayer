@@ -23,6 +23,7 @@ namespace AudioPlayer
     /// </summary>
     public partial class MyBar : UserControl
     {
+
         public  MyPlayer Player { get; set; }
         public MyBar()
         {
@@ -34,8 +35,10 @@ namespace AudioPlayer
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)
         {
-            if(!playing)
+            if (!playing)
+            {
                 Player.CurrePlayer.Play();
+            }
             else Player.CurrePlayer.Pause();
             playing = !playing;
         }
@@ -49,6 +52,7 @@ namespace AudioPlayer
             var par = Parent as DockPanel;
             var albums = par.Children[par.Children.Count - 1] as MainPage;
             albums.Update();
+            CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
             InvalidateVisual();
             playing = false;
         }
@@ -62,8 +66,20 @@ namespace AudioPlayer
             var par = Parent as DockPanel;
             var albums = par.Children[par.Children.Count - 1] as MainPage;
             albums.Reset();
+            CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
             InvalidateVisual();
             playing = false;
+        }
+
+        private void ProgressValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (Player.CurrePlayer != null)
+            {
+                Player.CurrePlayer.Pause();
+                playing = false;
+                Player.CurrePlayer.Position =
+                    new TimeSpan((long) (Player.CurrePlayer.NaturalDuration.TimeSpan.Ticks * e.NewValue / 100));
+            }
         }
     }
 }
