@@ -33,7 +33,7 @@ namespace AudioPlayer
             {
                 if (playing && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
                     Progress.Value = Player.CurrentPlayer.Position.TotalSeconds /
-                                     Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds * 100;
+                                     Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 InvalidateVisual();
             };
             timer.Start();
@@ -82,14 +82,20 @@ namespace AudioPlayer
         }
 
         private void ProgressValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {/*
-            if (Player.CurrentPlayer != null)
+        {
+            
+            if (Player.CurrentPlayer != null && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
             {
-                Player.CurrentPlayer.Pause();
-                playing = false;
-                Player.CurrentPlayer.Position =
-                    new TimeSpan((long) (Player.CurrentPlayer.NaturalDuration.TimeSpan.Ticks * e.NewValue / 100));
-            }*/
+                var dif = (e.NewValue - e.OldValue) * Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMilliseconds;
+                //var stDif = (e.NewValue - e.OldValue) * Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMilliseconds;
+                if (dif > 150)
+                {
+                    Player.CurrentPlayer.Pause();
+                    playing = false;
+                    Player.CurrentPlayer.Position =
+                        new TimeSpan((long) (Player.CurrentPlayer.NaturalDuration.TimeSpan.Ticks * e.NewValue));
+                }
+            }
         }
     }
 }
