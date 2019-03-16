@@ -24,6 +24,7 @@ namespace AudioPlayer
     public partial class MyBar : UserControl
     {
 
+        readonly ImageSourceConverter ic = new ImageSourceConverter();
         public  MyPlayer Player { get; set; }
         public MyBar()
         {
@@ -34,6 +35,9 @@ namespace AudioPlayer
                 if (playing && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
                     Progress.Value = Player.CurrentPlayer.Position.TotalSeconds /
                                      Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds;
+                Begin.Content = Player.CurrentPlayer.Position.ToString();
+                End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
+
                 InvalidateVisual();
             };
             timer.Start();
@@ -48,6 +52,8 @@ namespace AudioPlayer
             if (!playing)
             {
                 Player.CurrentPlayer.Play();
+                //End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
+
             }
             else Player.CurrentPlayer.Pause();
             playing = !playing;
@@ -63,6 +69,8 @@ namespace AudioPlayer
             var albums = par.Children[par.Children.Count - 1] as MainPage;
             albums.Update();
             CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
+            if (Player.CurrentSong.Tag.Pictures.Length > 0)
+                CurrentCover.Source = ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
             InvalidateVisual();
             playing = false;
         }
@@ -75,8 +83,11 @@ namespace AudioPlayer
                 Player.OpenFolder(openFolderDialog.SelectedPath);
             var par = Parent as DockPanel;
             var albums = par.Children[par.Children.Count - 1] as MainPage;
-            albums.Reset();
+            albums.Reset();/*
             CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
+            if(Player.CurrentSong.Tag.Pictures.Length > 0)
+                CurrentCover.Source = ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));*/
+            //End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
             InvalidateVisual();
             playing = false;
         }
