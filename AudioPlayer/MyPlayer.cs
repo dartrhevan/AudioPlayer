@@ -15,7 +15,7 @@ namespace AudioPlayer
 {
     public class MyPlayer
     {
-        public DoubleAnimation CurrentSongAnimation { get; private set; } = new DoubleAnimation();
+        //public DoubleAnimation CurrentSongAnimation { get; private set; } = new DoubleAnimation();
         public Album CurrAlbum { get; set; }
         public TagLib.File CurrentSong
         {
@@ -25,7 +25,7 @@ namespace AudioPlayer
                 currentSong = value;
                 CurrentPlayer.Close();
                 CurrentPlayer.Open(new Uri(currentSong.Name, UriKind.Relative));
-                CurrentSongAnimation.Duration = CurrentPlayer.NaturalDuration;
+                //CurrentSongAnimation.Duration = CurrentPlayer.NaturalDuration;
             }
         }
 
@@ -39,8 +39,8 @@ namespace AudioPlayer
         public MyPlayer()
         {
             OpenCurrentDirectory();
-            CurrentSongAnimation.From = 0;
-            CurrentSongAnimation.To = 100;
+            //CurrentSongAnimation.From = 0;
+            //CurrentSongAnimation.To = 100;
         }
 
         private void OpenCurrentDirectory()
@@ -60,6 +60,7 @@ namespace AudioPlayer
             Songs = new List<File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
                 .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures)));
+            CurrentSong = Songs[Songs.Count - 1];
         }
 
         public void OpenFolder(string folderPath)

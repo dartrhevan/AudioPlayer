@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -65,9 +66,21 @@ namespace AudioPlayer
 
         private void ReturnButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var par = (Parent as DockPanel).Parent as MainWindow;
-            par.Panel.Children.RemoveAt(par.Panel.Children.Count - 1);
-            par.Panel.Children.Add(par.MainPage);
+            var mainWindow = (Parent as DockPanel).Parent as MainWindow;
+            mainWindow.Panel.Children.RemoveAt(mainWindow.Panel.Children.Count - 1);
+            mainWindow.Panel.Children.Add(mainWindow.MainPage);
+            ExecuteAnimation(mainWindow);
+        }
+
+        private static void ExecuteAnimation(MainWindow mainWindow)
+        {
+            var anim = new ThicknessAnimation
+            {
+                From = new Thickness(-mainWindow.Width, 0, 0, 0),
+                To = new Thickness(0, 0, 0, 0),
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 250))
+            };
+            mainWindow.MainPage.BeginAnimation(MarginProperty, anim);
         }
     }
 }

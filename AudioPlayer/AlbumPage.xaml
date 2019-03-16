@@ -40,8 +40,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Column="2" Name="Stack">
-        </StackPanel>
+        <ScrollViewer Grid.Column="2">
+            <StackPanel  Name="Stack">
+            </StackPanel>
+        </ScrollViewer>
         <Button Grid.Column="0" Content="&lt;" Click="ReturnButtonOnClick"/>
     </Grid>
 </UserControl>

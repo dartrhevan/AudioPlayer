@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using TagLib;
 using System.IO;
 using System.Drawing;
+using System.Windows.Media.Animation;
 
 namespace AudioPlayer
 {
@@ -53,6 +54,18 @@ namespace AudioPlayer
             wind.Album.Album = this;
             wind.Album.Player = wind.Player;
             mainPanel.Children.Add(wind.Album);
+            ExecuteAlbumAnimation(wind);
         }
+        private static void ExecuteAlbumAnimation(MainWindow mainWindow)
+        {
+            var anim = new ThicknessAnimation
+            {
+                From = new Thickness(mainWindow.Width, 0, 0, 0),
+                To = new Thickness(0, 0, 0, 0),
+                Duration = new Duration(new TimeSpan(0, 0, 0, 0, 250))
+            };
+            mainWindow.Album.BeginAnimation(MarginProperty, anim);
+        }
+
     }
 }

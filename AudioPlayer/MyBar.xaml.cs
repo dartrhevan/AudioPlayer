@@ -37,7 +37,8 @@ namespace AudioPlayer
                                      Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 Begin.Content = Player.CurrentPlayer.Position.ToString();
                 End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
-
+                if (CurrentName.Content as string != Player.CurrentSong.Tag.Title)
+                    CurrentName.Content = Player.CurrentSong.Tag.Title;
                 InvalidateVisual();
             };
             timer.Start();
