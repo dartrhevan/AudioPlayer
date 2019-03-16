@@ -66,10 +66,9 @@ namespace AudioPlayer
         {
             var openFileDialog = new OpenFileDialog();
             var res = openFileDialog.ShowDialog();
-            if (res == DialogResult.Yes || res == DialogResult.OK)
-                Player.AddSong(openFileDialog.FileName);
-            var par = Parent as DockPanel;
-            var albums = par.Children[par.Children.Count - 1] as MainPage;
+            if (!(res == DialogResult.Yes || res == DialogResult.OK && openFileDialog.FileName != "")) return;
+            Player.AddSong(openFileDialog.FileName);
+            var albums = GetMainPage();
             albums.Update();
             CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
             if (Player.CurrentSong.Tag.Pictures.Length > 0)
@@ -78,14 +77,21 @@ namespace AudioPlayer
             playing = false;
         }
 
+        private MainPage GetMainPage()
+        {
+            var par = (Parent as DockPanel).Parent as MainWindow;
+            var albums = par.MainPage; //par.Children[par.Children.Count - 1] as MainPage;
+            return albums;
+        }
+
         private void OpenDirectoryClick(object sender, RoutedEventArgs e)
         {
             var openFolderDialog = new FolderBrowserDialog();
             var res = openFolderDialog.ShowDialog();
-            if (res == DialogResult.Yes || res  == DialogResult.OK)
+            if (!(res == DialogResult.Yes || res == DialogResult.OK && openFolderDialog.SelectedPath != "")) return;
                 Player.OpenFolder(openFolderDialog.SelectedPath);
-            var par = Parent as DockPanel;
-            var albums = par.Children[par.Children.Count - 1] as MainPage;
+            //var par = (Parent as DockPanel).Parent as MainWindow;
+            var albums = GetMainPage();//par.Children[par.Children.Count - 1] as MainPage;
             albums.Reset();/*
             CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
             if(Player.CurrentSong.Tag.Pictures.Length > 0)

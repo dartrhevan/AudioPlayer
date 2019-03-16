@@ -42,6 +42,6 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Column="2" Name="Stack">
         </StackPanel>
-
+        <Button Grid.Column="0" Content="&lt;" Click="ReturnButtonOnClick"/>
     </Grid>
 </UserControl>

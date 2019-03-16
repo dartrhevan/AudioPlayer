@@ -54,5 +54,20 @@ namespace AudioPlayer
         {
             InitializeComponent();
         }
+
+        //private MainPage GetMainPage()
+        //{
+        //    var par = (Parent as DockPanel).Parent as MainWindow;
+        //    var albums = par.MainPage; //par.Children[par.Children.Count - 1] as MainPage;
+        //    return albums;
+        //}
+
+
+        private void ReturnButtonOnClick(object sender, RoutedEventArgs e)
+        {
+            var par = (Parent as DockPanel).Parent as MainWindow;
+            par.Panel.Children.RemoveAt(par.Panel.Children.Count - 1);
+            par.Panel.Children.Add(par.MainPage);
+        }
     }
 }
