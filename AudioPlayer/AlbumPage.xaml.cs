@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,12 +33,14 @@ namespace AudioPlayer
                 album = value;
                 foreach (var song in album.Songs.Select(s =>
                 {
-                    var res = new Button {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
-                    res.Click += (send, args) =>
+                    var res = new SongRow(s);// {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
+                    res.MouseUp += (send, args) =>
                     {
                         Player.CurrentSong =
-                            Player.Songs.Find(f => f.Tag.Title == ((Button) send).Content as string);
+                            Player.Songs.Find(f => f.Tag.Title == ((SongRow) send).Label.Content as string);
                     };
+                    res.Template = (ControlTemplate) Resources["btTemplate"];
+                    res.Style = (Style)Resources["MainStyle"];
                     return res;
                 }))
                 {

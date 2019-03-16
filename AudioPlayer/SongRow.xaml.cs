@@ -20,9 +20,13 @@ namespace AudioPlayer
     /// </summary>
     public partial class SongRow : UserControl
     {
-        public SongRow()
+        public SongRow(TagLib.File song)
         {
             InitializeComponent();
+            //Content = song.Tag.Title;
+            Label.Content = song.Tag.Title;
+            Margin = new Thickness(0, 0, 0, 12);
+            Height = 20;
         }
     }
 }

@@ -79,9 +79,9 @@
                     <RowDefinition Height="25"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.8*"></ColumnDefinition>
-                    <ColumnDefinition Width="0.1*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.4*"></ColumnDefinition>
+                    <ColumnDefinition Width="0.3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label Name="Begin" Grid.Row="0" Grid.Column="0">0</Label>
                 <Label Name="End" Grid.Row="0" Grid.Column="2">0</Label>
@@ -96,7 +96,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Row ="0" Grid.Column="0" Width="25" ></Button>
-                <Button Grid.Row ="0" Grid.Column="1" Width="25" Click="PlayStartButtonClick">P/S</Button>
+                <Button Grid.Row ="0" Grid.Column="1" Width="25" Click="PlayStartButtonClick">>||</Button>
                 <Button Grid.Row ="0" Grid.Column="2" Width="25"></Button>
             </Grid>
         </Grid>
