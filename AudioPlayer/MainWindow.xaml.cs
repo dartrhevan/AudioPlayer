@@ -22,6 +22,9 @@ namespace AudioPlayer
     {// = new MyBar();
         public readonly MyPlayer Player = new MyPlayer();
         public readonly MainPage MainPage;// = new MainPage();
+
+        public AlbumPage Album;
+
         public MainWindow()
         {
             InitializeComponent();

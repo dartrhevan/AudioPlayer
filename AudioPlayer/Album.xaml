@@ -29,7 +29,7 @@
                 <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
             </Style>
         </Grid.Resources>
-        <Button Grid.Row="0" Grid.Column="0" Width ="240" Height=" 240" VerticalAlignment="Center" Name="Picture"></Button>
+        <Button Grid.Row="0" Grid.Column="0" Width ="240" Height=" 240" VerticalAlignment="Center" Name="Picture" Click="PictureClick"></Button>
         <Label Grid.Row="1" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Top" Name="AlbumName" Width="250">Название альбома</Label>
         <Label Grid.Row="2" Grid.Column="0" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" Name="Author" Width="250">Исполнитель</Label>
     </Grid>

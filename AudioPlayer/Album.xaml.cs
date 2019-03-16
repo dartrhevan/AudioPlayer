@@ -19,17 +19,13 @@ using System.Drawing;
 namespace AudioPlayer
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// 
     /// </summary>
     public partial class Album : UserControl
     {
-        ImageSourceConverter ic = new ImageSourceConverter();
-        public readonly List<TagLib.File> Songs;// = new List<TagLib.File>();
-        public readonly ImageSource Cover;//хз где брать обложку, просто чтобы не забыть, что она должна здесь быть
-        //public readonly string AlbumName;
-        //public readonly string Author;
-
-            //RenderTransformOrigin="0.519,0.685" не знаю что это, но я этого в гриде не писал
+        readonly ImageSourceConverter ic = new ImageSourceConverter();
+        public readonly List<TagLib.File> Songs;
+        public readonly ImageSource Cover;
 
 
         public Album(IEnumerable<TagLib.File> songs, string albumName, string author, IPicture[] pictures)
@@ -46,6 +42,17 @@ namespace AudioPlayer
             Songs = new List<TagLib.File>(songs);
             AlbumName.Content = albumName;
             Author.Content = author;
+        }
+
+        private void PictureClick(object sender, RoutedEventArgs e)
+        {
+            var mainPanel = ((((Parent as WrapPanel).Parent as ScrollViewer).Parent as Grid).Parent as MainPage).Parent as DockPanel;
+            mainPanel.Children.RemoveAt(mainPanel.Children.Count - 1);
+            var wind = (MainWindow) mainPanel.Parent;
+            wind.Album = new AlbumPage();
+            wind.Album.Album = this;
+            wind.Album.Player = wind.Player;
+            mainPanel.Children.Add(wind.Album);
         }
     }
 }
