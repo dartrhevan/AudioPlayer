@@ -16,7 +16,7 @@
                 <ContentControl Margin="{TemplateBinding Padding}"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Content="{TemplateBinding Content}" />
+                                Content="{TemplateBinding Content}"/>
             </Border>
         </ControlTemplate>
         <Style x:Key="MainStyle" TargetType="local:SongRow">

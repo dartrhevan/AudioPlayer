@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 namespace AudioPlayer
 {
     /// <summary>
-    /// Логика взаимодействия для SongRow.xaml
+    /// Строка одной песни в списке
     /// </summary>
     public partial class SongRow : UserControl
     {

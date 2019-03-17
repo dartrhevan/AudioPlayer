@@ -38,7 +38,12 @@ namespace AudioPlayer
                 Begin.Content = Player.CurrentPlayer.Position.ToString();
                 End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
                 if (CurrentName.Content as string != Player.CurrentSong.Tag.Title)
+                {
+                    if (Player.CurrentSong.Tag.Pictures.Length > 0)
+                        CurrentCover.Source = GetImage();
                     CurrentName.Content = Player.CurrentSong.Tag.Title;
+                }
+
                 InvalidateVisual();
             };
             timer.Start();
@@ -73,10 +78,12 @@ namespace AudioPlayer
             albums.Update();
             CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
             if (Player.CurrentSong.Tag.Pictures.Length > 0)
-                CurrentCover.Source = ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
+                CurrentCover.Source = GetImage();
             InvalidateVisual();
             playing = false;
         }
+
+        private ImageSource GetImage() => ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
 
         private MainPage GetMainPage()
         {

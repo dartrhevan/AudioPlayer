@@ -32,7 +32,7 @@ namespace AudioPlayer
         public Album(IEnumerable<TagLib.File> songs, string albumName, string author, IPicture[] pictures)
         {
             InitializeComponent();
-
+            
             if (pictures != null && pictures.Length > 0)
             {
                 Cover = (ImageSource)ic.ConvertFrom(pictures[0].Data.Data);
@@ -43,6 +43,9 @@ namespace AudioPlayer
             Songs = new List<TagLib.File>(songs);
             AlbumName.Content = albumName;
             Author.Content = author;
+            var style = Resources["Style"] as Style;
+            //style.Setters[0]
+            //style.Triggers[0].EnterActions.Add(new SetterBase());
         }
 
         private void PictureClick(object sender, RoutedEventArgs e)

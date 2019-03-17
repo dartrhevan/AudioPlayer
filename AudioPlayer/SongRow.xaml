@@ -6,24 +6,12 @@
              xmlns:local="clr-namespace:AudioPlayer"
              mc:Ignorable="d" Height="177.805" Width="916.341">
     <UserControl.Resources>
-        <!--<Style x:Key="MainStyle" TargetType="local:SongRow">
-            <Setter Property="Background" Value="Aqua"></Setter>
-            <Setter Property="BorderBrush" Value="Aqua"></Setter>
-            <Style.Triggers>
-                <Trigger Property="Button.IsMouseOver" Value="true">
-                    <Setter Property="Button.Background" Value="Red"/>
-                    <Setter Property="Button.BorderBrush" Value="Red"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>-->
         <Style x:Key="ButStyle" TargetType="Button">
+            <Setter Property="Background" Value="Red"></Setter>
         </Style>
 
     </UserControl.Resources>
-                <!--<Trigger Property="IsMouseOver" Value="false">
-                    <Setter Property="Background" Value="CadetBlue"></Setter>
-                </Trigger>-->
-        
+                
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.8*"></ColumnDefinition>

@@ -6,7 +6,8 @@
              xmlns:local="clr-namespace:AudioPlayer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
+    <UserControl.Resources>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height ="*"></RowDefinition>
@@ -23,6 +24,14 @@
                         <Setter Property="Margin" Value="10,0" />
                         <Setter Property="Padding" Value="10,10" />
                     </Style>
+                    <Style TargetType="local:Album">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Blue"></Setter>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+
                 </WrapPanel.Resources>
                 <!--<local:AlbumIcon Width="260" Height="260"/>
                 <local:AlbumIcon Width="260" Height="260"/>
