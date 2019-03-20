@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AudioPlayer"
-             mc:Ignorable="d" Height="177.805" Width="916.341">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <Style x:Key="ButStyle" TargetType="Button">
-            <Setter Property="Background" Value="Red"></Setter>
+            <Setter Property="Background" Value="Blue"></Setter>
         </Style>
 
     </UserControl.Resources>
@@ -19,7 +19,7 @@
             <ColumnDefinition Width="0.1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Name="Label" FontSize="11" FontFamily="Times new roman"/>
-        <Button Grid.Column="1" Style="{StaticResource ButStyle}">A</Button>
-        <Button Grid.Column="2" Style="{StaticResource ButStyle}">B</Button>
+        <Button Grid.Column="1" Style="{StaticResource ButStyle}" Click="PlayOnClick">>|</Button>
+        <Button Grid.Column="2" Style="{StaticResource ButStyle}">>></Button>
     </Grid>
 </UserControl>

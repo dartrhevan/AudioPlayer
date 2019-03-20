@@ -55,7 +55,12 @@ namespace AudioPlayer
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)
         {
-            CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
+            PlayStart();
+        }
+
+        public void PlayStart()
+        {
+            CurrentName.Content = Player.CurrentSong.Tag.Title;//.Name.Split('\\').Last();
             if (Player.CurrentSong.Tag.Pictures.Length > 0)
                 CurrentCover.Source = ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
             if (!playing)

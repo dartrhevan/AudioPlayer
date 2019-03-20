@@ -28,5 +28,14 @@ namespace AudioPlayer
             Margin = new Thickness(0, 0, 0, 12);
             Height = 20;
         }
+
+        private void PlayOnClick(object sender, RoutedEventArgs e)
+        {
+            var wind = (((((Parent as StackPanel).Parent as ScrollViewer).Parent as Grid).Parent as AlbumPage).Parent as DockPanel).Parent as MainWindow;
+            if(wind.Player.CurrentSong.Tag.Title != Label.Content as string)
+                wind.Player.CurrentSong = wind.Player.Songs.Find(f => f.Tag.Title == Label.Content as string);
+
+            wind.Bar.PlayStart();
+        }
     }
 }

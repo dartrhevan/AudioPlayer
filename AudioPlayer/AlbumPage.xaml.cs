@@ -35,12 +35,12 @@ namespace AudioPlayer
                 foreach (var song in album.Songs.Select(s =>
                 {
                     var res = new SongRow(s);// {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
-                    res.MouseUp += (send, args) =>
+                    res.MouseDown += (send, args) =>
                     {
                         Player.CurrentSong =
                             Player.Songs.Find(f => f.Tag.Title == ((SongRow) send).Label.Content as string);
                     };
-                    res.Template = (ControlTemplate) Resources["btTemplate"];
+                    //res.Template = (ControlTemplate) Resources["btTemplate"];
                     res.Style = (Style)Resources["MainStyle"];
                     return res;
                 }))

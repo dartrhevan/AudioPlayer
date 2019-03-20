@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <ControlTemplate TargetType="local:SongRow" x:Key="btTemplate">
+        <!--<ControlTemplate TargetType="local:SongRow" x:Key="btTemplate">
             <Border BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     Background="{TemplateBinding Background}"
@@ -18,7 +18,7 @@
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Content="{TemplateBinding Content}"/>
             </Border>
-        </ControlTemplate>
+        </ControlTemplate>-->
         <Style x:Key="MainStyle" TargetType="local:SongRow">
             <Setter Property="Background" Value="CadetBlue"></Setter>
             <Setter Property="BorderBrush" Value="CadetBlue"></Setter>
