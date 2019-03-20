@@ -114,12 +114,12 @@ namespace AudioPlayer
             
             if (Player.CurrentPlayer != null && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
             {
-                var dif = (e.NewValue - e.OldValue) * Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMilliseconds;
+                var dif = Math.Abs(e.NewValue - e.OldValue);
                 //var stDif = (e.NewValue - e.OldValue) * Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMilliseconds;
-                if (dif > 150)
+                if (dif > 120 / Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMilliseconds)
                 {
-                    Player.CurrentPlayer.Pause();
-                    playing = false;
+                    /*Player.CurrentPlayer.Pause();
+                    playing = false;*/
                     Player.CurrentPlayer.Position =
                         new TimeSpan((long) (Player.CurrentPlayer.NaturalDuration.TimeSpan.Ticks * e.NewValue));
                 }

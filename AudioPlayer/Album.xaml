@@ -27,9 +27,18 @@
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="BorderBrush" Value="Black"></Setter>
+                    <Setter Property="BorderThickness" Value="2"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <!--<Style TargetType="Grid">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="Blue"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>-->
+
     </UserControl.Resources>
     <Grid Background="AliceBlue"  RenderTransformOrigin="0.519,0.685">
         <Grid.RowDefinitions>
