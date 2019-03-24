@@ -24,7 +24,8 @@ namespace AudioPlayer
     public partial class AlbumPage : UserControl
     {
         private Album album;
-        public  MyPlayer Player { get; set; }
+        public readonly MainWindow Window;// { get; set; }
+
 
         public Album Album
         {
@@ -34,11 +35,11 @@ namespace AudioPlayer
                 album = value;
                 foreach (var song in album.Songs.Select(s =>
                 {
-                    var res = new SongRow(s);// {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
+                    var res = new SongRow(s, Window);// {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
                     res.MouseDown += (send, args) =>
                     {
-                        Player.CurrentSong =
-                            Player.Songs.Find(f => f.Tag.Title == ((SongRow) send).Label.Content as string);
+                        Window.Player.CurrentSong =
+                            Window.Player.Songs.Find(f => f.Tag.Title == ((SongRow) send).Label.Content as string);
                     };
                     //res.Template = (ControlTemplate) Resources["btTemplate"];
                     res.Style = (Style)Resources["MainStyle"];
@@ -51,8 +52,9 @@ namespace AudioPlayer
             }
         }
 
-        public AlbumPage()
+        public AlbumPage(MainWindow window)
         {
+            Window = window;
             InitializeComponent();
         }
 
@@ -66,10 +68,10 @@ namespace AudioPlayer
 
         private void ReturnButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var mainWindow = (Parent as DockPanel).Parent as MainWindow;
-            mainWindow.Panel.Children.RemoveAt(mainWindow.Panel.Children.Count - 1);
-            mainWindow.Panel.Children.Add(mainWindow.MainPage);
-            ExecuteAnimation(mainWindow);
+            //var mainWindow = (Parent as DockPanel).Parent as MainWindow;
+            Window.Panel.Children.RemoveAt(Window.Panel.Children.Count - 1);
+            Window.Panel.Children.Add(Window.MainPage);
+            ExecuteAnimation(Window);
         }
 
         private static void ExecuteAnimation(MainWindow mainWindow)

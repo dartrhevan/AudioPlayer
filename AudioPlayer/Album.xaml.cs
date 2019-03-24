@@ -27,10 +27,11 @@ namespace AudioPlayer
         readonly ImageSourceConverter ic = new ImageSourceConverter();
         public readonly List<TagLib.File> Songs;
         public readonly ImageSource Cover;
+        private readonly MainWindow window;
 
-
-        public Album(IEnumerable<TagLib.File> songs, string albumName, string author, IPicture[] pictures)
+        public Album(IEnumerable<TagLib.File> songs, string albumName, string author, IPicture[] pictures, MainWindow window)
         {
+            this.window = window;
             InitializeComponent();
             
             if (pictures != null && pictures.Length > 0)
@@ -50,14 +51,14 @@ namespace AudioPlayer
 
         private void PictureClick(object sender, RoutedEventArgs e)
         {
-            var mainPanel = ((((Parent as WrapPanel).Parent as ScrollViewer).Parent as Grid).Parent as MainPage).Parent as DockPanel;
+            var mainPanel = window.Panel;//((((Parent as WrapPanel).Parent as ScrollViewer).Parent as Grid).Parent as MainPage).Parent as DockPanel;
             mainPanel.Children.RemoveAt(mainPanel.Children.Count - 1);
-            var wind = (MainWindow) mainPanel.Parent;
-            wind.Album = new AlbumPage();
-            wind.Album.Album = this;
-            wind.Album.Player = wind.Player;
-            mainPanel.Children.Add(wind.Album);
-            ExecuteAlbumAnimation(wind);
+            //var wind = (MainWindow) mainPanel.Parent;
+            window.Album = new AlbumPage(window);
+            window.Album.Album = this;
+            //wind.Album.Player = wind.Player;
+            mainPanel.Children.Add(window.Album);
+            ExecuteAlbumAnimation(window);
         }
         private static void ExecuteAlbumAnimation(MainWindow mainWindow)
         {

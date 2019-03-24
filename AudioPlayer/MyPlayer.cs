@@ -15,6 +15,7 @@ namespace AudioPlayer
 {
     public class MyPlayer
     {
+        private readonly MainWindow window;
         //public DoubleAnimation CurrentSongAnimation { get; private set; } = new DoubleAnimation();
         public Album CurrAlbum { get; set; }
         public TagLib.File CurrentSong
@@ -36,8 +37,9 @@ namespace AudioPlayer
         public List<Album> Albums;// { get; set; }
         private File currentSong;
 
-        public MyPlayer()
+        public MyPlayer(MainWindow window)
         {
+            this.window = window;
             OpenCurrentDirectory();
             //CurrentSongAnimation.From = 0;
             //CurrentSongAnimation.To = 100;
@@ -59,7 +61,7 @@ namespace AudioPlayer
                 }).Where(f => f != null);
             Songs = new List<File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
-                .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures)));
+                .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures, window)));
             CurrentSong = Songs[Songs.Count - 1];
         }
 
@@ -80,7 +82,7 @@ namespace AudioPlayer
         {
             var song = File.Create(path);
             Songs.Add(song);
-            var album = new Album(new[] { song }, song.Tag.Album, String.Join(", ", song.Tag.Performers), song.Tag.Pictures);
+            var album = new Album(new[] { song }, song.Tag.Album, String.Join(", ", song.Tag.Performers), song.Tag.Pictures, window);
             var alb_ind = Albums.FindIndex(a => a.AlbumName.Content as string == album.AlbumName.Content as string && a.Author.Content as string == album.Author.Content as string);
             if (alb_ind == -1)
                 Albums.Add(album);

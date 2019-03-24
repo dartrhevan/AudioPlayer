@@ -20,8 +20,10 @@ namespace AudioPlayer
     /// </summary>
     public partial class SongRow : UserControl
     {
-        public SongRow(TagLib.File song)
+        private readonly MainWindow window;
+        public SongRow(TagLib.File song, MainWindow window)
         {
+            this.window = window;
             InitializeComponent();
             //Content = song.Tag.Title;
             Label.Content = song.Tag.Title;
