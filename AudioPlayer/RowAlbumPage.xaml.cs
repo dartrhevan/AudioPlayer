@@ -36,6 +36,24 @@ namespace AudioPlayer
                 {
                     Content = album.AlbumName.Content,
                 };
+                albumButton.MouseDown += delegate
+                {
+                    foreach (var song in album.Songs.Select(s =>
+                    {
+                        var res = new SongRow(s, Window);// {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
+                        res.MouseDown += (send, args) =>
+                        {
+                            Window.Player.CurrentSong =
+                                Window.Player.Songs.Find(f => f.Tag.Title == ((SongRow)send).Label.Content as string);
+                        };
+                        //res.Template = (ControlTemplate) Resources["btTemplate"];
+                        res.Style = (Style)Resources["MainStyle"];
+                        return res;
+                    }))
+                    {
+                        SongStack.Children.Add(song);
+                    }
+                };
                 if (i % 2 == 0)
                     albumButton.Background = Brushes.White;
                 else albumButton.Background = Brushes.LightGray;
