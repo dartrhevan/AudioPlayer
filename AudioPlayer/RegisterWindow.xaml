@@ -1,0 +1,20 @@
+﻿<Window x:Class="AudioPlayer.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AudioPlayer"
+        mc:Ignorable="d"
+        Title="RegisterWindow"  Height="300" Width="400" WindowStyle="ToolWindow" MaxWidth="400" MaxHeight="300" MinWidth="400" MinHeight="300">
+    <StackPanel>
+        <Label  FontSize="18" Margin="0, 0, 0, 5" HorizontalAlignment="Center" FontWeight="Bold">Registration</Label>
+        <Label FontSize="16" Margin="0, 0, 0, 5">Set login:</Label>
+        <TextBox FontSize="16" Margin="50,0,50,5" Height="25" Name="Login"></TextBox>
+        <Label FontSize="16" Margin="0, 0, 0, 5" AllowDrop="True">Set password:</Label>
+        <PasswordBox FontSize="16" Margin="50,0,50,5" Height="25" Name="Password"></PasswordBox>
+        <Label FontSize="16" Margin="0, 0, 0, 5" AllowDrop="True">Enter license key(if you have):</Label>
+        <PasswordBox FontSize="16" Margin="50,0,50,5" Height="25" Name="License"></PasswordBox>
+        <Button FontSize="16" Margin="155,0,156.6,5" Height="29" Content="Register" Click="RegisterButtonClick"/>
+
+    </StackPanel>
+</Window>

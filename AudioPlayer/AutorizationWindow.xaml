@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioPlayer"
         mc:Ignorable="d"
-        Title="AutorizationWindow" Height="200" Width="400" WindowStyle="ToolWindow" MaxWidth="400" MaxHeight="200" MinWidth="400" MinHeight="200">
+        Title="AutorizationWindow" Height="300" Width="400" WindowStyle="ToolWindow" MaxWidth="400" MaxHeight="300" MinWidth="400" MinHeight="300">
     <StackPanel>
+        <Label  FontSize="18" Margin="0, 0, 0, 5" HorizontalAlignment="Center" FontWeight="Bold">Autorization</Label>
         <Label FontSize="16" Margin="0, 0, 0, 5">Enter login:</Label>
-        <TextBox FontSize="16" Margin="50,0,50,5" Height="25"></TextBox>
+        <TextBox FontSize="16" Margin="50,0,50,5" Height="25" Name="Login"></TextBox>
         <Label FontSize="16" Margin="0, 0, 0, 5" AllowDrop="True">Enter password:</Label>
-        <PasswordBox FontSize="16" Margin="50,0,50,5" Height="25"></PasswordBox>
+        <PasswordBox FontSize="16" Margin="50,0,50,5" Height="25" Name="Password"></PasswordBox>
         <Button FontSize="16" Margin="155,0,156.6,5" Height="29" Content="OK" Click="ButtonClick"/>
+        <Button FontSize="16" Margin="155,0,156.6,5" Height="29" Content="Register" Click="RegisterButtonOnClick"/>
+
     </StackPanel>
 </Window>

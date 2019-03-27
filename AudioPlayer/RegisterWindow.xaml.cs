@@ -15,25 +15,19 @@ using System.Windows.Shapes;
 namespace AudioPlayer
 {
     /// <summary>
-    /// Логика взаимодействия для AutorizationWindow.xaml
+    /// Логика взаимодействия для RegisterWindow.xaml
     /// </summary>
-    public partial class AutorizationWindow : Window
+    public partial class RegisterWindow : Window
     {
-        public AutorizationWindow()
+        public RegisterWindow()
         {
             InitializeComponent();
         }
 
-        private void ButtonClick(object sender, RoutedEventArgs e)
+        private void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
             this.Close();
-        }
-
-        private void RegisterButtonOnClick(object sender, RoutedEventArgs e)
-        {
-            var r = new RegisterWindow().ShowDialog();
-            
+            //this.DialogResult = License.Password != "";
         }
     }
 }

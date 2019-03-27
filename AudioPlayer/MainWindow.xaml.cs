@@ -28,12 +28,19 @@ namespace AudioPlayer
         public MainWindow()
         {
             var r = (new AutorizationWindow()).ShowDialog();
-            MessageBox.Show(r.ToString());
+            //MessageBox.Show(r.ToString());
             Player = new MyPlayer(this);
             InitializeComponent();
-            MainPage = new MainPage(Player);
             Bar.Player = Player;
-            Panel.Children.Add(MainPage);
+            if (r.Value)
+            {
+                MainPage = new MainPage(Player);
+                Panel.Children.Add(MainPage);
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
