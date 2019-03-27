@@ -28,7 +28,6 @@ namespace AudioPlayer
         public  MyPlayer Player { get; set; }
         public MyBar()
         {
-            //Player.CurrentSong.Tag.
             InitializeComponent();
             timer.Tick += (sender, args) =>
             {
@@ -60,15 +59,11 @@ namespace AudioPlayer
 
         public void PlayStart()
         {
-            CurrentName.Content = Player.CurrentSong.Tag.Title;//.Name.Split('\\').Last();
+            CurrentName.Content = Player.CurrentSong.Tag.Title;
             if (Player.CurrentSong.Tag.Pictures.Length > 0)
                 CurrentCover.Source = ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
             if (!playing)
-            {
                 Player.CurrentPlayer.Play();
-                //End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
-
-            }
             else Player.CurrentPlayer.Pause();
             playing = !playing;
         }
@@ -93,7 +88,7 @@ namespace AudioPlayer
         private MainPage GetMainPage()
         {
             var par = (Parent as DockPanel).Parent as MainWindow;
-            var albums = par.MainPage; //par.Children[par.Children.Count - 1] as MainPage;
+            var albums = par.MainPage; 
             return albums;
         }
 
@@ -103,13 +98,8 @@ namespace AudioPlayer
             var res = openFolderDialog.ShowDialog();
             if (!(res == DialogResult.Yes || res == DialogResult.OK && openFolderDialog.SelectedPath != "")) return;
                 Player.OpenFolder(openFolderDialog.SelectedPath);
-            //var par = (Parent as DockPanel).Parent as MainWindow;
-            var albums = GetMainPage();//par.Children[par.Children.Count - 1] as MainPage;
-            albums.Reset();/*
-            CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
-            if(Player.CurrentSong.Tag.Pictures.Length > 0)
-                CurrentCover.Source = ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));*/
-            //End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
+            var albums = GetMainPage();
+            albums.Reset();
             InvalidateVisual();
             playing = false;
         }
@@ -120,11 +110,8 @@ namespace AudioPlayer
             if (Player.CurrentPlayer != null && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
             {
                 var dif = Math.Abs(e.NewValue - e.OldValue);
-                //var stDif = (e.NewValue - e.OldValue) * Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMilliseconds;
                 if (dif > 120 / Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMilliseconds)
                 {
-                    /*Player.CurrentPlayer.Pause();
-                    playing = false;*/
                     Player.CurrentPlayer.Position =
                         new TimeSpan((long) (Player.CurrentPlayer.NaturalDuration.TimeSpan.Ticks * e.NewValue));
                 }

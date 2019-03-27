@@ -7,7 +7,7 @@
              mc:Ignorable="d" Height="166.387" Width="918.487">
     <UserControl.Resources>
         <ControlTemplate TargetType="Button" x:Key="btTemplate">
-            <Border CornerRadius="15"
+            <Border CornerRadius="12"
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="{TemplateBinding BorderThickness}"
                     Background="{TemplateBinding Background}"
@@ -27,7 +27,6 @@
                 <Setter Property="Button.Foreground" Value="Black" />
                 <Setter Property="Button.FontSize" Value="14"></Setter>
                 <Setter Property="Button.FontFamily" Value="Times new roman" />
-                <Setter Property="Button.Content" Value="156"></Setter>
             </Style.Setters>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
@@ -35,8 +34,6 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-        <!--<ControlTemplate TargetType="Button" x:Key="None">
-        </ControlTemplate>-->
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -47,14 +44,6 @@
         <Canvas Grid.Column="0">
             <Button  Content="Open song" Canvas.Bottom="30" Canvas.Left="30" Width="96" Click="OpenSongClick"/>
             <Button Content="Open directory" Canvas.Top="30" Canvas.Left="30" Width="96" Click="OpenDirectoryClick" >
-                <!--<Button.Template>
-                    <ControlTemplate >
-                        <Border CornerRadius="10" BorderBrush="CadetBlue" BorderThickness="2"
-                                Background="LightBlue" Height="20" Width="80" >
-                            <ContentControl Content="{TemplateBinding Content}"/>
-                        </Border>
-                    </ControlTemplate>
-                 </Button.Template>-->
             </Button>
         </Canvas>
 
@@ -95,9 +84,9 @@
                     <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row ="0" Grid.Column="0" Width="25" ></Button>
+                <Button Grid.Row ="0" Grid.Column="0" Width="25" Content="&lt;&lt;"></Button>
                 <Button Grid.Row ="0" Grid.Column="1" Width="25" Click="PlayStartButtonClick">>||</Button>
-                <Button Grid.Row ="0" Grid.Column="2" Width="25"></Button>
+                <Button Grid.Row ="0" Grid.Column="2" Width="25" Content="&gt; &gt;"></Button>
             </Grid>
         </Grid>
         <Canvas Grid.Column="2">
