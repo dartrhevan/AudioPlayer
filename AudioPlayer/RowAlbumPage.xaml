@@ -33,19 +33,26 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"></ColumnDefinition>
-            <ColumnDefinition Width="0.3*"></ColumnDefinition>
             <ColumnDefinition Width="0.4*"></ColumnDefinition>
+            <ColumnDefinition Width="0.3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Column="0" Visibility="Hidden">
+        <ScrollViewer Grid.Column="0" Visibility="Visible" HorizontalScrollBarVisibility="Auto">
             <StackPanel Name="AlbumStack" Orientation="Vertical">
-                <Button Content="1" Background="Azure"></Button>
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property ="BorderThickness"  Value="0" />
+                    </Style>
+                </StackPanel.Resources>
+              <!--  <Button Content="1" Background="CornflowerBlue"></Button>
+                <Button Content="1" Background="CornflowerBlue"></Button> -->
             </StackPanel>
         </ScrollViewer>
-        <ScrollViewer Grid.Column="2" HorizontalAlignment="Stretch">
-            <StackPanel  Name="Stack">
+        <ScrollViewer Grid.Column="1" HorizontalAlignment="Stretch">
+            <StackPanel  Name="SongStack">
+                <Button Content="1" Background="CornflowerBlue"></Button>
             </StackPanel>
         </ScrollViewer>
         

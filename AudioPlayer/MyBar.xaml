@@ -71,7 +71,12 @@
                 <ColumnDefinition Width="*">
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Name ="CurrentCover" Source="C:\Users\User\OneDrive\Документы\Учёба\Интерфйсы\MediaPlayer\AudioPlayer\bin\Debug\1.png" Margin="0,0,0,2" Grid.RowSpan="3" ></Image>
+           <!-- <Grid.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="UseLayoutRounding" Value="False" />
+                </Style> 
+            </Grid.Resources> --> 
+            <Image Grid.Column="0" Name ="CurrentCover" Source="C:\Users\User\OneDrive\Документы\Учёба\Интерфйсы\MediaPlayer\AudioPlayer\bin\Debug\1.png" Margin="0,0,0,2" Grid.RowSpan="3" UseLayoutRounding="True" SnapsToDevicePixels="True"></Image>
             <Label Grid.Row="0" Grid.Column="1" Name="CurrentName" FontFamily="Times new roman" FontSize="18">The song haven't selected yet</Label>
             <Slider Grid.Row="1" Grid.Column="1"  Name="Progress" Minimum="0" Maximum="1" Height="20" Margin="0, 15, 0, 0" ValueChanged="ProgressValueChanged"></Slider>
             <Grid Grid.Row="2" Grid.Column="1">

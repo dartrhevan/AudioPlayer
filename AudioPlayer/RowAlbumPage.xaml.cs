@@ -23,11 +23,39 @@ namespace AudioPlayer
     
     public partial class RowAlbumPage : UserControl
     {
-        private Album album;
+        public readonly MyPlayer Player;
         public readonly MainWindow Window;// { get; set; }
-        public RowAlbumPage()
+        public RowAlbumPage(MyPlayer player)
         {
+            Player = player;
             InitializeComponent();
+            var i = 0;
+            foreach (var album in Player.Albums)
+            {
+                var albumButton = new Button()
+                {
+                    Content = album.AlbumName.Content,
+                };
+                if (i % 2 == 0)
+                    albumButton.Background = Brushes.White;
+                else albumButton.Background = Brushes.LightGray;
+                AlbumStack.Children.Add(albumButton);
+                i++;
+            }
+
+        }
+        public void Update()
+        {
+            if (AlbumStack.Children.Count < Player.Albums.Count)
+                for (var i = AlbumStack.Children.Count; i < Player.Albums.Count; ++i)
+                    AlbumStack.Children.Add(Player.Albums[i]);
+        }
+
+        public void Reset()
+        {
+            AlbumStack.Children.Clear();
+            foreach (var album in Player.Albums)
+                AlbumStack.Children.Add(album);
         }
     }
 }
