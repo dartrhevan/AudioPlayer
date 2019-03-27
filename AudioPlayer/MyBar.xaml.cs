@@ -26,22 +26,24 @@ namespace AudioPlayer
 
         readonly ImageSourceConverter ic = new ImageSourceConverter();
         public  MyPlayer Player { get; set; }
+        //public bool Playing => playing;
+
         public MyBar()
         {
             InitializeComponent();
             timer.Tick += (sender, args) =>
             {
-                if (playing && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
+                if (Player.Playing && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
                     Progress.Value = Player.CurrentPlayer.Position.TotalSeconds /
                                      Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds;
                 Begin.Content = Player.CurrentPlayer.Position.ToString();
                 End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
-                if (CurrentName.Content as string != Player.CurrentSong.Tag.Title)
-                {
+                //if (CurrentName.Content as string != Player.CurrentSong.Tag.Title)
+                //{
                     if (Player.CurrentSong.Tag.Pictures.Length > 0)
                         CurrentCover.Source = GetImage();
-                    CurrentName.Content = Player.CurrentSong.Tag.Title;
-                }
+                    CurrentName.Content = Player.CurrentSong.Tag.Title?? Player.CurrentSong.Name.Split('\\').Last();
+                //}
 
                 InvalidateVisual();
             };
@@ -50,7 +52,7 @@ namespace AudioPlayer
 
         private Timer timer = new Timer {Interval = 100};
 
-        bool playing;
+        
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)
         {
@@ -62,10 +64,10 @@ namespace AudioPlayer
             CurrentName.Content = Player.CurrentSong.Tag.Title;
             if (Player.CurrentSong.Tag.Pictures.Length > 0)
                 CurrentCover.Source = ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
-            if (!playing)
+            if (!Player.Playing)
                 Player.CurrentPlayer.Play();
             else Player.CurrentPlayer.Pause();
-            playing = !playing;
+            Player.Playing = !Player.Playing;
         }
 
         private void OpenSongClick(object sender, RoutedEventArgs e)
@@ -76,11 +78,11 @@ namespace AudioPlayer
             Player.AddSong(openFileDialog.FileName);
             var albums = GetMainPage();
             albums.Update();
-            CurrentName.Content = Player.CurrentSong.Name.Split('\\').Last();
-            if (Player.CurrentSong.Tag.Pictures.Length > 0)
+
+            CurrentName.Content = Player.CurrentSong.Tag.Title ?? Player.CurrentSong.Name.Split('\\').Last(); if (Player.CurrentSong.Tag.Pictures.Length > 0)
                 CurrentCover.Source = GetImage();
             InvalidateVisual();
-            playing = false;
+            Player.Playing = false;
         }
 
         private ImageSource GetImage() => ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
@@ -101,7 +103,7 @@ namespace AudioPlayer
             var albums = GetMainPage();
             albums.Reset();
             InvalidateVisual();
-            playing = false;
+            Player.Playing = false;
         }
 
         private void ProgressValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

@@ -26,6 +26,7 @@
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Background" Value ="DarkCyan"/>
                     <Setter Property="BorderBrush" Value="DarkCyan"/>
+                    <Setter Property="Height" Value="30"></Setter>
                 </Trigger>
             </Style.Triggers>
         </Style>

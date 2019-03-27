@@ -16,8 +16,7 @@ namespace AudioPlayer
     public class MyPlayer
     {
         private readonly MainWindow window;
-        //public DoubleAnimation CurrentSongAnimation { get; private set; } = new DoubleAnimation();
-        public Album CurrAlbum { get; set; }
+        public Album CurrentAlbum { get; set; }
         public File CurrentSong
         {
             get => currentSong;
@@ -26,28 +25,28 @@ namespace AudioPlayer
                 currentSong = value;
                 CurrentPlayer.Close();
                 CurrentPlayer.Open(new Uri(currentSong.Name, UriKind.Relative));
-                //CurrentSongAnimation.Duration = CurrentPlayer.NaturalDuration;
             }
         }
-
+        public bool Playing { get; set; }
         public void SetCurrentSongByIndexAndAlbum(int index, Album album)
         {
             CurrentSong = album.Songs[index];
+            CurrentIndex = index;
+            CurrentAlbum = album;
         }
 
-        public readonly MediaPlayer CurrentPlayer = new MediaPlayer();// { get; private set; }
+        public readonly MediaPlayer CurrentPlayer = new MediaPlayer();
         private static readonly DirectoryInfo MainDirectory = new DirectoryInfo(@"C:\MyPlayerDirectory");
         DirectoryInfo curreDirectory = MainDirectory;
-        public List<File> Songs;// = new List<TagLib.File>();
-        public List<Album> Albums;// { get; set; }
+        public int CurrentIndex { get; private set; }
+        public List<File> Songs;
+        public List<Album> Albums;
         private File currentSong;
 
         public MyPlayer(MainWindow window)
         {
             this.window = window;
             OpenCurrentDirectory();
-            //CurrentSongAnimation.From = 0;
-            //CurrentSongAnimation.To = 100;
         }
 
         private void OpenCurrentDirectory()
@@ -67,7 +66,12 @@ namespace AudioPlayer
             Songs = new List<File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
                 .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures, window)));
-            CurrentSong = Songs[Songs.Count - 1];
+            if (currentSong == null)
+            {
+                CurrentAlbum = Albums[Albums.Count - 1];
+                CurrentIndex = CurrentAlbum.Songs.Count - 1;
+                CurrentSong = CurrentAlbum.Songs[CurrentIndex];
+            }
         }
 
         public void OpenFolder(string folderPath)
@@ -76,26 +80,25 @@ namespace AudioPlayer
             OpenCurrentDirectory();
         }
 
-        /*
-        void InitialiseSongsList().
-        {
-            var files = MainDirectory.GetFiles()
-                .Select(f => TagLib.File.Create(Path.Combine(f.DirectoryName, f.Name)));
-
-        }*/
         public void AddSong(string path)
         {
             var song = File.Create(path);
             Songs.Add(song);
             var album = new Album(new[] { song }, song.Tag.Album, String.Join(", ", song.Tag.Performers), song.Tag.Pictures, window);
-            var alb_ind = Albums.FindIndex(a => a.AlbumName.Content as string == album.AlbumName.Content as string && a.Author.Content as string == album.Author.Content as string);
-            if (alb_ind == -1)
+            var albInd = Albums.FindIndex(a => a.AlbumName.Content as string == album.AlbumName.Content as string && a.Author.Content as string == album.Author.Content as string);
+            if (albInd == -1)
+            {
                 Albums.Add(album);
-            else Albums[alb_ind].Songs.Add(song);
-            CurrAlbum = album;
-            //CurrentSong.
+                CurrentIndex = albInd;
+            }
+            else
+            {
+                CurrentIndex = Albums.Count;
+                Albums[albInd].Songs.Add(song);
+            }
+            CurrentAlbum = album;
             CurrentSong = song;
-        }
 
+        }
     }
 }

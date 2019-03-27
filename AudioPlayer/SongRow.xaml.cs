@@ -20,33 +20,30 @@ namespace AudioPlayer
     /// </summary>
     public partial class SongRow : UserControl
     {
-        private readonly MainWindow window;
+        public readonly MainWindow Window;
         public readonly Album Album;
         public readonly int Index;
-        public SongRow(TagLib.File song, MainWindow window, int index, Album album)
+        public SongRow(MainWindow window, int index, Album album)
         {
-            this.window = window;
+            this.Window = window;
             InitializeComponent();
-            //Content = song.Tag.Title;
-            Label.Content = song.Tag.Title;
+            Album = album;
+            Label.Content = Album.Songs[index].Tag.Title??Album.Songs[index].Name.Split('\\').Last();
             Margin = new Thickness(0, 0, 0, 12);
             Height = 20;
             Index = index;
-            Album = album;
         }
 
         private void PlayOnClick(object sender, RoutedEventArgs e)
         {
-            var wind = (((((Parent as StackPanel).Parent as ScrollViewer).Parent as Grid).Parent as AlbumPage).Parent as DockPanel).Parent as MainWindow;
-            
-            if (wind.Player.CurrentSong.Tag.Title != Label.Content as string)
+            if (Index != Window.Player.CurrentIndex || Album != Window.Player.CurrentAlbum)
             {
-                wind.Player.SetCurrentSongByIndexAndAlbum(Index, Album);
+                if (Window.Player.Playing) Window.Bar.PauseStart();
+                Window.Player.SetCurrentSongByIndexAndAlbum(Index, Album);
+                //if (!Window.Bar.Playing) Window.Bar.PauseStart();
             }
-            wind.Bar.PauseStart();
-            //wind.Player.CurrentSong = wind.Player.Songs.Find(f => f.Tag.Title == Label.Content as string);
-
-            //wind.Bar.PauseStart();
+            //else
+                Window.Bar.PauseStart();
         }
     }
 }
