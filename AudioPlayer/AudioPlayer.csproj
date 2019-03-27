@@ -63,10 +63,17 @@
     <Compile Include="Album.xaml.cs">
       <DependentUpon>Album.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AutorizationWindow.xaml.cs">
+      <DependentUpon>AutorizationWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SongRow.xaml.cs">
       <DependentUpon>SongRow.xaml</DependentUpon>
     </Compile>
     <Page Include="AlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AutorizationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

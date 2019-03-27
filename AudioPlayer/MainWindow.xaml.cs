@@ -19,24 +19,21 @@ namespace AudioPlayer
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {// = new MyBar();
-        public readonly MyPlayer Player;// = new MyPlayer(this);
-        public readonly MainPage MainPage;// = new MainPage();
+    {
+        public readonly MyPlayer Player;
+        public readonly MainPage MainPage;
 
-        public AlbumPage Album;
+        public AlbumPage Album { get; set; }
 
         public MainWindow()
         {
+            var r = (new AutorizationWindow()).ShowDialog();
+            MessageBox.Show(r.ToString());
             Player = new MyPlayer(this);
             InitializeComponent();
             MainPage = new MainPage(Player);
             Bar.Player = Player;
-            //Bar = new MyBar(Player);
-            //Panel.Children.Add(Bar);
-            Panel.Children.Add(MainPage);/*
-            DockPanel.SetDock(Bar, Dock.Top);
-            Bar.Height = 150;
-            Bar.Width = this.Width;*/
+            Panel.Children.Add(MainPage);
         }
     }
 }
