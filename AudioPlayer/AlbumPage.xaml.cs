@@ -32,14 +32,16 @@ namespace AudioPlayer
             get => album;
             set
             {
+                int ind = 0;
                 album = value;
                 foreach (var song in album.Songs.Select(s =>
                 {
-                    var res = new SongRow(s, Window);// {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
+                    var res = new SongRow(s, Window, ind++, album);// {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
                     res.MouseDown += (send, args) =>
                     {
-                        Window.Player.CurrentSong =
-                            Window.Player.Songs.Find(f => f.Tag.Title == ((SongRow) send).Label.Content as string);
+                        Window.Player.SetCurrentSongByIndexAndAlbum((send as SongRow).Index, album);
+                        //Window.Player.CurrentSong =
+                        //    Window.Player.Songs.Find(f => f.Tag.Title == ((SongRow) send).Label.Content as string);
                     };
                     //res.Template = (ControlTemplate) Resources["btTemplate"];
                     res.Style = (Style)Resources["MainStyle"];

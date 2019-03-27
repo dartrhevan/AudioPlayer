@@ -54,10 +54,10 @@ namespace AudioPlayer
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)
         {
-            PlayStart();
+            PauseStart();
         }
 
-        public void PlayStart()
+        public void PauseStart()
         {
             CurrentName.Content = Player.CurrentSong.Tag.Title;
             if (Player.CurrentSong.Tag.Pictures.Length > 0)

@@ -18,16 +18,21 @@ namespace AudioPlayer
         private readonly MainWindow window;
         //public DoubleAnimation CurrentSongAnimation { get; private set; } = new DoubleAnimation();
         public Album CurrAlbum { get; set; }
-        public TagLib.File CurrentSong
+        public File CurrentSong
         {
             get => currentSong;
-            set
+            private set
             {
                 currentSong = value;
                 CurrentPlayer.Close();
                 CurrentPlayer.Open(new Uri(currentSong.Name, UriKind.Relative));
                 //CurrentSongAnimation.Duration = CurrentPlayer.NaturalDuration;
             }
+        }
+
+        public void SetCurrentSongByIndexAndAlbum(int index, Album album)
+        {
+            CurrentSong = album.Songs[index];
         }
 
         public readonly MediaPlayer CurrentPlayer = new MediaPlayer();// { get; private set; }

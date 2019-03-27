@@ -21,7 +21,9 @@ namespace AudioPlayer
     public partial class SongRow : UserControl
     {
         private readonly MainWindow window;
-        public SongRow(TagLib.File song, MainWindow window)
+        public readonly Album Album;
+        public readonly int Index;
+        public SongRow(TagLib.File song, MainWindow window, int index, Album album)
         {
             this.window = window;
             InitializeComponent();
@@ -29,15 +31,22 @@ namespace AudioPlayer
             Label.Content = song.Tag.Title;
             Margin = new Thickness(0, 0, 0, 12);
             Height = 20;
+            Index = index;
+            Album = album;
         }
 
         private void PlayOnClick(object sender, RoutedEventArgs e)
         {
             var wind = (((((Parent as StackPanel).Parent as ScrollViewer).Parent as Grid).Parent as AlbumPage).Parent as DockPanel).Parent as MainWindow;
-            if(wind.Player.CurrentSong.Tag.Title != Label.Content as string)
-                wind.Player.CurrentSong = wind.Player.Songs.Find(f => f.Tag.Title == Label.Content as string);
+            
+            if (wind.Player.CurrentSong.Tag.Title != Label.Content as string)
+            {
+                wind.Player.SetCurrentSongByIndexAndAlbum(Index, Album);
+            }
+            wind.Bar.PauseStart();
+            //wind.Player.CurrentSong = wind.Player.Songs.Find(f => f.Tag.Title == Label.Content as string);
 
-            wind.Bar.PlayStart();
+            //wind.Bar.PauseStart();
         }
     }
 }
