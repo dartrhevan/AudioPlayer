@@ -27,16 +27,17 @@ namespace AudioPlayer
 
         public MainWindow()
         {
-            Player = new MyPlayer(this);
             InitializeComponent();
-            MainPage = new MainPage(Player);
+            Player = new MyPlayer(this);
+            MainPage = new MainPage(Player); 
+         //    var RowAlbumPage = new RowAlbumPage();
             Bar.Player = Player;
             //Bar = new MyBar(Player);
             //Panel.Children.Add(Bar);
-            Panel.Children.Add(MainPage);/*
-            DockPanel.SetDock(Bar, Dock.Top);
-            Bar.Height = 150;
-            Bar.Width = this.Width;*/
+             Panel.Children.Add(MainPage);/* Как и здесь
+             DockPanel.SetDock(Bar, Dock.Top);
+             Bar.Height = 150;
+             Bar.Width = this.Width;*/
         }
     }
 }
