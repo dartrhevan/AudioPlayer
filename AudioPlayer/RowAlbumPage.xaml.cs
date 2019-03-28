@@ -21,13 +21,14 @@ namespace AudioPlayer
     /// Логика взаимодействия для AlbumPage.xaml
     /// </summary>
     
-    public partial class RowAlbumPage : UserControl
+    public partial class RowAlbumPage : UserControl, IMainPage
     {
         public readonly MyPlayer Player;
         public readonly MainWindow Window;// { get; set; }
-        public RowAlbumPage(MyPlayer player)
+        public RowAlbumPage(MainWindow window)
         {
-            Player = player;
+            Window = window;
+            Player = window.Player;
             InitializeComponent();
             var i = 0;
             foreach (var album in Player.Albums)

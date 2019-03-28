@@ -30,7 +30,7 @@ namespace AudioPlayer
             InitializeComponent();
             Player = new MyPlayer(this);
             //MainPage = new MainPage(Player); 
-             var RowAlbumPage = new RowAlbumPage(Player);
+            var RowAlbumPage = new RowAlbumPage(this);
             Bar.Player = Player;
             //Bar = new MyBar(Player);
             //Panel.Children.Add(Bar);

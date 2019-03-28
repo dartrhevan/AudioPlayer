@@ -90,10 +90,10 @@ namespace AudioPlayer
 
         private ImageSource GetImage() => ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
 
-        private MainPage GetMainPage()
+        private IMainPage GetMainPage()
         {
-            var par = (Parent as DockPanel).Parent as MainWindow;
-            var albums = par.MainPage; //par.Children[par.Children.Count - 1] as MainPage;
+            var par = (Parent as DockPanel);
+            var albums = par.Children[par.Children.Count - 1] as IMainPage;
             return albums;
         }
 
