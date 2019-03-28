@@ -37,17 +37,22 @@ namespace AudioPlayer
                 {
                     Content = album.AlbumName.Content,
                 };
-                albumButton.MouseDown += delegate
+                albumButton.MouseDown += (send, args) =>
                 {
+                    while (SongStack.Children.Count > 0)
+                    {
+                        SongStack.Children.RemoveAt(SongStack.Children.Count - 1);
+                    }
+                    int ind = 0;
                     foreach (var song in album.Songs.Select(s =>
                     {
-                        var res = new SongRow(s, Window);// {Content = s.Tag.Title, Margin = new Thickness(0, 0, 0, 12), Height = 20};
-                        res.MouseDown += (send, args) =>
-                        {
-                            Window.Player.CurrentSong =
-                                Window.Player.Songs.Find(f => f.Tag.Title == ((SongRow)send).Label.Content as string);
+                        var res = new SongRow(Window, ind++, album);
+                        res.MouseDown += delegate 
+                        { 
+                            var song = (send as SongRow);
+                            if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
+                                Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, album);
                         };
-                        //res.Template = (ControlTemplate) Resources["btTemplate"];
                         res.Style = (Style)Resources["MainStyle"];
                         return res;
                     }))
