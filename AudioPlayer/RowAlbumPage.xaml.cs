@@ -37,7 +37,7 @@ namespace AudioPlayer
                 {
                     Content = album.AlbumName.Content,
                 };
-                albumButton.MouseDown += (send, args) =>
+                albumButton.MouseEnter += (se, a) =>
                 {
                     while (SongStack.Children.Count > 0)
                     {
@@ -47,7 +47,7 @@ namespace AudioPlayer
                     foreach (var song in album.Songs.Select(s =>
                     {
                         var res = new SongRow(Window, ind++, album);
-                        res.MouseDown += delegate 
+                        res.MouseLeftButtonDown += (send, args) =>
                         { 
                             var song = (send as SongRow);
                             if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)

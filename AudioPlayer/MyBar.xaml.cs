@@ -119,5 +119,15 @@ namespace AudioPlayer
                 }
             }
         }
+
+        private void PreviousButtonClick(object sender, RoutedEventArgs e)
+        {
+            Player.Previous();
+        }
+
+        private void NextButtonClick(object sender, RoutedEventArgs e)
+        {
+            Player.Next();
+        }
     }
 }
