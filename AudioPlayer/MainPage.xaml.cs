@@ -18,7 +18,7 @@ namespace AudioPlayer
     /// <summary>
     /// Interaction logic for MainPage.xaml
     /// </summary>
-    public partial class MainPage : UserControl
+    public partial class MainPage : UserControl, IMainPage
     {
         public readonly MyPlayer Player;
         //readonly List<Album> Albums;

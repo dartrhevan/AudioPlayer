@@ -87,10 +87,10 @@ namespace AudioPlayer
 
         private ImageSource GetImage() => ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
 
-        private MainPage GetMainPage()
+        private IMainPage GetMainPage()
         {
             var par = (Parent as DockPanel).Parent as MainWindow;
-            var albums = par.MainPage; 
+            var albums = par.RealMainPage; 
             return albums;
         }
 

@@ -22,7 +22,8 @@ namespace AudioPlayer
     {
         public readonly MyPlayer Player;
         public readonly MainPage MainPage;
-
+        private readonly RowAlbumPage RowAlbumPage;
+        public readonly IMainPage RealMainPage;// { get; set; }
         public AlbumPage Album { get; set; }
 
         public MainWindow()
@@ -35,11 +36,14 @@ namespace AudioPlayer
             if (r.Value)
             {
                 MainPage = new MainPage(Player);
+                RealMainPage = MainPage;
                 Panel.Children.Add(MainPage);
             }
             else
             {
-                throw new NotImplementedException();
+                RowAlbumPage = new RowAlbumPage(this);
+                RealMainPage = RowAlbumPage;
+                Panel.Children.Add(RowAlbumPage);
             }
         }
     }
