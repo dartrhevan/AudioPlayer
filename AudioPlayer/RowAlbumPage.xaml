@@ -30,7 +30,13 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid Opacity="0.8">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FFCDCDCD" Offset="1"/>
+                <GradientStop Color="White"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.3*"></ColumnDefinition>
             <ColumnDefinition Width="0.4*"></ColumnDefinition>
@@ -39,18 +45,24 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Column="0" Visibility="Visible" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer Grid.Column="0" Visibility="Visible" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden" BorderBrush="Black" >
             <StackPanel Name="AlbumStack" Orientation="Vertical">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
                         <Setter Property ="BorderThickness"  Value="0" />
                     </Style>
                 </StackPanel.Resources>
-              <!--  <Button Content="1" Background="CornflowerBlue"></Button>
+                <!--  <Button Content="1" Background="CornflowerBlue"></Button>
                 <Button Content="1" Background="CornflowerBlue"></Button> -->
             </StackPanel>
         </ScrollViewer>
         <ScrollViewer Grid.Column="1" Visibility="Visible" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer.BorderBrush>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="White" Offset="0"/>
+                    <GradientStop Color="#FF616161" Offset="1"/>
+                </LinearGradientBrush>
+            </ScrollViewer.BorderBrush>
             <StackPanel  Name="SongStack">
                 <!--<StackPanel.Resources>
                     <Style TargetType="{x:Type Button}">
@@ -59,6 +71,6 @@
                 </StackPanel.Resources>-->
             </StackPanel>
         </ScrollViewer>
-        
+
     </Grid>
 </UserControl>

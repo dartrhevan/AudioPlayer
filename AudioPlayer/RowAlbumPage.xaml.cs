@@ -47,7 +47,7 @@ namespace AudioPlayer
                     foreach (var song in album.Songs.Select(s =>
                     {
                         var res = new SongRow(Window, ind++, album);
-                        res.MouseDown += (send, args) =>
+                        res.MouseLeftButtonDown += (send, args) =>
                         { 
                             var song = (send as SongRow);
                             if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
