@@ -78,7 +78,6 @@ namespace AudioPlayer
             Player.AddSong(openFileDialog.FileName);
             var albums = GetMainPage();
             albums.Update();
-
             CurrentName.Content = Player.CurrentSong.Tag.Title ?? Player.CurrentSong.Name.Split('\\').Last(); if (Player.CurrentSong.Tag.Pictures.Length > 0)
                 CurrentCover.Source = GetImage();
             InvalidateVisual();
@@ -118,6 +117,22 @@ namespace AudioPlayer
                         new TimeSpan((long) (Player.CurrentPlayer.NaturalDuration.TimeSpan.Ticks * e.NewValue));
                 }
             }
+        }
+
+        private void PreviousButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (!Player.Playing)
+                PauseStart();
+            Player.Previous();
+            PauseStart();
+        }
+
+        private void NextButtonClick(object sender, RoutedEventArgs e)
+        {
+            if(!Player.Playing)
+                PauseStart();
+            Player.Next();
+            PauseStart();
         }
     }
 }

@@ -43,7 +43,7 @@ namespace AudioPlayer
                 //if (!Window.Bar.Playing) Window.Bar.PauseStart();
             }
             //else
-                Window.Bar.PauseStart();
+            Window.Bar.PauseStart();
         }
     }
 }

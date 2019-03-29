@@ -84,9 +84,9 @@
                     <ColumnDefinition Width="0.5*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Row ="0" Grid.Column="0" Width="25" Content="&lt;&lt;"></Button>
+                <Button Grid.Row ="0" Grid.Column="0" Width="25" Content="&lt;&lt;" Click="PreviousButtonClick"></Button>
                 <Button Grid.Row ="0" Grid.Column="1" Width="25" Click="PlayStartButtonClick">>||</Button>
-                <Button Grid.Row ="0" Grid.Column="2" Width="25" Content="&gt; &gt;"></Button>
+                <Button Grid.Row ="0" Grid.Column="2" Width="25" Content="&gt; &gt;" RenderTransformOrigin="0.504,0.5" Click="NextButtonClick"></Button>
             </Grid>
         </Grid>
         <Canvas Grid.Column="2">

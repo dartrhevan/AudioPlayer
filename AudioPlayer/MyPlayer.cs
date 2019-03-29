@@ -28,11 +28,26 @@ namespace AudioPlayer
             }
         }
         public bool Playing { get; set; }
+
+        public void Next()
+        {
+            SetCurrentSongByIndexAndAlbum(CurrentIndex + 1, CurrentAlbum);
+        }
+
+        public void Previous()
+        {
+            SetCurrentSongByIndexAndAlbum(CurrentIndex - 1, CurrentAlbum);
+        }
+
         public void SetCurrentSongByIndexAndAlbum(int index, Album album)
         {
-            CurrentSong = album.Songs[index];
-            CurrentIndex = index;
-            CurrentAlbum = album;
+            if (album.Songs.Count > index && index >= 0)
+            {
+                CurrentSong = album.Songs[index];
+                CurrentIndex = index;
+                CurrentAlbum = album;
+            }
+            //else throw new Exception("Fuck you!");
         }
 
         public readonly MediaPlayer CurrentPlayer = new MediaPlayer();
@@ -45,6 +60,12 @@ namespace AudioPlayer
 
         public MyPlayer(MainWindow window)
         {
+            CurrentPlayer.MediaEnded += (s, a) =>
+            {
+                window.Bar.PauseStart();
+                Next();
+                window.Bar.PauseStart();
+            };
             this.window = window;
             OpenCurrentDirectory();
         }
@@ -66,12 +87,12 @@ namespace AudioPlayer
             Songs = new List<File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
                 .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures, window)));
-            if (currentSong == null)
-            {
+            //if (currentSong == null)
+            //{
                 CurrentAlbum = Albums[Albums.Count - 1];
                 CurrentIndex = CurrentAlbum.Songs.Count - 1;
                 CurrentSong = CurrentAlbum.Songs[CurrentIndex];
-            }
+            //}
         }
 
         public void OpenFolder(string folderPath)
