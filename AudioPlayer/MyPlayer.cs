@@ -60,6 +60,12 @@ namespace AudioPlayer
 
         public MyPlayer(MainWindow window)
         {
+            CurrentPlayer.MediaEnded += (s, a) =>
+            {
+                window.Bar.PauseStart();
+                Next();
+                window.Bar.PauseStart();
+            };
             this.window = window;
             OpenCurrentDirectory();
         }

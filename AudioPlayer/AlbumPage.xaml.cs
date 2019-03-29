@@ -50,6 +50,10 @@ namespace AudioPlayer
                     Stack.Children.Add(song);
                 }
 
+                Cover.Source = album.Cover;
+                NameLabel.Content = album.AlbumName.Content as string;
+                Author.Content = album.Author.Content as string;
+                Count.Content = album.Songs.Count.ToString();
             }
         }
 
