@@ -20,13 +20,13 @@
             </Border>
         </ControlTemplate>-->
         <Style x:Key="MainStyle" TargetType="local:SongRow">
-            <Setter Property="Background" Value="CadetBlue"></Setter>
-            <Setter Property="BorderBrush" Value="CadetBlue"></Setter>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="LightGray"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value ="DarkCyan"/>
-                    <Setter Property="BorderBrush" Value="DarkCyan"/>
-                    <Setter Property="Height" Value="30"></Setter>
+                    <Setter Property="Background" Value ="#FFECECEC"/>
+                    <Setter Property="BorderBrush" Value="#FFD4D4D4"/>
+                    <!--<Setter Property="Height" Value="50"></Setter> -->
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -48,9 +48,9 @@
         <Button Grid.Column="0" Content="&lt;" Click="ReturnButtonOnClick"/>
         <StackPanel Grid.Column="1">
             <Image Name="Cover" Margin="0, 0, 0, 5"></Image>
-            <Label Name="NameLabel" Margin="0, 0, 0, 5" FontSize="16" FontFamily="Times new roman" FontWeight="Bold"></Label>
-            <Label Name="Author" Margin="0, 0, 0, 5" FontSize="16" FontFamily="Times new roman" FontWeight="Bold"></Label>
-            <Label Name="Count" Margin="0, 0, 0, 5" FontSize="16" FontFamily="Times new roman" FontWeight="Bold"></Label>
+            <Label Name="NameLabel" Margin="0, 0, 0, 5" FontSize="16" FontFamily="Arial" FontWeight="Bold"></Label>
+            <Label Name="Author" Margin="0, 0, 0, 5" FontSize="16" FontFamily="Arial" FontWeight="Bold"></Label>
+            <Label Name="Count" Margin="0, 0, 0, 5" FontSize="16" FontFamily="Arial" FontWeight="Bold"></Label>
         </StackPanel>
     </Grid>
 </UserControl>

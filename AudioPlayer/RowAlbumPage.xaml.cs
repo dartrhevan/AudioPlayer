@@ -37,7 +37,7 @@ namespace AudioPlayer
                 {
                     Content = album.AlbumName.Content,
                 };
-                albumButton.MouseEnter += (se, a) =>
+                albumButton.MouseDown += (se, arg) =>
                 {
                     while (SongStack.Children.Count > 0)
                     {

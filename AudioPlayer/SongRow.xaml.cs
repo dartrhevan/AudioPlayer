@@ -28,9 +28,10 @@ namespace AudioPlayer
             this.Window = window;
             InitializeComponent();
             Album = album;
+            SongIndex.Content = index + 1;
             Label.Content = Album.Songs[index].Tag.Title??Album.Songs[index].Name.Split('\\').Last();
-            Margin = new Thickness(0, 0, 0, 12);
-            Height = 20;
+           // Margin = new Thickness(0, 0, 0, 0);
+            Height = 25;
             Index = index;
         }
 
