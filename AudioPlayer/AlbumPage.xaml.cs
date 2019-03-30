@@ -50,6 +50,21 @@ namespace AudioPlayer
                     Stack.Children.Add(song);
                 }
 
+                foreach (var track in Window.Player.PlayList.Select(s =>
+                {
+                    var res = new SongRow(Window, s.Item1, s.Item2);
+                    res.MouseDown += (send, args) =>
+                    {
+                        var song = (send as SongRow);
+                        if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
+                            Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, album);
+                    };
+                    res.Style = (Style)Resources["MainStyle"];
+                    return res;
+                }))
+                {
+                    PlayList.Children.Add(track);
+                }
                 Cover.Source = album.Cover;
                 NameLabel.Content = album.AlbumName.Content as string;
                 Author.Content = album.Author.Content as string;

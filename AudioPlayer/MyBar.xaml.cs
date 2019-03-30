@@ -33,6 +33,7 @@ namespace AudioPlayer
             InitializeComponent();
             timer.Tick += (sender, args) =>
             {
+                if (Player.CurrentSong == null) return;
                 if (Player.Playing && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
                     Progress.Value = Player.CurrentPlayer.Position.TotalSeconds /
                                      Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds;

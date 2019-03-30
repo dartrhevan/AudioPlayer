@@ -8,6 +8,7 @@ using System.Windows.Media;
 using TagLib;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using File = TagLib.File;
 
@@ -15,6 +16,7 @@ namespace AudioPlayer
 {
     public class MyPlayer
     {
+        public int CurrentPlayListIndex { get; set; } = 0;
         private readonly MainWindow window;
         public Album CurrentAlbum { get; set; }
         public File CurrentSong
@@ -31,12 +33,27 @@ namespace AudioPlayer
 
         public void Next()
         {
-            SetCurrentSongByIndexAndAlbum(CurrentIndex + 1, CurrentAlbum);
+            if(PlayList.Count == 0)
+                SetCurrentSongByIndexAndAlbum(CurrentIndex + 1, CurrentAlbum);
+            else
+            {
+                var track = PlayList[++CurrentPlayListIndex];
+
+                SetCurrentSongByIndexAndAlbum(track.Item1, track.Item2);
+            }
+
         }
 
         public void Previous()
         {
-            SetCurrentSongByIndexAndAlbum(CurrentIndex - 1, CurrentAlbum);
+            if (PlayList.Count == 0)
+                SetCurrentSongByIndexAndAlbum(CurrentIndex - 1, CurrentAlbum);
+            else
+            {
+                var track = PlayList[--CurrentPlayListIndex];
+
+                SetCurrentSongByIndexAndAlbum(track.Item1, track.Item2);
+            }
         }
 
         public void SetCurrentSongByIndexAndAlbum(int index, Album album)
@@ -57,9 +74,11 @@ namespace AudioPlayer
         public List<File> Songs;
         public List<Album> Albums;
         private File currentSong;
+        public readonly List<Tuple<int, Album>> PlayList = new List<Tuple<int, Album>>();
 
         public MyPlayer(MainWindow window)
         {
+            
             CurrentPlayer.MediaEnded += (s, a) =>
             {
                 window.Bar.PauseStart();
@@ -72,12 +91,21 @@ namespace AudioPlayer
 
         private void OpenCurrentDirectory()
         {
+            //File.AddFileTypeResolver(new File.FileTypeResolver());
             var files = curreDirectory.GetFiles()
                 .Select(f =>
                 {
                     try
                     {
-                        return File.Create(Path.Combine(f.DirectoryName, f.Name));
+                        var dim = f.Name.Substring(f.Name.Length - 3);
+                        switch (dim)
+                        {
+                            case "mp3":
+                            case "waw":
+                            case "wma":
+                                return File.Create(Path.Combine(f.DirectoryName, f.Name));
+                            default: return null;
+                        }
                     }
                     catch
                     {
@@ -87,12 +115,15 @@ namespace AudioPlayer
             Songs = new List<File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
                 .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures, window)));
-            //if (currentSong == null)
-            //{
-                CurrentAlbum = Albums[Albums.Count - 1];
+            //if (curreDirectory.GetFiles().Length <= 0) return;
+            if (Songs.Count > 0)
+            {
+                CurrentAlbum = Albums.Last();
                 CurrentIndex = CurrentAlbum.Songs.Count - 1;
                 CurrentSong = CurrentAlbum.Songs[CurrentIndex];
-            //}
+                //var ind = 0;
+                //PlayList = Albums[0].Songs.Select(s => Tuple.Create(ind++, Albums[0])).ToList();
+            }
         }
 
         public void OpenFolder(string folderPath)

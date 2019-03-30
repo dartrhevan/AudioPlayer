@@ -16,25 +16,25 @@ using System.Windows.Shapes;
 namespace AudioPlayer
 {
     /// <summary>
-    /// Строка одной песни в списке
+    /// Логика взаимодействия для PlayListRow.xaml
     /// </summary>
-    public partial class SongRow : UserControl
+    public partial class PlayListRow : UserControl
     {
         public readonly MainWindow Window;
         public readonly Album Album;
         public readonly int Index;
-        public SongRow(MainWindow window, int index, Album album)
+        public PlayListRow(MainWindow window, int index, Album album)
         {
-            
+
             this.Window = window;
             InitializeComponent();
             Album = album;
             SongIndex.Content = index + 1;
-            Label.Content = Album.Songs[index].Tag.Title??Album.Songs[index].Name.Split('\\').Last();
-           // Margin = new Thickness(0, 0, 0, 0);
+            Label.Content = Album.Songs[index].Tag.Title ?? Album.Songs[index].Name.Split('\\').Last();
+            // Margin = new Thickness(0, 0, 0, 0);
             Height = 25;
             Index = index;
-            
+
         }
 
         private void PlayOnClick(object sender, RoutedEventArgs e)
