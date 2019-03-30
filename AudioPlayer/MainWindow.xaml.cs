@@ -33,7 +33,8 @@ namespace AudioPlayer
             Player = new MyPlayer(this);
             InitializeComponent();
             Bar.Player = Player;
-            if (r.Value) // Для расширенного дизайна убери < ! >
+            if(r == null) Close();
+            else if (r.Value) // Для расширенного дизайна убери < ! >
             {
                 MainPage = new MainPage(Player);
                 RealMainPage = MainPage;

@@ -34,14 +34,14 @@ namespace AudioPlayer
         private void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
             var user = new User(Login.Text, Password.Password.GetHashCode(), License.Password == "159");
-            
+            Save(user);
             this.Close();
             //this.DialogResult = License.Password != "";
         }
 
         public void Save(User user)
         {
-            var fileStream = File.Open(user.Login, FileMode.Create);
+            var fileStream = File.Open(Path.Combine(MyPlayer.MainDirectory.FullName, "Users", user.Login), FileMode.Create);
             var binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(fileStream, user);
             fileStream.Close();

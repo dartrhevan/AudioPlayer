@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Path = System.IO.Path;
+using System.ComponentModel;
 
 namespace AudioPlayer
 {
@@ -23,20 +24,43 @@ namespace AudioPlayer
     public partial class AutorizationWindow : Window
     {
         private readonly DirectoryInfo dir;
-        private IEnumerable<User>users;
+        private IEnumerable<User> users;
         public AutorizationWindow()
         {
             InitializeComponent();
             dir = new DirectoryInfo(Path.Combine(MyPlayer.MainDirectory.FullName, "Users"));
         }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            DialogResult = null;
+
+        }
+
+        //protected override void OnClosing(CancelEventArgs e)
+        //{
+        //    base.OnClosing(e);
+        //    DialogResult = null;
+        //}
+
         private void ButtonClick(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            if (!Directory.Exists(dir.FullName))
+            {
+                Directory.CreateDirectory(dir.FullName);
+            }
             users = dir.GetFiles().Select(f => Open(f));//.ToArray();//dir.GetFiles().Select(f => Open(f));
-            //f(users.Contains())
+            var user = users.FirstOrDefault(s => s.Login == Login.Text && s.PasswordHash == Password.Password.GetHashCode());
+            if (user == null)
+            {
+                MessageBox.Show("Fuck!");
+                return;
+            }
+            this.DialogResult = user.IsExtended; //if (user)
             this.Close();
         }
+
 
         private User Open(FileInfo f)
         {
