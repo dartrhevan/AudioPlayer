@@ -84,13 +84,15 @@
     <Grid Height="26">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"></ColumnDefinition>
-            <ColumnDefinition Width="0.8*"></ColumnDefinition>
+            <ColumnDefinition Width="0.7*"></ColumnDefinition>
+            <ColumnDefinition Width="0.2*"></ColumnDefinition>
             <ColumnDefinition Width="0.1*"></ColumnDefinition>
             <ColumnDefinition Width="0.1*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Column="0" Name="SongIndex" FontSize="12" FontFamily="Arial" Foreground="Gray" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Label Grid.Column="1" Name="Label" FontSize="12" FontFamily="Arial" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
-        <Button Grid.Column="2" Style="{StaticResource ButStyle}" Click="PlayOnClick"></Button>
-        <Button Grid.Column="3" Style="{StaticResource ToPlayList}"></Button>
+        <Label Grid.Column="1" Name="Duration" FontSize="12" FontFamily="Arial" VerticalContentAlignment="Center"  Foreground="Gray" HorizontalContentAlignment="Right"/>
+        <Button Grid.Column="3" Style="{StaticResource ButStyle}" Click="PlayOnClick"></Button>
+        <Button Grid.Column="4" Style="{StaticResource ToPlayList}"></Button>
     </Grid>
 </UserControl>
