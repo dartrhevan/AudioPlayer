@@ -23,6 +23,7 @@ namespace AudioPlayer
     /// </summary>
     public partial class AutorizationWindow : Window
     {
+        //private bool? result = null;
         private readonly DirectoryInfo dir;
         private IEnumerable<User> users;
         public AutorizationWindow()
@@ -31,12 +32,11 @@ namespace AudioPlayer
             dir = new DirectoryInfo(Path.Combine(MyPlayer.MainDirectory.FullName, "Users"));
         }
 
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            DialogResult = null;
-
-        }
+        //protected override void OnClosed(EventArgs e)
+        //{
+        //    ////base.OnClosed(e);
+        //    //DialogResult = result;
+        //}
 
         //protected override void OnClosing(CancelEventArgs e)
         //{
@@ -57,7 +57,7 @@ namespace AudioPlayer
                 MessageBox.Show("Fuck!");
                 return;
             }
-            this.DialogResult = user.IsExtended; //if (user)
+            DialogResult = user.IsExtended; //if (user)
             this.Close();
         }
 
