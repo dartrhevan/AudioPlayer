@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AudioPlayer"
-             mc:Ignorable="d" Height="166.387" Width="918.487" BorderThickness="1" BorderBrush="Gray">
+             mc:Ignorable="d" Height="166.387" Width="918.487" BorderThickness="1" BorderBrush="Gray" Background="#2E2C33">
     <UserControl.Resources>
         <ControlTemplate TargetType="Button" x:Key="btTemplate">
             <Border CornerRadius="12"
@@ -61,7 +61,7 @@
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Name ="CurrentCover" Source="C:\Users\User\OneDrive\Документы\Учёба\Интерфйсы\MediaPlayer\AudioPlayer\bin\Debug\1.png" Margin="0,0,0,2" Grid.RowSpan="3" ></Image>
-            <Label Grid.Row="0" Grid.Column="1" Name="CurrentName" FontFamily="Arial" FontSize="18">The song haven't selected yet</Label>
+            <Label Grid.Row="0" Grid.Column="1" Name="CurrentName" FontFamily="Arial" FontSize="18" Foreground="White">The song haven't selected yet</Label>
             <Slider Grid.Row="1" Grid.Column="1"  Name="Progress" Minimum="0" Maximum="1" Height="20" Margin="0, 15, 0, 0" ValueChanged="ProgressValueChanged"></Slider>
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -72,8 +72,8 @@
                     <ColumnDefinition Width="0.4*"></ColumnDefinition>
                     <ColumnDefinition Width="0.3*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Label Name="Begin" Grid.Row="0" Grid.Column="0">0</Label>
-                <Label Name="End" Grid.Row="0" Grid.Column="2">0</Label>
+                <Label Name="Begin" Grid.Row="0" Grid.Column="0" Foreground="White">0</Label>
+                <Label Name="End" Grid.Row="0" Grid.Column="2" Foreground="White">0</Label>
             </Grid>
             <Grid Grid.Row="3" Grid.Column="1" Margin="0, 15, 0, 0">
                 <Grid.RowDefinitions>

@@ -24,13 +24,13 @@
             <Setter Property="BorderBrush" Value="CadetBlue"></Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value ="DarkCyan"/>
-                    <Setter Property="BorderBrush" Value="DarkCyan"/>
+                    <Setter Property="Background" Value ="#FFECECEC"/>
+                    <Setter Property="BorderBrush" Value="#FFD4D4D4"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Grid Opacity="0.8">
+    <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                 <GradientStop Color="#FFCDCDCD" Offset="1"/>
