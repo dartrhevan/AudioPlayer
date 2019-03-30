@@ -23,9 +23,11 @@ namespace AudioPlayer
         public readonly MainWindow Window;
         public readonly Album Album;
         public readonly int Index;
-        public PlayListRow(MainWindow window, int index, Album album)
-        {
+        public readonly int PlayListIndex;
 
+        public PlayListRow(MainWindow window, int index, Album album, int playListIndex)
+        {
+            PlayListIndex = playListIndex;
             this.Window = window;
             InitializeComponent();
             Album = album;
@@ -49,21 +51,12 @@ namespace AudioPlayer
             Window.Bar.PauseStart();
         }
 
-        private void ToPlayListOnClick(object sender, RoutedEventArgs e)
+        private void FromPlayListOnClick(object sender, RoutedEventArgs e)
         {
-            Window.Player.PlayList.Add(Tuple.Create(Index, Album));
-            var row = new SongRow(Window, Index, Album);
-            row.MouseDown += (send, args) =>
-            {
-                var song = (send as SongRow);
-                if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
-                    Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, Album);
-            };
+            Window.Player.PlayList.RemoveAt(PlayListIndex);
             Window.Bar.PauseStart();
             Window.Player.SetCurrentSongByIndexAndAlbum(Index, Album);
-            Window.Album.PlayList.Children.Add(row);
-            Window.Player.CurrentPlayListIndex = Window.Player.PlayList.Count - 1;
-
+            Window.Album.PlayList.Children.Remove(this);
         }
     }
 }

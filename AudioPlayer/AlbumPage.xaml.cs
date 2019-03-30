@@ -50,16 +50,17 @@ namespace AudioPlayer
                     Stack.Children.Add(song);
                 }
 
+                ind = 0;
                 foreach (var track in Window.Player.PlayList.Select(s =>
                 {
-                    var res = new SongRow(Window, s.Item1, s.Item2);
+                    var res = new PlayListRow(Window, s.Item1, s.Item2, ind++);
                     res.MouseDown += (send, args) =>
                     {
-                        var song = (send as SongRow);
+                        var song = (send as PlayListRow);
                         if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
                             Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, album);
                     };
-                    res.Style = (Style)Resources["MainStyle"];
+                    res.Style = (Style)Resources["MainStyle2"];
                     return res;
                 }))
                 {

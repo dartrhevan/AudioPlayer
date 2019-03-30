@@ -52,17 +52,23 @@ namespace AudioPlayer
         private void ToPlayListOnClick(object sender, RoutedEventArgs e)
         {
             Window.Player.PlayList.Add(Tuple.Create(Index, Album));
-            var row = new SongRow(Window, Index, Album);
+            var row = new PlayListRow(Window, Index, Album, Window.Player.PlayList.Count - 1);
             row.MouseDown += (send, args) =>
             {
-                var song = (send as SongRow);
+                var song = (send as PlayListRow);
                 if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
                     Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, Album);
             };
-            Window.Bar.PauseStart();
-            Window.Player.SetCurrentSongByIndexAndAlbum(Index, Album);
+            row.Style = (Style)Window.Album.Resources["MainStyle2"];
+            if (Window.Player.PlayList.Count == 1)
+            {
+                //Window.Bar.PauseStart();
+                Window.Player.SetCurrentSongByIndexAndAlbum(Index, Album);
+                Window.Player.CurrentPlayListIndex = Window.Player.PlayList.Count - 1;
+
+            }
+
             Window.Album.PlayList.Children.Add(row);
-            Window.Player.CurrentPlayListIndex = Window.Player.PlayList.Count - 1;
 
         }
     }

@@ -37,8 +37,8 @@ namespace AudioPlayer
                 SetCurrentSongByIndexAndAlbum(CurrentIndex + 1, CurrentAlbum);
             else
             {
+                if(CurrentPlayListIndex == PlayList.Count - 1) return;
                 var track = PlayList[++CurrentPlayListIndex];
-
                 SetCurrentSongByIndexAndAlbum(track.Item1, track.Item2);
             }
 
@@ -50,8 +50,8 @@ namespace AudioPlayer
                 SetCurrentSongByIndexAndAlbum(CurrentIndex - 1, CurrentAlbum);
             else
             {
+                if (CurrentPlayListIndex == 0) return;
                 var track = PlayList[--CurrentPlayListIndex];
-
                 SetCurrentSongByIndexAndAlbum(track.Item1, track.Item2);
             }
         }

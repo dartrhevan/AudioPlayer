@@ -7,6 +7,20 @@
              mc:Ignorable="d"
              BorderThickness="0,0,0,1" BorderBrush="#FFBFBFBF">
     <UserControl.Resources>
+        <!--<Style x:Key="elstl">
+            <Style.Setters>
+                <Setter Property="RadiusX" Value="1"></Setter>
+            </Style.Setters>
+        </Style>
+        <ControlTemplate TargetType="EllipseGeometry" x:Key="elipseTempl">
+            <ContentControl Style="{StaticResource elstl}"></ContentControl>
+            <ControlTemplate.Triggers>
+                <Trigger Property="">
+                    <Setter></Setter>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>-->
+
         <Style x:Key="ButStyle" TargetType="Button">
            <!-- <Setter Property="Background" Value="Blue"></Setter> -->
             <Setter Property="Template">
@@ -46,6 +60,7 @@
         </Style>
         <Style x:Key="ToPlayList" TargetType="Button">
             <!-- <Setter Property="Background" Value="Blue"></Setter> -->
+            
             <Setter Property="Template">
                
                 <Setter.Value>
