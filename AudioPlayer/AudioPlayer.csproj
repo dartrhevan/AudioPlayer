@@ -79,6 +79,7 @@
     <Compile Include="SongRow.xaml.cs">
       <DependentUpon>SongRow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Page Include="AlbumPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

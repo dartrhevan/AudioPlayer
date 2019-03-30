@@ -68,7 +68,7 @@ namespace AudioPlayer
         }
 
         public readonly MediaPlayer CurrentPlayer = new MediaPlayer();
-        private static readonly DirectoryInfo MainDirectory = new DirectoryInfo(@"C:\MyPlayerDirectory");
+        public static readonly DirectoryInfo MainDirectory = new DirectoryInfo(@"C:\MyPlayerDirectory");
         DirectoryInfo curreDirectory = MainDirectory;
         public int CurrentIndex { get; private set; }
         public List<File> Songs;
