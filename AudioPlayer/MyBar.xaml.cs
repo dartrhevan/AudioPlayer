@@ -37,11 +37,23 @@ namespace AudioPlayer
                 if (Player.Playing && Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
                     Progress.Value = Player.CurrentPlayer.Position.TotalSeconds /
                                      Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds;
-                Begin.Content = Player.CurrentPlayer.Position.ToString();
-                End.Content = Player.CurrentPlayer.NaturalDuration.ToString();
-                //if (CurrentName.Content as string != Player.CurrentSong.Tag.Title)
-                //{
-                    if (Player.CurrentSong.Tag.Pictures.Length > 0)
+                //Условие для мелодий длительностью больше часа
+                if (Player.CurrentPlayer.NaturalDuration.HasTimeSpan && Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalHours > 0)
+                {
+                    Begin.Content = String.Format("{0:00}:{1:00}:{2:00}", Player.CurrentPlayer.Position.Hours, Player.CurrentPlayer.Position.Minutes, Player.CurrentPlayer.Position.Seconds);
+                    End.Content = String.Format("{0:00}:{1:00}:{2:00}", Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalHours, Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMinutes, Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds);
+                    //if (CurrentName.Content as string != Player.CurrentSong.Tag.Title)
+                    //{
+                }
+                else
+                {
+                    if (Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
+                    {
+                        Begin.Content = String.Format("{0:00}:{1:00}", Player.CurrentPlayer.Position.Minutes, Player.CurrentPlayer.Position.Seconds);
+                        End.Content = String.Format("{0:00}:{1:00}", Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMinutes, Player.CurrentPlayer.NaturalDuration.TimeSpan.Seconds);
+                    }
+                }
+                if (Player.CurrentSong.Tag.Pictures.Length > 0)
                         CurrentCover.Source = GetImage();
                     CurrentName.Content = Player.CurrentSong.Tag.Title?? Player.CurrentSong.Name.Split('\\').Last();
                 //}
@@ -51,7 +63,7 @@ namespace AudioPlayer
             timer.Start();
         }
 
-        private Timer timer = new Timer {Interval = 100};
+        private Timer timer = new Timer {Interval = 1};
 
         
 
