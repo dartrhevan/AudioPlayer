@@ -20,15 +20,18 @@ namespace AudioPlayer
     /// </summary>
     public partial class PlayListRow : UserControl
     {
-        public readonly MainWindow Window;
+        public MainWindow Window
+        {
+            get => Application.Current.MainWindow as MainWindow;
+        }
         public readonly Album Album;
         public readonly int Index;
         public readonly int PlayListIndex;
 
-        public PlayListRow(MainWindow window, int index, Album album, int playListIndex)
+        public PlayListRow(int index, Album album, int playListIndex)
         {
             PlayListIndex = playListIndex;
-            this.Window = window;
+            //this.Window = window;
             InitializeComponent();
             Album = album;
             SongIndex.Content = index + 1;

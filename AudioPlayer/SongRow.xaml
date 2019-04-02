@@ -7,28 +7,10 @@
              mc:Ignorable="d"
              BorderThickness="0,0,0,1" BorderBrush="#FFBFBFBF">
     <UserControl.Resources>
-        <!--<Style x:Key="elstl">
-            <Style.Setters>
-                <Setter Property="RadiusX" Value="1"></Setter>
-            </Style.Setters>
-        </Style>
-        <ControlTemplate TargetType="EllipseGeometry" x:Key="elipseTempl">
-            <ContentControl Style="{StaticResource elstl}"></ContentControl>
-            <ControlTemplate.Triggers>
-                <Trigger Property="">
-                    <Setter></Setter>
-                </Trigger>
-            </ControlTemplate.Triggers>
-        </ControlTemplate>-->
-
-        <Style x:Key="ButStyle" TargetType="Button">
-            <!-- <Setter Property="Background" Value="Blue"></Setter> -->
-            <Setter Property="Template">
-
+        <!--<Style x:Key="ButStyle">
+            <Setter Property="Button.Template">
                 <Setter.Value>
-
                     <ControlTemplate TargetType="{x:Type Button}">
-
                         <Grid>
                             <Path Stretch="Uniform" UseLayoutRounding="False" Stroke="#FFAEAEAE" StrokeThickness="0.4" Margin="3">
                                 <Path.Fill>
@@ -49,7 +31,6 @@
                             <Path Fill="#FFF90000" UseLayoutRounding="False" HorizontalAlignment="Center" VerticalAlignment="Center">
                                 <Path.Data>
                                     <CombinedGeometry GeometryCombineMode="Union" Geometry1=""/>
-                                    <!--   <RectangleGeometry RadiusX="1" RadiusY="1" Rect="0,0,6,6"/> -->
                                 </Path.Data>
                             </Path>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -58,10 +39,8 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        <Style x:Key="ToPlayList" TargetType="Button">
-            <!-- <Setter Property="Background" Value="Blue"></Setter> -->
-            
-            <Setter Property="Template">
+        <Style x:Key="ToPlayList">
+            <Setter Property="Button.Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
@@ -87,12 +66,12 @@
                 </Setter.Value>
             </Setter>
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value ="Red"/>
-                    <Setter Property="BorderBrush" Value="#FF171414"/>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Background" Value ="Red"/>
+                    <Setter Property="Button.BorderBrush" Value="#FF171414"/>
                 </Trigger>
             </Style.Triggers>
-        </Style>
+        </Style>-->
 
     </UserControl.Resources>
 
