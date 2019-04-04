@@ -92,7 +92,35 @@ namespace AudioPlayer
         private void OpenCurrentDirectory()
         {
             //File.AddFileTypeResolver(new File.FileTypeResolver());
-            var files = curreDirectory.GetFiles()
+            var func = new Func<IEnumerable<File>>(GetFiles);
+            var res = func.BeginInvoke(null, null);//GetFilesAsync().Result;
+            var files = func.EndInvoke(res);
+            Songs = new List<File>(files);
+            Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
+                .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures)));
+            //if (curreDirectory.GetFiles().Length <= 0) return;
+            if (Songs.Count > 0)
+            {
+                CurrentAlbum = Albums.Last();
+                CurrentIndex = CurrentAlbum.Songs.Count - 1;
+                CurrentSong = CurrentAlbum.Songs[CurrentIndex];
+                //var ind = 0;
+                //PlayList = Albums[0].Songs.Select(s => Tuple.Create(ind++, Albums[0])).ToList();
+            }
+            GC.Collect();
+        }
+
+        //async Task<IEnumerable<File>> GetFilesAsync()
+        //{
+        //    var task = new Task<IEnumerable<File>>(GetFiles);
+        //    task.Start();
+        //    var res = await task;
+        //    return res;
+        //}
+
+        private IEnumerable<File> GetFiles()
+        {
+            return curreDirectory.GetFiles()
                 .Select(f =>
                 {
                     try

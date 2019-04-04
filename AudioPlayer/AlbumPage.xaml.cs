@@ -66,7 +66,6 @@ namespace AudioPlayer
                 {
                     PlayList.Children.Add(track);
                 }
-                //if
                 Cover.Source = (album.Picture.Background as ImageBrush)?.ImageSource;
                 NameLabel.Content = album.AlbumName.Content as string;
                 Author.Content = album.Author.Content as string;
