@@ -10,7 +10,6 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using System.Windows.Media.Animation;
-using Application = System.Windows.Application;
 using File = TagLib.File;
 
 namespace AudioPlayer
@@ -18,10 +17,7 @@ namespace AudioPlayer
     public class MyPlayer
     {
         public int CurrentPlayListIndex { get; set; } = 0;
-        public MainWindow window
-        {
-            get => Application.Current.MainWindow as MainWindow;
-        }
+        private readonly MainWindow window;
         public Album CurrentAlbum { get; set; }
         public File CurrentSong
         {
@@ -80,7 +76,7 @@ namespace AudioPlayer
         private File currentSong;
         public readonly List<Tuple<int, Album>> PlayList = new List<Tuple<int, Album>>();
 
-        public MyPlayer()
+        public MyPlayer(MainWindow window)
         {
             
             CurrentPlayer.MediaEnded += (s, a) =>
@@ -89,7 +85,7 @@ namespace AudioPlayer
                 Next();
                 window.Bar.PauseStart();
             };
-            //this.window = window;
+            this.window = window;
             OpenCurrentDirectory();
         }
 
@@ -118,7 +114,7 @@ namespace AudioPlayer
                 }).Where(f => f != null);
             Songs = new List<File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
-                .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures)));
+                .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures, window)));
             //if (curreDirectory.GetFiles().Length <= 0) return;
             if (Songs.Count > 0)
             {
@@ -140,7 +136,7 @@ namespace AudioPlayer
         {
             var song = File.Create(path);
             Songs.Add(song);
-            var album = new Album(new[] { song }, song.Tag.Album, String.Join(", ", song.Tag.Performers), song.Tag.Pictures);
+            var album = new Album(new[] { song }, song.Tag.Album, String.Join(", ", song.Tag.Performers), song.Tag.Pictures, window);
             var albInd = Albums.FindIndex(a => a.AlbumName.Content as string == album.AlbumName.Content as string && a.Author.Content as string == album.Author.Content as string);
             if (albInd == -1)
             {
