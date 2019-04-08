@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Path = System.IO.Path;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AudioPlayer
 {
@@ -33,7 +23,8 @@ namespace AudioPlayer
 
         private void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
-            var user = new User(Login.Text, Password.Password.GetHashCode(), License.Password == "159");
+
+            var user = new User(Login.Text, User.Encrypt(Password.Password), License.Password == "159");
             Save(user);
             this.Close();
             //this.DialogResult = License.Password != "";

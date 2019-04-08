@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace AudioPlayer
 {
@@ -10,10 +12,10 @@ namespace AudioPlayer
     public class User
     {
         public readonly string Login;
-        public readonly int PasswordHash;
+        public readonly string PasswordHash;
         public readonly bool IsExtended;
 
-        public User(string login, int passwordHash, bool isExtended)
+        public User(string login, string passwordHash, bool isExtended)
         {
             Login = login;
             PasswordHash = passwordHash;
@@ -28,6 +30,16 @@ namespace AudioPlayer
                    PasswordHash == user.PasswordHash &&
                    IsExtended == user.IsExtended;
         }
+
+        public static string Encrypt(string str)
+        {
+            MD5 hasher = MD5.Create();
+            var data = hasher.ComputeHash(Encoding.Default.GetBytes(str));
+            var builder = new StringBuilder();
+            builder.Append(data);
+            return builder.ToString();
+        }
+
 
         public override int GetHashCode()
         {

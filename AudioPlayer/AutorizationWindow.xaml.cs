@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Path = System.IO.Path;
-using System.ComponentModel;
 
 namespace AudioPlayer
 {
@@ -51,7 +40,7 @@ namespace AudioPlayer
                 Directory.CreateDirectory(dir.FullName);
             }
             users = dir.GetFiles().Select(f => Open(f));//.ToArray();//dir.GetFiles().Select(f => Open(f));
-            var user = users.FirstOrDefault(s => s.Login == Login.Text && s.PasswordHash == Password.Password.GetHashCode());
+            var user = users.FirstOrDefault(s => s.Login == Login.Text && s.PasswordHash == User.Encrypt(Password.Password));
             if (user == null)
             {
                 MessageBox.Show("Fuck!");
