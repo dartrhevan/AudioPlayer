@@ -38,6 +38,7 @@ namespace AudioPlayer
             // data;
         }
 
+        public static User CurrentUser;
 
         public override int GetHashCode()
         {

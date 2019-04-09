@@ -61,6 +61,8 @@ namespace AudioPlayer
                 ErrorLabel.Content = "*This login or password are irregular";
                 return;
             }
+
+            User.CurrentUser = user;
             result = user.IsExtended; //if (user)
             this.Close();
         }

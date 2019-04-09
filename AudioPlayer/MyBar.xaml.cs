@@ -31,6 +31,7 @@ namespace AudioPlayer
         public MyBar()
         {
             InitializeComponent();
+            UserLabel.Text = "Currnet user:\n" + User.CurrentUser.Login;
             timer.Tick += (sender, args) =>
             {
                 if (Player.CurrentSong == null) return;
