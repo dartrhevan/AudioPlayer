@@ -12,6 +12,7 @@
         <TextBox FontSize="16" Margin="50,0,50,5" Height="25" Name="Login"></TextBox>
         <Label FontSize="16" Margin="0, 0, 0, 5" AllowDrop="True">Enter password:</Label>
         <PasswordBox FontSize="16" Margin="50,0,50,5" Height="25" Name="Password"></PasswordBox>
+        <Label Name="ErrorLabel" FontSize="14" Foreground="Red"></Label>
         <Button FontSize="16" Margin="155,0,156.6,5" Height="29" Content="OK" Click="ButtonClick"/>
         <Button FontSize="16" Margin="155,0,156.6,5" Height="29" Content="Register" Click="RegisterButtonOnClick"/>
 

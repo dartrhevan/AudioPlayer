@@ -12,10 +12,10 @@ namespace AudioPlayer
     public class User
     {
         public readonly string Login;
-        public readonly string PasswordHash;
+        public readonly byte[] PasswordHash;
         public readonly bool IsExtended;
 
-        public User(string login, string passwordHash, bool isExtended)
+        public User(string login, byte[] passwordHash, bool isExtended)
         {
             Login = login;
             PasswordHash = passwordHash;
@@ -31,13 +31,11 @@ namespace AudioPlayer
                    IsExtended == user.IsExtended;
         }
 
-        public static string Encrypt(string str)
+        public static byte[] Encrypt(string str)
         {
             MD5 hasher = MD5.Create();
-            var data = hasher.ComputeHash(Encoding.Default.GetBytes(str));
-            var builder = new StringBuilder();
-            builder.Append(data);
-            return builder.ToString();
+            return hasher.ComputeHash(Encoding.Default.GetBytes(str));
+            // data;
         }
 
 

@@ -51,10 +51,14 @@ namespace AudioPlayer
                 Directory.CreateDirectory(dir.FullName);
             }
             users = dir.GetFiles().Select(f => Open(f));//.ToArray();//dir.GetFiles().Select(f => Open(f));
-            var user = users.FirstOrDefault(s => s.Login == Login.Text && s.PasswordHash == User.Encrypt(Password.Password));
+
+            var curHash = User.Encrypt(Password.Password);
+            var user = users.FirstOrDefault(s => 
+                s.Login == Login.Text && ArrayEquals(s.PasswordHash, curHash));
             if (user == null)
             {
-                MessageBox.Show("Fuck!");
+                //MessageBox.Show("Fuck!");
+                ErrorLabel.Content = "*This login or password are irregular";
                 return;
             }
             result = user.IsExtended; //if (user)
@@ -75,6 +79,17 @@ namespace AudioPlayer
         {
             var r = new RegisterWindow().ShowDialog();
             
+        }
+
+        static bool ArrayEquals(byte[] arr1, byte[] arr2)
+        {
+            if (arr1.Length != arr2.Length) return false;
+            for (var i = 0; i < arr1.Length; i++)
+            {
+                if (arr1[i] != arr2[i]) return false;
+            }
+
+            return true;
         }
     }
 }
