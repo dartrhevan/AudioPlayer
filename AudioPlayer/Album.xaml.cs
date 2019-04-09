@@ -24,20 +24,23 @@ namespace AudioPlayer
     /// </summary>
     public partial class Album : UserControl
     {
-        readonly ImageSourceConverter ic = new ImageSourceConverter();
         public readonly List<TagLib.File> Songs;
-        public readonly ImageSource Cover;
-        private readonly MainWindow window;
-
-        public Album(IEnumerable<TagLib.File> songs, string albumName, string author, IPicture[] pictures, MainWindow window)
+        //public readonly ImageSource Cover;
+         MainWindow window
         {
-            this.window = window;
+            get => Application.Current.MainWindow as MainWindow;
+        }
+
+        public Album(IEnumerable<TagLib.File> songs, string albumName, string author, IPicture[] pictures)
+        {
+            //this.window = window;
             InitializeComponent();
-            
+            ImageSourceConverter ic = new ImageSourceConverter();
+
             if (pictures != null && pictures.Length > 0)
             {
-                Cover = (ImageSource)ic.ConvertFrom(pictures[0].Data.Data);
-                var bg = new ImageBrush(Cover);
+                //Cover = (ImageSource)ic.ConvertFrom(pictures[0].Data.Data);
+                var bg = new ImageBrush((ImageSource)ic.ConvertFrom(pictures[0].Data.Data));
                 bg.Stretch = Stretch.Fill;
                 Picture.Background = bg;
             }
@@ -54,7 +57,7 @@ namespace AudioPlayer
             var mainPanel = window.Panel;//((((Parent as WrapPanel).Parent as ScrollViewer).Parent as Grid).Parent as MainPage).Parent as DockPanel;
             mainPanel.Children.RemoveAt(mainPanel.Children.Count - 1);
             //var wind = (MainWindow) mainPanel.Parent;
-            window.Album = new AlbumPage(window);
+            window.Album = new AlbumPage();
             window.Album.Album = this;
             //wind.Album.Player = wind.Player;
             mainPanel.Children.Add(window.Album);

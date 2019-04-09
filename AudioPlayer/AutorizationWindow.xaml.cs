@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Path = System.IO.Path;
+using System.ComponentModel;
 
 namespace AudioPlayer
 {
@@ -12,7 +14,7 @@ namespace AudioPlayer
     /// </summary>
     public partial class AutorizationWindow : Window
     {
-        //private bool? result = null;
+        private bool? result = null;
         private readonly DirectoryInfo dir;
         private IEnumerable<User> users;
         public AutorizationWindow()
@@ -21,10 +23,19 @@ namespace AudioPlayer
             dir = new DirectoryInfo(Path.Combine(MyPlayer.MainDirectory.FullName, "Users"));
         }
 
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            DialogResult = result;
+            if(result == null)
+                App.Current.Shutdown();
+        }
+
         //protected override void OnClosed(EventArgs e)
         //{
         //    ////base.OnClosed(e);
-        //    //DialogResult = result;
+        //    DialogResult = result;
+        //    return;
         //}
 
         //protected override void OnClosing(CancelEventArgs e)
@@ -46,11 +57,11 @@ namespace AudioPlayer
                 MessageBox.Show("Fuck!");
                 return;
             }
-            DialogResult = user.IsExtended; //if (user)
+            result = user.IsExtended; //if (user)
             this.Close();
         }
 
-
+        
         private User Open(FileInfo f)
         {
             var fileStream = File.Open(f.FullName, FileMode.Open);

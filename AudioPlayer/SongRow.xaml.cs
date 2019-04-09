@@ -20,13 +20,16 @@ namespace AudioPlayer
     /// </summary>
     public partial class SongRow : UserControl
     {
-        public readonly MainWindow Window;
+        public MainWindow Window
+        {
+            get => Application.Current.MainWindow as MainWindow;
+        }
         public readonly Album Album;
         public readonly int Index;
-        public SongRow(MainWindow window, int index, Album album)
+        public SongRow(int index, Album album)
         {
             
-            this.Window = window;
+            //this.Window = window;
             InitializeComponent();
             Album = album;
             SongIndex.Content = index + 1;
@@ -52,7 +55,7 @@ namespace AudioPlayer
         private void ToPlayListOnClick(object sender, RoutedEventArgs e)
         {
             Window.Player.PlayList.Add(Tuple.Create(Index, Album));
-            var row = new PlayListRow(Window, Index, Album, Window.Player.PlayList.Count - 1);
+            var row = new PlayListRow(Index, Album, Window.Player.PlayList.Count - 1);
             row.MouseDown += (send, args) =>
             {
                 var song = (send as PlayListRow);

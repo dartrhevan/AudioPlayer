@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioPlayer"
         mc:Ignorable="d"
-        Title="RegisterWindow"  Height="300" Width="400" WindowStyle="ToolWindow" MaxWidth="400" MaxHeight="300" MinWidth="400" MinHeight="300">
+        Title="RegisterWindow"  Height="320" Width="400" WindowStyle="ToolWindow" MaxWidth="400" MaxHeight="320" MinWidth="400" MinHeight="320">
     <StackPanel>
         <Label  FontSize="18" Margin="0, 0, 0, 5" HorizontalAlignment="Center" FontWeight="Bold">Registration</Label>
         <Label FontSize="16" Margin="0, 0, 0, 5">Set login:</Label>

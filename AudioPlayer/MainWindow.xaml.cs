@@ -30,7 +30,7 @@ namespace AudioPlayer
         {
             var r = (new AutorizationWindow()).ShowDialog();
             //MessageBox.Show(r.ToString());
-            Player = new MyPlayer(this);
+            Player = new MyPlayer();
             InitializeComponent();
             Bar.Player = Player;
             if(r == null) Close();
@@ -42,7 +42,7 @@ namespace AudioPlayer
             }
             else
             {
-                RowAlbumPage = new RowAlbumPage(this);
+                RowAlbumPage = new RowAlbumPage();
                 RealMainPage = RowAlbumPage;
                 Panel.Children.Add(RowAlbumPage);
             }

@@ -24,7 +24,10 @@ namespace AudioPlayer
     public partial class AlbumPage : UserControl
     {
         private Album album;
-        public readonly MainWindow Window;
+        public MainWindow Window
+        {
+            get => Application.Current.MainWindow as MainWindow;
+        }
 
 
         public Album Album
@@ -36,7 +39,7 @@ namespace AudioPlayer
                 album = value;
                 foreach (var song in album.Songs.Select(s =>
                 {
-                    var res = new SongRow(Window, ind++, album);
+                    var res = new SongRow(ind++, album);
                     res.MouseDown += (send, args) =>
                     {
                         var song = (send as SongRow);
@@ -53,7 +56,7 @@ namespace AudioPlayer
                 ind = 0;
                 foreach (var track in Window.Player.PlayList.Select(s =>
                 {
-                    var res = new PlayListRow(Window, s.Item1, s.Item2, ind++);
+                    var res = new PlayListRow(s.Item1, s.Item2, ind++);
                     res.MouseDown += (send, args) =>
                     {
                         var song = (send as PlayListRow);
@@ -73,9 +76,9 @@ namespace AudioPlayer
             }
         }
 
-        public AlbumPage(MainWindow window)
+        public AlbumPage()
         {
-            Window = window;
+            //Window = window;
             InitializeComponent();
         }
 
