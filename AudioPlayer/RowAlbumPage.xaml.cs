@@ -48,7 +48,7 @@ namespace AudioPlayer
                     {
                         var res = new SongRow(Window, ind++, album);
                         res.MouseLeftButtonDown += (send, args) =>
-                        { 
+                        {
                             var song = (send as SongRow);
                             if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
                                 Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, album);
@@ -66,8 +66,9 @@ namespace AudioPlayer
                 AlbumStack.Children.Add(albumButton);
                 i++;
             }
-
         }
+
+
         public void Update()
         {
             if (AlbumStack.Children.Count < Player.Albums.Count)

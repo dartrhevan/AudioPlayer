@@ -36,6 +36,12 @@ namespace AudioPlayer
             Index = index;
         }
 
+        private void Edit_Click(object sender, RoutedEventArgs args)
+        {
+            var window = new SongEditWindow(Album, Index);
+            window.Show();
+        }
+
         private void PlayOnClick(object sender, RoutedEventArgs e)
         {
             if (Index != Window.Player.CurrentIndex || Album != Window.Player.CurrentAlbum)

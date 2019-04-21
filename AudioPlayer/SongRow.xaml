@@ -82,6 +82,11 @@
     </UserControl.Resources>
 
     <Grid Height="26">
+        <Grid.ContextMenu>
+            <ContextMenu Name="Context">
+                <MenuItem Name="Edit" Header="Редактировать информацию о песне" Click="Edit_Click"/>
+            </ContextMenu>
+        </Grid.ContextMenu>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*"></ColumnDefinition>
             <ColumnDefinition Width="0.7*"></ColumnDefinition>
