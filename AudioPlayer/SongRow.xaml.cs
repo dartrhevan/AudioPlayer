@@ -32,8 +32,9 @@ namespace AudioPlayer
             //this.Window = window;
             InitializeComponent();
             Album = album;
-            SongIndex.Content = index + 1;
-            Label.Content = Album.Songs[index].Tag.Title??Album.Songs[index].Name.Split('\\').Last();
+            SongIndex.Content = Album.Songs[index].Tag.Track.ToString();
+            Label.Content = Album.Songs[index].Tag.Title ?? Album.Songs[index].Name.Split('\\').Last();
+            Duration.Content = String.Format("{0:00}:{1:00}", Album.Songs[index].Properties.Duration.Minutes, Album.Songs[index].Properties.Duration.Seconds);
            // Margin = new Thickness(0, 0, 0, 0);
             Height = 25;
             Index = index;
