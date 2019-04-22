@@ -76,6 +76,9 @@
     <Compile Include="RowAlbumPage.xaml.cs">
       <DependentUpon>RowAlbumPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SongEditWindow.xaml.cs">
+      <DependentUpon>SongEditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SongRow.xaml.cs">
       <DependentUpon>SongRow.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
     <Page Include="RowAlbumPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SongEditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SongRow.xaml">
       <SubType>Designer</SubType>

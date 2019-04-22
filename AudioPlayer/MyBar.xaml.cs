@@ -64,7 +64,7 @@ namespace AudioPlayer
             timer.Start();
         }
 
-        private Timer timer = new Timer {Interval = 1};
+        private Timer timer = new Timer {Interval = 100};
 
         
 
