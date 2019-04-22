@@ -87,6 +87,6 @@
         <Label Grid.Column="1" Name="Label" FontSize="12" FontFamily="Arial" VerticalContentAlignment="Center" HorizontalContentAlignment="Left"/>
         <Label Grid.Column="1" Name="Duration" FontSize="12" FontFamily="Arial" VerticalContentAlignment="Center"  Foreground="Gray" HorizontalContentAlignment="Right"/>
         <Button Grid.Column="3" Style="{StaticResource ButStyle}" Click="PlayOnClick"></Button>
-        <Button Grid.Column="4" Style="{StaticResource ToPlayList}"></Button>
+        <Button Grid.Column="4" Style="{StaticResource ToPlayList}" Click="ToPlayListOnClick"></Button>
     </Grid>
 </UserControl>
