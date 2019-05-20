@@ -25,7 +25,8 @@ namespace AudioPlayer
     {
 
         readonly ImageSourceConverter ic = new ImageSourceConverter();
-        public  MyPlayer Player { get; set; }
+
+        public MyPlayer Player { get; set; }
         //public bool Playing => playing;
 
         public MyBar()
@@ -56,7 +57,7 @@ namespace AudioPlayer
                 }
                 if (Player.CurrentSong.Tag.Pictures.Length > 0)
                         CurrentCover.Source = GetImage();
-                    CurrentName.Content = Player.CurrentSong.Tag.Title?? Player.CurrentSong.Name.Split('\\').Last();
+                CurrentName.Content = Player.CurrentSong.Tag.Title?? Player.CurrentSong.Name.Split('\\').Last();
                 //}
 
                 InvalidateVisual();
@@ -66,7 +67,6 @@ namespace AudioPlayer
 
         private Timer timer = new Timer {Interval = 100};
 
-        
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)
         {
@@ -74,8 +74,11 @@ namespace AudioPlayer
         }
 
         public void PauseStart()
-        {
+        {                
+
             CurrentName.Content = Player.CurrentSong.Tag.Title;
+
+
             if (Player.CurrentSong.Tag.Pictures.Length > 0)
                 CurrentCover.Source = ((ImageSource)ic.ConvertFrom(Player.CurrentSong.Tag.Pictures[0].Data.Data));
             if (!Player.Playing)
@@ -92,8 +95,10 @@ namespace AudioPlayer
             Player.AddSong(openFileDialog.FileName);
             var albums = GetMainPage();
             albums.Update();
+
             CurrentName.Content = Player.CurrentSong.Tag.Title ?? Player.CurrentSong.Name.Split('\\').Last(); if (Player.CurrentSong.Tag.Pictures.Length > 0)
-                CurrentCover.Source = GetImage();
+
+            CurrentCover.Source = GetImage();
             InvalidateVisual();
             Player.Playing = false;
         }

@@ -78,7 +78,7 @@
     <Grid Height="26">
         <Grid.ContextMenu>
             <ContextMenu Name="Context">
-                <MenuItem Name="Edit" Header="Редактировать информацию о песне" Click="Edit_Click"/>
+                <MenuItem Name="Edit" Header="Редактировать информацию о песне" Click="EditClick"/>
             </ContextMenu>
         </Grid.ContextMenu>
         <Grid.ColumnDefinitions>

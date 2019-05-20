@@ -41,7 +41,7 @@ namespace AudioPlayer
             
         }
 
-        private void Edit_Click(object sender, RoutedEventArgs args)
+        private void EditClick(object sender, RoutedEventArgs args)
         {
             var window = new SongEditWindow(Album, Index);
             window.Show();
