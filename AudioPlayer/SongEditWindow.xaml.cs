@@ -51,7 +51,17 @@ namespace AudioPlayer
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
+            Album.Songs[Index].Tag.Title = Title.Text;
+            Album.Songs[Index].Tag.Album = AlbumTitle.Text;
+            Album.Songs[Index].Tag.Year = uint.Parse(Year.Text);
+            Album.Songs[Index].Tag.Genres = new[] { Genre.Text.Replace(';', ' ') };
+            Album.Songs[Index].Tag.Performers = new[] { Performers.Text.Replace(';', ' ') };
+            Album.Songs[Index].Tag.Track = uint.Parse(AlbumIndex.Text);
+            this.Close();
+        }
+        private void Button_Click1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

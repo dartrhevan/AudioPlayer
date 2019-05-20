@@ -18,7 +18,7 @@
         <Label Content="Год" HorizontalAlignment="Right" Margin="0,139,74,0" VerticalAlignment="Top" Grid.Column="1"/>
         <Label Content="Жанр" Margin="12,138,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="40"/>
         <Label Content="Номер в альбоме" HorizontalAlignment="Left" Margin="9,168,0,0" VerticalAlignment="Top"/>
-        <Button Content="ОК" Margin="0,0,10,10" Click="Button_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Grid.Column="1"/>
+        <Button Content="ОК" Margin="0,0,10,10" Click="Button_Click" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Bottom" Grid.Column="1" IsCancel="True"/>
         <Label Content="Редактирование информации о произведении" FontSize="16" FontFamily="Arial" FontStyle="Normal"   HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30,10,28,0" Grid.ColumnSpan="2"/>
         <TextBox Name ="Title" Height="20" Margin="87,51,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2" />
         <TextBox Name ="AlbumTitle" Height="20" Margin="87,83,10,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
@@ -26,7 +26,7 @@
         <TextBox Name ="Year" Margin="0,142,11,0" TextWrapping="Wrap" Text="" Height="20" VerticalAlignment="Top" HorizontalAlignment="Right" Width="58" Grid.Column="1"/>
         <TextBox Name ="Genre" Margin="57,142,108,0" TextWrapping="Wrap" Text="" Height="20" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
         <TextBox Name ="AlbumIndex" HorizontalAlignment="Left" Height="20" Margin="1,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="32" Grid.Column="1"/>
-        <Button Content="Отмена " Margin="0,0,90,10" Click="Button_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Grid.Column="1"/>
+        <Button Content="Отмена " Margin="0,0,90,10" Click="Button_Click1" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Grid.Column="1"/>
 
     </Grid>
 </Window>
