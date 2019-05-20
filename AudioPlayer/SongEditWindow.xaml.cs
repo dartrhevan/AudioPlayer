@@ -27,9 +27,9 @@ namespace AudioPlayer
             InitializeComponent();
             Album = album;
             Index = index;
-            Title.Text = Album.Songs[index].Tag.Title.ToString();
-            AlbumTitle.Text = Album.Songs[index].Tag.Album.ToString();
-            Year.Text = Album.Songs[index].Tag.Year.ToString();
+            Title.Text = Album.Songs[index].Tag.Title;
+            AlbumTitle.Text = Album.Songs[index].Tag.Album??"";
+            Year.Text = Album.Songs[index].Tag.Year.ToString();// != null ? Album.Songs[index].Tag.Year.ToString();
             foreach( var e in Album.Songs[index].Tag.Genres)
             {
                 Genre.Text += e + "; ";
@@ -43,7 +43,8 @@ namespace AudioPlayer
             AlbumIndex.Text = Album.Songs[index].Tag.Track.ToString();
             if (Album.Songs[index].Tag.Title.ToString() == "System.String[]")
                 Title.Text = "Без названия";
-            if (Album.Songs[index].Tag.Album.ToString() == "System.String[]")
+            var tagAlbum = Album.Songs[index].Tag.Album;
+            if (tagAlbum != null && tagAlbum.ToString() == "System.String[]")
                 AlbumTitle.Text = "Неизвестный альбом";
             if (Album.Songs[index].Tag.Year == 0)
                 Year.Text = "?";
