@@ -47,7 +47,7 @@ namespace AudioPlayer
             if (tagAlbum != null && tagAlbum.ToString() == "System.String[]")
                 AlbumTitle.Text = "Неизвестный альбом";
             if (Album.Songs[index].Tag.Year == 0)
-                Year.Text = "?";
+                Year.Text = "0";
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
