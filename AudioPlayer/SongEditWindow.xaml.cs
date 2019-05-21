@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using TagLib;
@@ -19,6 +20,9 @@ using Microsoft.Office.Interop.Word.Selection;
 using Microsoft.Office.Interop.Word.Bookmark;
 using Microsoft.Office.Interop.Word.Range;*/
 using Microsoft.Office.Interop.Word;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
+using Task = System.Threading.Tasks.Task;
 using Word = Microsoft.Office.Interop.Word;
 using Window = System.Windows.Window;
 
@@ -68,8 +72,25 @@ namespace AudioPlayer
             song.Tag.Genres = new[] { Genre.Text.Replace(';', ' ') };
             song.Tag.Performers = new[] { Performers.Text.Replace(';', ' ') };
             song.Tag.Track = uint.Parse(AlbumIndex.Text);
-            //song.Dispose();
-            //song.Save();
+
+            Window.Player.CurrentPlayer.Stop();
+            Window.Player.CurrentPlayer.Close();
+            Window.Player.CurrentPlayer.Close();
+            Thread.Sleep(200);
+            //Window.Player.CurrentSong -
+            //song.Dispose();,
+            try
+            {
+                song.Save();
+
+            }
+            catch(Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Не удалось изменить информацию", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            
+            Window.Player.CurrentPlayer.Open(new Uri(song.Name));
+
             this.Close();
         }
         private void CancelButtonClick(object sender, RoutedEventArgs e)
@@ -77,20 +98,33 @@ namespace AudioPlayer
             this.Close();
         }
 
-        private void SaveButton_Click(object sender, RoutedEventArgs e)
+        public MainWindow Window
         {
-            File song = Album.Songs[Index];
-            var wdApp = new Word.Application();
-            //wdApp.Visible = true;
-            wdApp.Documents.Add();
-            var docum = wdApp.Documents.get_Item(1);
+            get => Application.Current.MainWindow as MainWindow;
+        }
+
+        private async void SaveButton_Click(object sender, RoutedEventArgs e)
+        {
             var openFolderDialog = new SaveFileDialog();
             var res = openFolderDialog.ShowDialog();
-            if (!(res == System.Windows.Forms.DialogResult.Yes || res == System.Windows.Forms.DialogResult.OK && openFolderDialog.FileName != "")) return;
+            if (!(res == System.Windows.Forms.DialogResult.Yes ||
+                  res == System.Windows.Forms.DialogResult.OK && openFolderDialog.FileName != "")) return;
 
-            wdApp.Selection.Text = $"Название: {song.Tag.Title}\nАльбом: {song.Tag.Album}\nИсполнитель: {string.Join(", ", song.Tag.Performers)}\n ЖанрЖ {string.Join(", ", song.Tag.Genres)}\n Год: {song.Tag.Year}\n";
-            docum.SaveAs(openFolderDialog.FileName);
-            docum.Close();
+
+            var task = new Task(() =>
+            {
+                File song = Album.Songs[Index];
+                var wdApp = new Word.Application();
+                //wdApp.Visible = true;
+                wdApp.Documents.Add();
+                var docum = wdApp.Documents.get_Item(1);
+                wdApp.Selection.Text =
+                    $"Название: {song.Tag.Title ?? ""}\nАльбом: {song.Tag.Album ?? ""}\nИсполнитель: {string.Join(", ", song.Tag.Performers)}\n Жанр: {string.Join(", ", song.Tag.Genres)}\n Год: {song.Tag.Year}\n";
+                docum.SaveAs(openFolderDialog.FileName);
+                docum.Close();
+            });
+            task.Start();
+            await task;
         }
     }
 }
