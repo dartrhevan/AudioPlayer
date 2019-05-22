@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AudioPlayer"
              mc:Ignorable="d"
-             BorderThickness="0,0,0,1" BorderBrush="#FFBFBFBF">
+             BorderThickness="0,0,0,1" BorderBrush="#FFBFBFBF" Background="Gray">
     <UserControl.Resources>
         <!--<Style x:Key="ButStyle">
             <Setter Property="Button.Template">
@@ -72,7 +72,9 @@
                 </Trigger>
             </Style.Triggers>
         </Style>-->
-
+    <Style TargetType="Label">
+        <Setter Property="Foreground" Value="White"></Setter>
+    </Style>
     </UserControl.Resources>
 
     <Grid Height="26">

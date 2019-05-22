@@ -32,6 +32,7 @@ namespace AudioPlayer
             //MessageBox.Show(r.ToString());
             Player = new MyPlayer();
             InitializeComponent();
+            Background = Brushes.DarkSlateGray;
             Bar.Player = Player;
             if(r == null) Close();
             else if (r.Value) // Для расширенного дизайна убери < ! >
