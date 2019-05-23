@@ -35,6 +35,12 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter Property="Button.Background" Value ="Red"/>
+                    <Setter Property="Button.BorderBrush" Value="#FF171414"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="ToPlayList">
             <Setter Property="Button.Template">
