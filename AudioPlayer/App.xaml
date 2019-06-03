@@ -9,13 +9,13 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid>
-                            <Path Stretch="Uniform" UseLayoutRounding="False" Stroke="#FFAEAEAE" StrokeThickness="0.4" Margin="3">
-                                <Path.Fill>
+                            <Path Stretch="Uniform" UseLayoutRounding="False" x:Name="Ellipse2" Stroke="#FFAEAEAE" StrokeThickness="0.4" Margin="3"  Tag="#FFF7F7F7" Fill="{Binding Tag,ElementName= Ellipse2}">
+                                <!--<Path.Fill >
                                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                         <GradientStop Color="#FFDEDEDE" Offset="0.99"/>
                                         <GradientStop Color="White"/>
                                     </LinearGradientBrush>
-                                </Path.Fill>
+                                </Path.Fill>-->
                                 <Path.Data>
                                     <EllipseGeometry RadiusX="1" RadiusY="1"/>
                                 </Path.Data>
@@ -32,6 +32,11 @@
                             </Path>
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Tag" TargetName="Ellipse2" Value ="#FF8B8B8B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
