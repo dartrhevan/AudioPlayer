@@ -25,6 +25,8 @@
                 <Setter Property="Button.Background" Value= "DarkViolet" />
                 <Setter Property="Button.BorderBrush" Value="DarkViolet"></Setter>
                 <Setter Property="Button.Foreground" Value="Black" />
+                <Setter Property="Button.Cursor" Value="Hand"/>
+                <Setter Property="Button.ForceCursor" Value="True"/>
                 <Setter Property="Button.FontSize" Value="14"></Setter>
                 <Setter Property="Button.FontFamily" Value="Times new roman" />
                 <Setter Property="Button.Foreground" Value="White"></Setter>

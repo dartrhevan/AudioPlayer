@@ -14,7 +14,7 @@
         <PasswordBox FontSize="16" Margin="50,0,50,5" Height="25" Name="Password"></PasswordBox>
         <Label FontSize="16" Margin="0, 0, 0, 5" AllowDrop="True">Enter license key(if you have):</Label>
         <PasswordBox FontSize="16" Margin="50,0,50,5" Height="25" Name="License"></PasswordBox>
-        <Button FontSize="16" Margin="155,0,156.6,5" Height="29" Content="Register" Click="RegisterButtonClick" Background="Gray"/>
+        <Button FontSize="16" Margin="155,0,156.6,5" Height="29" ForceCursor="true" Cursor="Hand" Content="Register" Click="RegisterButtonClick" Background="Gray"/>
 
     </StackPanel>
 </Window>

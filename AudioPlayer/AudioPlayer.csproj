@@ -80,6 +80,8 @@
       <DependentUpon>AutorizationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="IMainPage.cs" />
+    <Compile Include="Models\FileAuthService.cs" />
+    <Compile Include="Models\IAuthService.cs" />
     <Compile Include="PlayListRow.xaml.cs">
       <DependentUpon>PlayListRow.xaml</DependentUpon>
     </Compile>
@@ -95,7 +97,7 @@
     <Compile Include="SongRow.xaml.cs">
       <DependentUpon>SongRow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
+    <Compile Include="Models\User.cs" />
     <Page Include="AlbumPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,7 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MyPlayer.cs" />
+    <Compile Include="Models\MyPlayer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -186,5 +188,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

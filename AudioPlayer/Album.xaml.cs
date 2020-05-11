@@ -26,14 +26,11 @@ namespace AudioPlayer
     {
         public readonly List<TagLib.File> Songs;
         //public readonly ImageSource Cover;
-         MainWindow window
-        {
-            get => Application.Current.MainWindow as MainWindow;
-        }
+        MainWindow window => Application.Current.MainWindow as MainWindow;
 
         public Album(IEnumerable<TagLib.File> songs, string albumName, string author, IPicture[] pictures)
         {
-            //this.window = window;
+            //this.Window = Window;
             InitializeComponent();
             ImageSourceConverter ic = new ImageSourceConverter();
 

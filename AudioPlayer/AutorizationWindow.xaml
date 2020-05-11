@@ -13,8 +13,8 @@
         <Label FontSize="16" Margin="0, 0, 0, 5" AllowDrop="True">Enter password:</Label>
         <PasswordBox FontSize="16" Margin="50,0,50,5" Height="25" Name="Password"></PasswordBox>
         <Label Name="ErrorLabel" FontSize="14" Foreground="Red"></Label>
-        <Button FontSize="16" Margin="155,0,156.6,5" Height="29" Background="Gray" Content="OK" Click="ButtonClick"/>
-        <Button FontSize="16" Margin="155,0,156.6,5" Height="29" Background="Gray" Content="Register" Click="RegisterButtonOnClick"/>
+        <Button FontSize="16" Margin="155,0,156.6,5" Height="29" ForceCursor="true" Cursor="Hand" Background="Gray" Content="OK" Click="LoginButtonClick"/>
+        <Button FontSize="16" Margin="155,0,156.6,5" Height="29" ForceCursor="true" Cursor="Hand" Background="Gray" Content="Register" Click="RegisterButtonOnClick"/>
 
     </StackPanel>
 </Window>

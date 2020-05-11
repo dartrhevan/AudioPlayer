@@ -18,10 +18,8 @@ namespace AudioPlayer
     public class MyPlayer
     {
         public int CurrentPlayListIndex { get; set; } = 0;
-        public MainWindow window
-        {
-            get => Application.Current.MainWindow as MainWindow;
-        }
+        public MainWindow Window => Application.Current.MainWindow as MainWindow;
+        
         public Album CurrentAlbum { get; set; }
         public File CurrentSong
         {
@@ -73,7 +71,7 @@ namespace AudioPlayer
 
         public readonly MediaPlayer CurrentPlayer = new MediaPlayer();
         public static readonly DirectoryInfo MainDirectory = new DirectoryInfo(@"C:\MyPlayerDirectory");
-        DirectoryInfo curreDirectory = MainDirectory;
+        DirectoryInfo currentDirectory = MainDirectory;
         public int CurrentIndex { get; private set; }
         public List<File> Songs;
         public List<Album> Albums;
@@ -85,11 +83,11 @@ namespace AudioPlayer
             
             CurrentPlayer.MediaEnded += (s, a) =>
             {
-                window.Bar.PauseStart();
+                Window.Bar.PauseStart();
                 Next();
-                window.Bar.PauseStart();
+                Window.Bar.PauseStart();
             };
-            //this.window = window;
+            //this.Window = Window;
             OpenCurrentDirectory();
         }
 
@@ -97,34 +95,25 @@ namespace AudioPlayer
         {
             //File.AddFileTypeResolver(new File.FileTypeResolver());
             var func = new Func<IEnumerable<File>>(GetFiles);
-            var res = func.BeginInvoke(null, null);//GetFilesAsync().Result;
+            var res = func.BeginInvoke(null, null);
             var files = func.EndInvoke(res);
             Songs = new List<File>(files);
             Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
                 .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures)));
-            //if (curreDirectory.GetFiles().Length <= 0) return;
+
             if (Songs.Count > 0)
             {
                 CurrentAlbum = Albums.Last();
                 CurrentIndex = CurrentAlbum.Songs.Count - 1;
                 CurrentSong = CurrentAlbum.Songs[CurrentIndex];
-                //var ind = 0;
-                //PlayList = Albums[0].Songs.Select(s => Tuple.Create(ind++, Albums[0])).ToList();
             }
             GC.Collect();
         }
 
-        //async Task<IEnumerable<File>> GetFilesAsync()
-        //{
-        //    var task = new Task<IEnumerable<File>>(GetFiles);
-        //    task.Start();
-        //    var res = await task;
-        //    return res;
-        //}
 
         private IEnumerable<File> GetFiles()
         {
-            return curreDirectory.GetFiles()
+            return currentDirectory.GetFiles()
                 .Select(f =>
                 {
                     try
@@ -148,7 +137,7 @@ namespace AudioPlayer
 
         public void OpenFolder(string folderPath)
         {
-            curreDirectory = new DirectoryInfo(folderPath);
+            currentDirectory = new DirectoryInfo(folderPath);
             OpenCurrentDirectory();
         }
 

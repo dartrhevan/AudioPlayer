@@ -31,25 +31,10 @@ namespace AudioPlayer
                 App.Current.Shutdown();
         }
 
-        //protected override void OnClosed(EventArgs e)
-        //{
-        //    ////base.OnClosed(e);
-        //    DialogResult = result;
-        //    return;
-        //}
-
-        //protected override void OnClosing(CancelEventArgs e)
-        //{
-        //    base.OnClosing(e);
-        //    DialogResult = null;
-        //}
-
-        private void ButtonClick(object sender, RoutedEventArgs e)
+        private void LoginButtonClick(object sender, RoutedEventArgs e)
         {
             if (!Directory.Exists(dir.FullName))
-            {
                 Directory.CreateDirectory(dir.FullName);
-            }
             users = dir.GetFiles().Select(f => Open(f));//.ToArray();//dir.GetFiles().Select(f => Open(f));
 
             var curHash = User.Encrypt(Password.Password);
@@ -61,6 +46,7 @@ namespace AudioPlayer
                 ErrorLabel.Content = "*This login or password are irregular";
                 return;
             }
+
 
             User.CurrentUser = user;
             result = user.IsExtended; //if (user)
@@ -80,17 +66,13 @@ namespace AudioPlayer
         private void RegisterButtonOnClick(object sender, RoutedEventArgs e)
         {
             var r = new RegisterWindow().ShowDialog();
-            
         }
-
+        
         static bool ArrayEquals(byte[] arr1, byte[] arr2)
         {
             if (arr1.Length != arr2.Length) return false;
             for (var i = 0; i < arr1.Length; i++)
-            {
                 if (arr1[i] != arr2[i]) return false;
-            }
-
             return true;
         }
     }

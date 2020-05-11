@@ -31,7 +31,7 @@ namespace AudioPlayer
         public PlayListRow(int index, Album album, int playListIndex)
         {
             PlayListIndex = playListIndex;
-            //this.Window = window;
+            //this.Window = Window;
             InitializeComponent();
             Album = album;
             SongIndex.Content = index + 1;

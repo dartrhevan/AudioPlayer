@@ -29,7 +29,7 @@ namespace AudioPlayer
         public SongRow(int index, Album album)
         {
             
-            //this.Window = window;
+            //this.Window = Window;
             InitializeComponent();
             Album = album;
             SongIndex.Content = Album.Songs[index].Tag.Track.ToString();

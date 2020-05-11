@@ -24,11 +24,8 @@ namespace AudioPlayer
     public partial class AlbumPage : UserControl
     {
         private Album album;
-        public MainWindow Window
-        {
-            get => Application.Current.MainWindow as MainWindow;
-        }
-
+        public MainWindow Window => Application.Current.MainWindow as MainWindow;
+        
 
         public Album Album
         {
@@ -49,9 +46,7 @@ namespace AudioPlayer
                     res.Style = (Style)Resources["MainStyle"];
                     return res;
                 }))
-                {
                     Stack.Children.Add(song);
-                }
 
                 ind = 0;
                 foreach (var track in Window.Player.PlayList.Select(s =>
@@ -66,9 +61,8 @@ namespace AudioPlayer
                     res.Style = (Style)Resources["MainStyle2"];
                     return res;
                 }))
-                {
                     PlayList.Children.Add(track);
-                }
+                
                 Cover.Source = (album.Picture.Background as ImageBrush)?.ImageSource;
                 NameLabel.Content = album.AlbumName.Content as string;
                 Author.Content = album.Author.Content as string;
@@ -78,7 +72,7 @@ namespace AudioPlayer
 
         public AlbumPage()
         {
-            //Window = window;
+            //Window = Window;
             InitializeComponent();
         }
 
