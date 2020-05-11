@@ -32,7 +32,7 @@ namespace AudioPlayer
         public MyBar()
         {
             InitializeComponent();
-            UserLabel.Text = "Currnet user:\n" + User.CurrentUser.Login;
+            UserLabel.Text = "Currnet user:\n" + MyPlayer.CurrentUser.Login;
             timer.Tick += (sender, args) =>
             {
                 if (Player.CurrentSong == null) return;

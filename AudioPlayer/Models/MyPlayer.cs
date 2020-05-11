@@ -161,5 +161,7 @@ namespace AudioPlayer
             CurrentSong = song;
 
         }
+
+        public static User CurrentUser;
     }
 }

@@ -13,29 +13,19 @@ namespace AudioPlayer
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        private readonly DirectoryInfo dir;
-
+        readonly IAuthService authService = new FileAuthService();
         public RegisterWindow()
         {
             InitializeComponent();
-            dir = new DirectoryInfo(Path.Combine(MyPlayer.MainDirectory.FullName, "Users"));
         }
 
         private void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
-
             var user = new User(Login.Text, User.Encrypt(Password.Password), License.Password == "159");
-            Save(user);
+            authService.Save(user);
             this.Close();
             //this.DialogResult = License.Password != "";
         }
-
-        public void Save(User user)
-        {
-            var fileStream = File.Open(Path.Combine(MyPlayer.MainDirectory.FullName, "Users", user.Login), FileMode.Create);
-            var binaryFormatter = new BinaryFormatter();
-            binaryFormatter.Serialize(fileStream, user);
-            fileStream.Close();
-        }
+        
     }
 }
