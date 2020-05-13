@@ -23,25 +23,25 @@ namespace AudioPlayer
     
     public partial class AlbumPage : UserControl
     {
-        private Album album;
+        private Album _album;
         public MainWindow Window => Application.Current.MainWindow as MainWindow;
         
 
         public Album Album
         {
-            get => album;
+            get => _album;
             set
             {
                 int ind = 0;
-                album = value;
-                foreach (var song in album.Songs.Select(s =>
+                _album = value;
+                foreach (var song in _album.Songs.Select(s =>
                 {
-                    var res = new SongRow(ind++, album);
+                    var res = new SongRow(ind++, _album);
                     res.MouseDown += (send, args) =>
                     {
                         var song = (send as SongRow);
                         if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
-                            Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, album);
+                            Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, _album);
                     };
                     res.Style = (Style)Resources["MainStyle"];
                     return res;
@@ -56,17 +56,17 @@ namespace AudioPlayer
                     {
                         var song = (send as PlayListRow);
                         if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
-                            Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, album);
+                            Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, _album);
                     };
                     res.Style = (Style)Resources["MainStyle2"];
                     return res;
                 }))
                     PlayList.Children.Add(track);
                 
-                Cover.Source = (album.Picture.Background as ImageBrush)?.ImageSource;
-                NameLabel.Content = album.AlbumName.Content as string;
-                Author.Content = album.Author.Content as string;
-                Count.Content = album.Songs.Count.ToString();
+                Cover.Source = (_album.Picture.Background as ImageBrush)?.ImageSource;
+                NameLabel.Content = _album.AlbumName.Content as string;
+                Author.Content = _album.Author.Content as string;
+                Count.Content = _album.Songs.Count.ToString();
             }
         }
 

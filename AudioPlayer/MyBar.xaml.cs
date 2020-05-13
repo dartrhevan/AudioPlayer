@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AudioPlayer.Models;
 using OpenFileDialog = System.Windows.Forms.OpenFileDialog;
 using UserControl = System.Windows.Controls.UserControl;
 

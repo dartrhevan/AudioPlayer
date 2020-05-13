@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AudioPlayer
+namespace AudioPlayer.Models
 {
     /// <summary>
     /// User data

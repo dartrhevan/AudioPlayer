@@ -33,39 +33,39 @@ namespace AudioPlayer
     /// </summary>
     public partial class SongEditWindow : Window
     {
-        Album Album;
+        Album _album;
         int Index;
         public SongEditWindow(Album album, int index)
         {
             InitializeComponent();
-            Album = album;
+            _album = album;
             Index = index;
-            Title.Text = Album.Songs[index].Tag.Title;
-            AlbumTitle.Text = Album.Songs[index].Tag.Album??"";
-            Year.Text = Album.Songs[index].Tag.Year.ToString();// != null ? Album.Songs[index].Tag.Year.ToString();
-            foreach( var e in Album.Songs[index].Tag.Genres)
+            Title.Text = _album.Songs[index].Tag.Title;
+            AlbumTitle.Text = _album.Songs[index].Tag.Album??"";
+            Year.Text = _album.Songs[index].Tag.Year.ToString();// != null ? Album.Songs[index].Tag.Year.ToString();
+            foreach( var e in _album.Songs[index].Tag.Genres)
             {
                 Genre.Text += e + "; ";
                 if (e == null) Genre.Text = "-";
             }
-            foreach (var e in Album.Songs[index].Tag.Performers)
+            foreach (var e in _album.Songs[index].Tag.Performers)
             {
                Performers.Text += e + "; ";
                 if (e == null) Performers.Text = "Неизвестный исполнитель";
             }
-            AlbumIndex.Text = Album.Songs[index].Tag.Track.ToString();
-            if (Album.Songs[index].Tag.Title.ToString() == "System.String[]")
+            AlbumIndex.Text = _album.Songs[index].Tag.Track.ToString();
+            if (_album.Songs[index].Tag.Title.ToString() == "System.String[]")
                 Title.Text = "Без названия";
-            var tagAlbum = Album.Songs[index].Tag.Album;
+            var tagAlbum = _album.Songs[index].Tag.Album;
             if (tagAlbum != null && tagAlbum.ToString() == "System.String[]")
                 AlbumTitle.Text = "Неизвестный альбом";
-            if (Album.Songs[index].Tag.Year == 0)
+            if (_album.Songs[index].Tag.Year == 0)
                 Year.Text = "0";
         }
 
         private void OkButtonClick(object sender, RoutedEventArgs e)
         {
-            File song = Album.Songs[Index];
+            File song = _album.Songs[Index];
             song.Tag.Title = Title.Text;
             song.Tag.Album = AlbumTitle.Text;
             song.Tag.Year = uint.Parse(Year.Text);
@@ -113,7 +113,7 @@ namespace AudioPlayer
 
             var task = new Task(() =>
             {
-                File song = Album.Songs[Index];
+                File song = _album.Songs[Index];
                 var wdApp = new Word.Application();
                 //wdApp.Visible = true;
                 wdApp.Documents.Add();

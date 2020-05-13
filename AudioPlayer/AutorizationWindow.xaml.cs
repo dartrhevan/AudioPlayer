@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using Path = System.IO.Path;
 using System.ComponentModel;
+using AudioPlayer.Models;
 
 namespace AudioPlayer
 {

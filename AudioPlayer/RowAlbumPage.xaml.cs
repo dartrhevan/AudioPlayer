@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AudioPlayer.Models;
 
 namespace AudioPlayer
 {
@@ -37,7 +38,7 @@ namespace AudioPlayer
             {
                 var albumButton = new Button()
                 {
-                    Content = album.AlbumName.Content,
+                    Content = album.Value.AlbumName.Content,
                 };
                 albumButton.MouseDown += (se, arg) =>
                 {
@@ -46,14 +47,14 @@ namespace AudioPlayer
                         SongStack.Children.RemoveAt(SongStack.Children.Count - 1);
                     }
                     int ind = 0;
-                    foreach (var song in album.Songs.Select(s =>
+                    foreach (var song in album.Value.Songs.Select(s =>
                     {
-                        var res = new SongRow(ind++, album);
+                        var res = new SongRow(ind++, album.Value);
                         res.MouseLeftButtonDown += (send, args) =>
                         {
                             var song = (send as SongRow);
                             if (song.Index != song.Window.Player.CurrentIndex || song.Album != song.Window.Player.CurrentAlbum)
-                                Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, album);
+                                Window.Player.SetCurrentSongByIndexAndAlbum(song.Index, album.Value);
                         };
                         res.Style = (Style)Resources["MainStyle"];
                         return res;
@@ -72,17 +73,25 @@ namespace AudioPlayer
 
 
         public void Update()
-        {
+        {/*
             if (AlbumStack.Children.Count < Player.Albums.Count)
                 for (var i = AlbumStack.Children.Count; i < Player.Albums.Count; ++i)
-                    AlbumStack.Children.Add(Player.Albums[i]);
+                    AlbumStack.Children.Add(Player.Albums[i]);*/
+
+            var albs = new List<Album>();
+            if (AlbumStack.Children.Count < Player.Albums.Count)
+                foreach (Album album in AlbumStack.Children)
+                    if (Player.Albums.ContainsKey(album.AlbumName.Content as string))
+                        albs.Add(album);
+            foreach (var album in albs)
+                AlbumStack.Children.Add(album);
         }
 
         public void Reset()
         {
             AlbumStack.Children.Clear();
             foreach (var album in Player.Albums)
-                AlbumStack.Children.Add(album);
+                AlbumStack.Children.Add(album.Value);
         }
     }
 }

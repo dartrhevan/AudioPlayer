@@ -80,6 +80,7 @@
       <DependentUpon>AutorizationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="IMainPage.cs" />
+    <Compile Include="Models\Album.cs" />
     <Compile Include="Models\FileAuthService.cs" />
     <Compile Include="Models\IAuthService.cs" />
     <Compile Include="PlayListRow.xaml.cs">

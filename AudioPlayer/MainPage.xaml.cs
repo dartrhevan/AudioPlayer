@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using AudioPlayer.Models;
 
 namespace AudioPlayer
 {
@@ -29,21 +30,28 @@ namespace AudioPlayer
             InitializeComponent();
             //Albums = Player.Albums;
             foreach (var album in Player.Albums)
-                AlbumsPanel.Children.Add(album);
+                AlbumsPanel.Children.Add(album.Value);
         }
 
         public void Update()
         {
+            var albs = new List<Album>();
             if (AlbumsPanel.Children.Count < Player.Albums.Count)
+                foreach (Album album in AlbumsPanel.Children)
+                    if(Player.Albums.ContainsKey(album.AlbumName.Content as string))
+                        albs.Add(album);
+            foreach (var album in albs)
+                AlbumsPanel.Children.Add(album);
+            /*
                 for(var i = AlbumsPanel.Children.Count; i < Player.Albums.Count; ++i)
-                    AlbumsPanel.Children.Add(Player.Albums[i]);
+                    AlbumsPanel.Children.Add(Player.Albums[i]);*/
         }
 
         public void Reset()
         {
             AlbumsPanel.Children.Clear();
             foreach (var album in Player.Albums)
-                AlbumsPanel.Children.Add(album);
+                AlbumsPanel.Children.Add(album.Value);
         }
     }
 }

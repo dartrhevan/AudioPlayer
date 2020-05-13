@@ -1,4 +1,4 @@
-﻿namespace AudioPlayer
+﻿namespace AudioPlayer.Models
 {
     public interface IAuthService
     {

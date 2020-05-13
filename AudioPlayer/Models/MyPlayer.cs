@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
-using TagLib;
 using System.IO;
-using System.Runtime.CompilerServices;
-using System.Windows.Forms;
-using System.Windows.Media.Animation;
+using System.Linq;
+using System.Windows.Media;
 using Application = System.Windows.Application;
 using File = TagLib.File;
 
-namespace AudioPlayer
+namespace AudioPlayer.Models
 {
     public class MyPlayer
     {
@@ -74,7 +67,7 @@ namespace AudioPlayer
         DirectoryInfo currentDirectory = MainDirectory;
         public int CurrentIndex { get; private set; }
         public List<File> Songs;
-        public List<Album> Albums;
+        public Dictionary<string, Album> Albums;
         private File currentSong;
         public readonly List<Tuple<int, Album>> PlayList = new List<Tuple<int, Album>>();
 
@@ -91,6 +84,14 @@ namespace AudioPlayer
             OpenCurrentDirectory();
         }
 
+        private static Dictionary<string, Album> GetAlbums(List<File> files) => files.GroupBy(f => f.Tag.Album)
+            .ToDictionary(g => g.Key??"", g => new Album(g, g.Key??"", String.Join(", ", g.First().Tag.Performers),
+                (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures));
+        /*
+            .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), 
+                (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures))
+            .ToList();
+            */
         private void OpenCurrentDirectory()
         {
             //File.AddFileTypeResolver(new File.FileTypeResolver());
@@ -98,12 +99,10 @@ namespace AudioPlayer
             var res = func.BeginInvoke(null, null);
             var files = func.EndInvoke(res);
             Songs = new List<File>(files);
-            Albums = new List<Album>(files.GroupBy(f => f.Tag.Album)
-                .Select(g => new Album(g, g.Key, String.Join(", ", g.First().Tag.Performers), (g.FirstOrDefault(a => a.Tag.Pictures.Length > 0) ?? g.First()).Tag.Pictures)));
-
+            Albums = GetAlbums(Songs);
             if (Songs.Count > 0)
             {
-                CurrentAlbum = Albums.Last();
+                CurrentAlbum = Albums.Last().Value;
                 CurrentIndex = CurrentAlbum.Songs.Count - 1;
                 CurrentSong = CurrentAlbum.Songs[CurrentIndex];
             }
@@ -132,7 +131,8 @@ namespace AudioPlayer
                     {
                         return null;
                     }
-                }).Where(f => f != null);
+                })
+                .Where(f => f != null);
         }
 
         public void OpenFolder(string folderPath)
@@ -146,22 +146,22 @@ namespace AudioPlayer
             var song = File.Create(path);
             Songs.Add(song);
             var album = new Album(new[] { song }, song.Tag.Album, String.Join(", ", song.Tag.Performers), song.Tag.Pictures);
-            var albInd = Albums.FindIndex(a => a.AlbumName.Content as string == album.AlbumName.Content as string && a.Author.Content as string == album.Author.Content as string);
-            if (albInd == -1)
+            var existedAlbum = Albums.FirstOrDefault(a => a.Value.AlbumName.Content as string == album.AlbumName.Content as string && a.Value.Author.Content as string == album.Author.Content as string);
+            if (existedAlbum.Value == null)
             {
-                Albums.Add(album);
-                CurrentIndex = albInd;
+                Albums[album.Name] = album;
+                CurrentIndex = -1;//albInd;
             }
             else
             {
                 CurrentIndex = Albums.Count;
-                Albums[albInd].Songs.Add(song);
+                existedAlbum.Value.Songs.Add(song);
             }
             CurrentAlbum = album;
             CurrentSong = song;
 
         }
 
-        public static User CurrentUser;
+        public static User CurrentUser { get; set; }
     }
 }
