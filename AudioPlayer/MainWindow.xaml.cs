@@ -29,9 +29,10 @@ namespace AudioPlayer
 
         public MainWindow()
         {
-            var r = (new AutorizationWindow()).ShowDialog();
+            var authDialog = new AutorizationWindow();
+            var r = authDialog.ShowDialog();
             //MessageBox.Show(r.ToString());
-            Player = new MyPlayer();
+            Player = new MyPlayer(authDialog.User);
             InitializeComponent();
             Background = Brushes.DarkSlateGray;
             Bar.Player = Player;

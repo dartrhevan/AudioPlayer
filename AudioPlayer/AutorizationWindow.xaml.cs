@@ -29,12 +29,14 @@ namespace AudioPlayer
             if(result == null)
                 App.Current.Shutdown();
         }
-
+        public User User { get; private set; }
         private void LoginButtonClick(object sender, RoutedEventArgs e)
         {
-            var user = authService.Authenticate(Login.Text, Password.Password);
+            var user = authService.Authenticate(Login.Text, Password.Password, Pla);
+
             if (user != null)
-            { 
+            {
+                User = user;
                 result = user.IsExtended; //if (user)
                 this.Close();
             }

@@ -27,13 +27,20 @@ namespace AudioPlayer
 
         readonly ImageSourceConverter ic = new ImageSourceConverter();
 
-        public MyPlayer Player { get; set; }
+        public MyPlayer Player
+        {
+            get => _player;
+            set
+            {
+                UserLabel.Text = "Currnet user:\n" + value.CurrentUser.Login;
+                _player = value;
+            }
+        }
         //public bool Playing => playing;
 
         public MyBar()
         {
             InitializeComponent();
-            UserLabel.Text = "Currnet user:\n" + MyPlayer.CurrentUser.Login;
             timer.Tick += (sender, args) =>
             {
                 if (Player.CurrentSong == null) return;
@@ -45,16 +52,11 @@ namespace AudioPlayer
                 {
                     Begin.Content = String.Format("{0:00}:{1:00}:{2:00}", Player.CurrentPlayer.Position.Hours, Player.CurrentPlayer.Position.Minutes, Player.CurrentPlayer.Position.Seconds);
                     End.Content = String.Format("{0:00}:{1:00}:{2:00}", Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalHours, Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMinutes, Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalSeconds);
-                    //if (CurrentName.Content as string != Player.CurrentSong.Tag.Title)
-                    //{
                 }
-                else
+                else if (Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
                 {
-                    if (Player.CurrentPlayer.NaturalDuration.HasTimeSpan)
-                    {
-                        Begin.Content = String.Format("{0:00}:{1:00}", Player.CurrentPlayer.Position.Minutes, Player.CurrentPlayer.Position.Seconds);
-                        End.Content = String.Format("{0:00}:{1:00}", Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMinutes, Player.CurrentPlayer.NaturalDuration.TimeSpan.Seconds);
-                    }
+                    Begin.Content = String.Format("{0:00}:{1:00}", Player.CurrentPlayer.Position.Minutes, Player.CurrentPlayer.Position.Seconds);
+                    End.Content = String.Format("{0:00}:{1:00}", Player.CurrentPlayer.NaturalDuration.TimeSpan.TotalMinutes, Player.CurrentPlayer.NaturalDuration.TimeSpan.Seconds);
                 }
                 if (Player.CurrentSong.Tag.Pictures.Length > 0)
                         CurrentCover.Source = GetImage();
@@ -67,6 +69,7 @@ namespace AudioPlayer
         }
 
         private Timer timer = new Timer {Interval = 100};
+        private MyPlayer _player;
 
 
         private void PlayStartButtonClick(object sender, RoutedEventArgs e)
@@ -153,6 +156,11 @@ namespace AudioPlayer
                 PauseStart();
             Player.Next();
             PauseStart();
+        }
+
+        private void ShowOptionsWindow(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

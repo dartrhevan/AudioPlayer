@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -31,6 +32,9 @@ namespace AuthService
                 .AddCookie(options =>
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Main/Login")
                 );
+            services.AddDbContext<AuthDbContext>(options =>
+                options.UseNpgsql(AuthDbContext.ConnectionString)); //UseNpgsql();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

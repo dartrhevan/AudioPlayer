@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AudioPlayer.Models
+namespace AuthService
 {
-    /// <summary>
-    /// User data
-    /// </summary>
-    [Serializable]
     public class User
     {
+        public const string ExtendedUserRole = "ExtendedUserRole";
+        public const string BasicUserRole = "BasicUserRole";
         public readonly string Login;
         public readonly byte[] PasswordHash;
         public readonly bool IsExtended;
@@ -26,8 +24,7 @@ namespace AudioPlayer.Models
 
         public override bool Equals(object obj)
         {
-            var user = obj as User;
-            return user != null &&
+            return obj is User user &&
                    Login == user.Login &&
                    PasswordHash == user.PasswordHash &&
                    IsExtended == user.IsExtended;
@@ -37,7 +34,6 @@ namespace AudioPlayer.Models
         {
             MD5 hasher = MD5.Create();
             return hasher.ComputeHash(Encoding.Default.GetBytes(str));
-            // data;
         }
 
         public override int GetHashCode()

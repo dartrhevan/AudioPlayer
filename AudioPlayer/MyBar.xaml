@@ -93,7 +93,7 @@
             </Grid>
         </Grid>
         <Canvas Grid.Column="2">
-            <!--<Button Content="Bottom 20 Right 40" Canvas.Bottom="30" Canvas.Right="20" Width="96" FontFamily="Arial"/>-->
+            <Button Canvas.Bottom="30" Canvas.Right="20" Width="96" FontFamily="Arial" Click="ShowOptionsWindow">Options</Button>
             <TextBlock  Canvas.Right="20" Canvas.Top="10" Height="49" Width="96" Name="UserLabel" FontSize="14" Foreground="White" TextDecorations="Underline"/>
         </Canvas>
     </Grid>

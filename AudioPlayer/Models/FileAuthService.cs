@@ -7,12 +7,12 @@ namespace AudioPlayer.Models
 {
     public class FileAuthService : IAuthService
     {
-
-        private readonly DirectoryInfo dir = new DirectoryInfo(Path.Combine(MyPlayer.MainDirectory.FullName, "Users"));
         private IEnumerable<User> users;
 
-        public User Authenticate(string login, string password)
+        public User Authenticate(string login, string password, string dirName)
         {
+
+            DirectoryInfo dir = new DirectoryInfo(Path.Combine(dirName, "Users"));
             if (!Directory.Exists(dir.FullName))
                 Directory.CreateDirectory(dir.FullName);
             users = dir.GetFiles().Select(f => Open(f)); //.ToArray();//dir.GetFiles().Select(f => Open(f));
@@ -26,7 +26,7 @@ namespace AudioPlayer.Models
                 return null;
 
 
-            MyPlayer.CurrentUser = user;
+            //MyPlayer.CurrentUser = user;
             return user;
         }
 
@@ -38,9 +38,9 @@ namespace AudioPlayer.Models
             return true;
         }
 
-        public void Save(User user)
+        public void Save(User user, string dirName)
         {
-            var fileStream = File.Open(Path.Combine(MyPlayer.MainDirectory.FullName, "Users", user.Login), FileMode.Create);
+            var fileStream = File.Open(Path.Combine(dirName, "Users", user.Login), FileMode.Create);
             var binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(fileStream, user);
             fileStream.Close();
