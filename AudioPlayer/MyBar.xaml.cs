@@ -100,9 +100,9 @@ namespace AudioPlayer
             var albums = GetMainPage();
             albums.Update();
 
-            CurrentName.Content = Player.CurrentSong.Tag.Title ?? Player.CurrentSong.Name.Split('\\').Last(); if (Player.CurrentSong.Tag.Pictures.Length > 0)
-
-            CurrentCover.Source = GetImage();
+            CurrentName.Content = Player.CurrentSong.Tag.Title ?? Player.CurrentSong.Name.Split('\\').Last(); 
+            if (Player.CurrentSong.Tag.Pictures.Length > 0)
+                CurrentCover.Source = GetImage();
             InvalidateVisual();
             Player.Playing = false;
         }

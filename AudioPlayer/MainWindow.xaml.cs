@@ -37,7 +37,7 @@ namespace AudioPlayer
             Background = Brushes.DarkSlateGray;
             Bar.Player = Player;
             if(r == null) Close();
-            else if (r.Value) // Для расширенного дизайна убери < ! >
+            else if (authDialog.User.UseSimple)
             {
                 MainPage = new MainPage(Player);
                 RealMainPage = MainPage;

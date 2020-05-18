@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace AuthService
 {
@@ -9,17 +10,21 @@ namespace AuthService
     {
         public const string ExtendedUserRole = "ExtendedUserRole";
         public const string BasicUserRole = "BasicUserRole";
+        [Key]
         public readonly string Login;
         public readonly byte[] PasswordHash;
         public readonly bool IsExtended;
         public readonly string MainDirectory;
-        public readonly List<Tuple<int, string>> PlayList = new List<Tuple<int, string>>();
-        public User(string login, byte[] passwordHash, bool isExtended, string mainDirectory)
+
+        public readonly bool IsSimple;
+        //public readonly List<Tuple<int, string>> PlayList = new List<Tuple<int, string>>();
+        public User(string login, byte[] passwordHash, bool isExtended, string mainDirectory, bool isSimple)
         {
             Login = login;
             PasswordHash = passwordHash;
             IsExtended = isExtended;
             MainDirectory = mainDirectory;
+            IsSimple = isSimple;
         }
 
         public override bool Equals(object obj)

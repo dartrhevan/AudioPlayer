@@ -22,6 +22,7 @@ namespace AudioPlayer.Models
                 currentSong = value;
                 CurrentPlayer.Close();
                 CurrentPlayer.Open(new Uri(currentSong.Name, UriKind.Relative));
+                CurrentPlayer.Volume = CurrentUser.Volume;
             }
         }
         public bool Playing { get; set; }
@@ -69,11 +70,12 @@ namespace AudioPlayer.Models
         public List<File> Songs;
         public Dictionary<string, Album> Albums;
         private File currentSong;
-        public readonly List<Tuple<int, Album>> PlayList;// = new List<Tuple<int, Album>>();
+        public readonly List<Tuple<int, Album>> PlayList = new List<Tuple<int, Album>>();
+        public const string DefaultMainDirecrory = @"C:\MyPlayerDirectory";
 
         public MyPlayer(User currentUser)
         {
-            MainDirectory = new DirectoryInfo(currentUser.MainDirectory??@"C:\MyPlayerDirectory");
+            MainDirectory = new DirectoryInfo(currentUser.MainDirectory??DefaultMainDirecrory);
             CurrentUser = currentUser;
             currentDirectory = MainDirectory;
             CurrentPlayer.MediaEnded += (s, a) =>
@@ -84,7 +86,7 @@ namespace AudioPlayer.Models
             };
             //this.Window = Window;
             OpenCurrentDirectory();
-            PlayList = currentUser.PlayList?.Select(t => Tuple.Create(t.Item1, Albums[t.Item2]))?.ToList() ?? new List<Tuple<int, Album>>();
+            //PlayList = currentUser.PlayList?.Select(t => Tuple.Create(t.Item1, Albums[t.Item2]))?.ToList() ?? new List<Tuple<int, Album>>();
         }
 
         private static Dictionary<string, Album> GetAlbums(List<File> files) => files.GroupBy(f => f.Tag.Album)

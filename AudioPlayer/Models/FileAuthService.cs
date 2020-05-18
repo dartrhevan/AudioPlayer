@@ -30,11 +30,11 @@ namespace AudioPlayer.Models
             return user;
         }
 
-        private static bool ArrayEquals(byte[] arr1, byte[] arr2)
+        private static bool ArrayEquals<T>(T[] arr1, T[] arr2)
         {
             if (arr1.Length != arr2.Length) return false;
             for (var i = 0; i < arr1.Length; i++)
-                if (arr1[i] != arr2[i]) return false;
+                if (arr1[i].Equals(arr2[i])) return false;
             return true;
         }
 
