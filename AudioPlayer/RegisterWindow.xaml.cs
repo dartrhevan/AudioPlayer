@@ -23,7 +23,7 @@ namespace AudioPlayer
         private void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
             var user = new User(Login.Text, User.Encrypt(Password.Password), License.Password == "159");
-            authService.Save(user, MyPlayer.DefaultMainDirecrory);
+            authService.Save(user);
             this.Close();
             //this.DialogResult = License.Password != "";
         }

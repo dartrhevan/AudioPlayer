@@ -5,24 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AudioPlayer"
         mc:Ignorable="d"
-        
-        Title="SettingsWindow" Height="410.387" Width="727.113">
+        Background="LightGray" 
+        Title="Settings" Height="410.387" Width="727.113">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="Gray"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="ForceCursor" Value="True"/>
+        </Style>
+    </Window.Resources>
     <StackPanel>
         <TextBlock FontSize="28" FontWeight="Bold" HorizontalAlignment="Center">Settings</TextBlock>
         <StackPanel Orientation="Horizontal">
             <TextBlock FontSize="22" Margin="30 0 0 0">Login:</TextBlock>
-            <TextBox Margin="30 10 30 10" Width="200"/>
+            <TextBox Name="LoginField" Margin="30 10 30 10" Width="200"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontSize="22" Margin="30 0 0 0">Current password:</TextBlock>
+            <TextBox Name="CurrentPassword" Margin="30 10 30 10" Width="200"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock FontSize="22" Margin="30 0 0 0">New password:</TextBlock>
+            <TextBox Name="NewPassword" Margin="30 10 30 10" Width="200"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal">
             <TextBlock FontSize="22" Margin="30 0 0 0">Volume:</TextBlock>
-            <Slider Margin="30 10 30 10"  Width="200" Value="0.5" Maximum="1" />
+            <Slider Name="VolumeSLider" Margin="30 10 30 10"  Width="200" Value="0.5" Maximum="1" />
         </StackPanel>
         <StackPanel Orientation="Horizontal">
-            <TextBlock FontSize="22" Margin="30 0 0 0">Simple view:</TextBlock>
-            <CheckBox Margin="30 10 30 10"   />
+            <TextBlock FontSize="22" Margin="30 0 0 0">Simple view (only for extended users):</TextBlock>
+            <CheckBox Name="SimpleView" Margin="30 10 30 10"   />
         </StackPanel>
 
         <Button FontSize="20" Margin="30 0 0 0" Width="250" HorizontalAlignment="Left">Change main directory</Button>
-        <Button HorizontalAlignment="Right" Margin="30 10 30 10"  Width="80">Ok</Button>
+        <Button HorizontalAlignment="Right" Margin="30 10 30 10"  Width="80" Click="AcceptClick">Ok</Button>
     </StackPanel>
 </Window>

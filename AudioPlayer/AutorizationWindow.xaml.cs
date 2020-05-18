@@ -32,7 +32,7 @@ namespace AudioPlayer
         public User User { get; private set; }
         private void LoginButtonClick(object sender, RoutedEventArgs e)
         {
-            var user = authService.Authenticate(Login.Text, Password.Password, MyPlayer.DefaultMainDirecrory);
+            var user = authService.Authenticate(Login.Text, Password.Password);
 
             if (user != null)
             {

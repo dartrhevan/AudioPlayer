@@ -9,10 +9,10 @@ namespace AudioPlayer.Models
     {
         private IEnumerable<User> users;
 
-        public User Authenticate(string login, string password, string dirName)
+        public User Authenticate(string login, string password)
         {
 
-            DirectoryInfo dir = new DirectoryInfo(Path.Combine(dirName, "Users"));
+            DirectoryInfo dir = new DirectoryInfo(Path.Combine(MyPlayer.DefaultMainDirecrory, "Users"));
             if (!Directory.Exists(dir.FullName))
                 Directory.CreateDirectory(dir.FullName);
             users = dir.GetFiles().Select(f => Open(f)); //.ToArray();//dir.GetFiles().Select(f => Open(f));
@@ -34,13 +34,13 @@ namespace AudioPlayer.Models
         {
             if (arr1.Length != arr2.Length) return false;
             for (var i = 0; i < arr1.Length; i++)
-                if (arr1[i].Equals(arr2[i])) return false;
+                if (!arr1[i].Equals(arr2[i])) return false;
             return true;
         }
 
-        public void Save(User user, string dirName)
+        public void Save(User user)
         {
-            var fileStream = File.Open(Path.Combine(dirName, "Users", user.Login), FileMode.Create);
+            var fileStream = File.Open(Path.Combine(MyPlayer.DefaultMainDirecrory, "Users", user.Login), FileMode.Create);
             var binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(fileStream, user);
             fileStream.Close();

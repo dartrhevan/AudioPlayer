@@ -160,7 +160,8 @@ namespace AudioPlayer
 
         private void ShowOptionsWindow(object sender, RoutedEventArgs e)
         {
-
+            var set = new SettingsWindow(Player.CurrentUser);
+            set.ShowDialog();
         }
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using AudioPlayer.Models;
 
 namespace AudioPlayer
 {
@@ -19,9 +20,26 @@ namespace AudioPlayer
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public SettingsWindow()
+        private readonly User user;
+        public SettingsWindow(User user)
         {
+            this.user = user;
             InitializeComponent();
+            LoginField.Text = user.Login;
+            VolumeSLider.Value = user.Volume;
+            SimpleView.IsEnabled = user.IsExtended;
+            SimpleView.IsChecked = user.UseSimple;
+        }
+
+        private void AcceptClick(object sender, RoutedEventArgs e)
+        {
+            //LoginField.Text = user.Login;
+            user.Volume = VolumeSLider.Value;
+            //SimpleView.IsEnabled = user.IsExtended;
+            user.IsSimple = SimpleView.IsChecked.Value;
+            var fs = new FileAuthService();
+            fs.Save(user);
+            this.Close();
         }
     }
 }

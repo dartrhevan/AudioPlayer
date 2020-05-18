@@ -48,7 +48,7 @@ namespace AuthService.Controllers
         {
             if (arr1.Length != arr2.Length) return false;
             for (var i = 0; i < arr1.Length; i++)
-                if (arr1[i].Equals(arr2[i])) return false;
+                if (!arr1[i].Equals(arr2[i])) return false;
             return true;
         }
 
