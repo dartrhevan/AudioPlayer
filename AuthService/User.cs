@@ -11,10 +11,22 @@ namespace AuthService
         public const string ExtendedUserRole = "ExtendedUserRole";
         public const string BasicUserRole = "BasicUserRole";
         [Key]
-        public readonly string Login;
-        public readonly byte[] PasswordHash;
-        public readonly bool IsExtended;
-        public readonly string MainDirectory;
+        public string Login { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public readonly bool IsExtended;// { get; set; }
+        public string MainDirectory { get; set; }
+        private double _volume;
+
+        public double Volume
+        {
+            get => _volume;
+            set
+            {
+                if (value > 1 || value < 0)
+                    throw new ArgumentException("Volume should be between 0 and 1");
+                _volume = value;
+            }
+        }
 
         public readonly bool IsSimple;
         //public readonly List<Tuple<int, string>> PlayList = new List<Tuple<int, string>>();

@@ -11,10 +11,10 @@ namespace AudioPlayer.Models
     [Serializable]
     public class User
     {
-        public readonly string Login;
-        public readonly byte[] PasswordHash;
-        public readonly bool IsExtended;
-        public readonly string MainDirectory;
+        public string Login { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public readonly bool IsExtended;// { get; set; }
+        public string MainDirectory { get; set; }
         private double _volume;
 
         public double Volume

@@ -54,18 +54,31 @@ namespace AuthService.Controllers
 
         [HttpPost]
         public string Register(User user)
-        {/*
-            Console.WriteLine(user.Email);
-            if (users.Any(u => u.Email == user.Email))
-                return "Already exists";
-            else
+        {
+            using (var db = new AuthDbContext())
             {
-                users.Add(user);
-                Authenticate(user.Email);
-                return User.Identity.Name;
-            }*/
-            return "";
+                var u = db.Users.Find(user.Login);
+                if (u != null)
+                    return "Already exists";
+                db.Users.Add(user);
+                db.SaveChangesAsync();
+                return "OK";
+            }
         }
+
+        [HttpPut]
+        public string EditSettings(string login, User user)
+        {
+            using (var db = new AuthDbContext())
+            {
+                var u = db.Users.Find(login);
+                if (u == null) return "Not found";
+                u.Login = user.Login ? u.Login;
+
+            }
+            return "?";
+        }
+
         private async Task Authenticate(string userName, bool isExtended)
         {
             var id = new ClaimsIdentity(new[]
