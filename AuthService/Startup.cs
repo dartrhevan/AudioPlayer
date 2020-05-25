@@ -53,9 +53,20 @@ namespace AuthService
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            {
+            {/*
+                endpoints.MapControllerRoute("Test", "/Main/test", new { controller = "Main", action = "Test" });
+
+                endpoints.MapControllerRoute("default", "/Main", new { controller = "Main", action = "Index" }/*"{controller=Main}/{action=Index}/{id?}"/);
+            */
                 endpoints.MapControllers();
+
             });
+           /* app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+            });*/
         }
     }
 }

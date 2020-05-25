@@ -11,12 +11,14 @@ namespace AuthService
         public const string ExtendedUserRole = "ExtendedUserRole";
         public const string BasicUserRole = "BasicUserRole";
         [Key]
+        [Required]
         public string Login { get; set; }
+        [Required]
         public byte[] PasswordHash { get; set; }
-        public readonly bool IsExtended;// { get; set; }
+        public bool IsExtended { get; set; }
         public string MainDirectory { get; set; }
-        private double _volume;
-
+        private double _volume = 0.5;
+        public const string LicenseKey = "159";
         public double Volume
         {
             get => _volume;
@@ -28,15 +30,20 @@ namespace AuthService
             }
         }
 
-        public readonly bool IsSimple;
+        public bool IsSimple { get; set;  }
         //public readonly List<Tuple<int, string>> PlayList = new List<Tuple<int, string>>();
-        public User(string login, byte[] passwordHash, bool isExtended, string mainDirectory, bool isSimple)
+        public User(string login, byte[] passwordHash, bool isExtended, bool isSimple = false, string mainDirectory = null)
         {
             Login = login;
             PasswordHash = passwordHash;
             IsExtended = isExtended;
             MainDirectory = mainDirectory;
             IsSimple = isSimple;
+        }
+
+        public User()
+        {
+
         }
 
         public override bool Equals(object obj)

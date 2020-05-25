@@ -32,7 +32,7 @@ namespace AudioPlayer.Models
 
         public bool UseSimple => IsExtended && !IsSimple;
         //public readonly List<Tuple<int, string>> PlayList = new List<Tuple<int, string>>();
-        public User(string login, byte[] passwordHash, bool isExtended, string mainDirectory = MyPlayer.DefaultMainDirecrory, bool isSimple = false)
+        public User(string login, byte[] passwordHash, bool isExtended, string mainDirectory = MyPlayer.DefaultMainDirectory, bool isSimple = false)
         {
             Login = login;
             PasswordHash = passwordHash;

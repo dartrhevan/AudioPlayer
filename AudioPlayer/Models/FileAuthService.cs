@@ -12,7 +12,7 @@ namespace AudioPlayer.Models
         public User Authenticate(string login, string password)
         {
 
-            DirectoryInfo dir = new DirectoryInfo(Path.Combine(MyPlayer.DefaultMainDirecrory, "Users"));
+            DirectoryInfo dir = new DirectoryInfo(Path.Combine(MyPlayer.DefaultMainDirectory, "Users"));
             if (!Directory.Exists(dir.FullName))
                 Directory.CreateDirectory(dir.FullName);
             users = dir.GetFiles().Select(f => Open(f)); //.ToArray();//dir.GetFiles().Select(f => Open(f));
@@ -40,7 +40,7 @@ namespace AudioPlayer.Models
 
         public void Save(User user)
         {
-            var fileStream = File.Open(Path.Combine(MyPlayer.DefaultMainDirecrory, "Users", user.Login), FileMode.Create);
+            var fileStream = File.Open(Path.Combine(MyPlayer.DefaultMainDirectory, "Users", user.Login), FileMode.Create);
             var binaryFormatter = new BinaryFormatter();
             binaryFormatter.Serialize(fileStream, user);
             fileStream.Close();

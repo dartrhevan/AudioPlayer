@@ -71,11 +71,11 @@ namespace AudioPlayer.Models
         public Dictionary<string, Album> Albums;
         private File currentSong;
         public readonly List<Tuple<int, Album>> PlayList = new List<Tuple<int, Album>>();
-        public const string DefaultMainDirecrory = @"C:\MyPlayerDirectory";
+        public const string DefaultMainDirectory = @"C:\MyPlayerDirectory";
 
         public MyPlayer(User currentUser)
         {
-            MainDirectory = new DirectoryInfo(currentUser.MainDirectory??DefaultMainDirecrory);
+            MainDirectory = new DirectoryInfo(currentUser.MainDirectory??DefaultMainDirectory);
             CurrentUser = currentUser;
             currentDirectory = MainDirectory;
             CurrentPlayer.MediaEnded += (s, a) =>

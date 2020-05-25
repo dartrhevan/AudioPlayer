@@ -19,7 +19,8 @@ namespace AuthService
 
         public DbSet<User> Users { get; set; }
 
-        public static string ConnectionString { get; set; }//TODO: initialize
+        public static string ConnectionString { get; set; } =
+            "User ID=postgres;Password=android;Host=localhost;Port=5432;Database=playerAuth;Pooling=true;SSL Mode=Prefer;Trust Server Certificate=True";//TODO: initialize
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
