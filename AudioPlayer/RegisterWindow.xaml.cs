@@ -20,11 +20,15 @@ namespace AudioPlayer
             InitializeComponent();
         }
 
-        private void RegisterButtonClick(object sender, RoutedEventArgs e)
+        private async void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
-            var user = new User(Login.Text, User.Encrypt(Password.Password), License.Password == "159");
-            authService.Save(user);
-            this.Close();
+            //var user = new User(Login.Text, User.Encrypt(Password.Password), License.Password == "159");
+            var result = await authService.Save(Login.Text, Password.Password, License.Password);
+            if (result == null)
+                this.Close();
+            else
+                MessageBox.Show(result);
+
             //this.DialogResult = License.Password != "";
         }
         

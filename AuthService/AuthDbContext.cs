@@ -6,16 +6,13 @@ namespace AuthService
     public class AuthDbContext : DbContext
 
     {
-
         public AuthDbContext()
         {
-
             Database.EnsureCreated();
         }
 
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)
-        {
-        }
+        {}
 
         public DbSet<User> Users { get; set; }
 

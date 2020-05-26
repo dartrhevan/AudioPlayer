@@ -43,11 +43,12 @@ namespace AuthService.Controllers
                 var user = db.Users.Find(login);
                 if (user != null && ArrayEquals(user.PasswordHash, AuthService.User.Encrypt(password)))
                 {
-
                     await Authenticate(user.Login, user.IsExtended);
                     return user;
                 }
             }
+
+            HttpContext.Response.StatusCode = 401;
             return null;
         }
 
@@ -73,7 +74,7 @@ namespace AuthService.Controllers
                 db.Users.Add(user);
                 db.SaveChangesAsync();
                 await Authenticate(user.Login, user.IsExtended);
-                return "OK";
+                return null;
             }
         }
 

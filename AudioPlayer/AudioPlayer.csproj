@@ -51,6 +51,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Text.Json, Version=2.0.0.11, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.2.0.0.11\lib\net40\System.Text.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -81,8 +84,8 @@
     </Compile>
     <Compile Include="IMainPage.cs" />
     <Compile Include="Models\Album.cs" />
-    <Compile Include="Models\FileAuthService.cs" />
     <Compile Include="Models\IAuthService.cs" />
+    <Compile Include="Models\RemoteAuthService.cs" />
     <Compile Include="PlayListRow.xaml.cs">
       <DependentUpon>PlayListRow.xaml</DependentUpon>
     </Compile>

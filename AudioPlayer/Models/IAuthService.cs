@@ -1,8 +1,10 @@
-﻿namespace AudioPlayer.Models
+﻿using System.Threading.Tasks;
+
+namespace AudioPlayer.Models
 {
     public interface IAuthService
     {
-        void Save(User user);
-        User Authenticate(string login, string password);
+        Task<string> Save(string login, string password, string licenseKey);
+        Task<User> Authenticate(string login, string password);
     }
 }
