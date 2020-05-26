@@ -37,8 +37,8 @@ namespace AudioPlayer
             user.Volume = VolumeSLider.Value;
             //SimpleView.IsEnabled = user.IsExtended;
             user.IsSimple = SimpleView.IsChecked.Value;
-            var fs = new FileAuthService();
-            fs.Save(user);
+            /*var fs = new Rem();
+            fs.Save(user);*/
             this.Close();
         }
     }

@@ -19,7 +19,7 @@ namespace AudioPlayer.Models
                 formVariables.Add(new KeyValuePair<string, string>("password", password));
                 formVariables.Add(new KeyValuePair<string, string>("licenseKey", licenseKey));
                 var formContent = new FormUrlEncodedContent(formVariables);
-                var result = await client.PostAsync("/Main/Register", formContent);
+                var result = await client.PostAsync("https://localhost:44342/Main/Register", formContent);
                 var message = await result.Content.ReadAsStringAsync();
                 if (message == null && result.IsSuccessStatusCode)
                     return null;
@@ -35,15 +35,10 @@ namespace AudioPlayer.Models
                 formVariables.Add(new KeyValuePair<string, string>("login", login));
                 formVariables.Add(new KeyValuePair<string, string>("password", password));
                 var formContent = new FormUrlEncodedContent(formVariables);
-                var result = await client.PostAsync("/Main/Login", formContent);
-                return new JsonParser().Parse<User>(
-                    await result.Content.ReadAsStreamAsync());
-
-                // await result.Content.
-                /*.ReadAsStringAsync();
-if (message == null && result.IsSuccessStatusCode)
-return null;
-return message;*/
+                var result = await client.PostAsync("https://localhost:44342/Main/Login", formContent);
+                var str = await result.Content.ReadAsStringAsync();
+                //return new JsonParser.Parse<User>(str);
+                return JsonSerializer.Deserialize<User>(str, new JsonSerializerOptions() {PropertyNamingPolicy = JsonNamingPolicy.CamelCase});
             }
         }
     }

@@ -13,7 +13,7 @@ namespace AudioPlayer.Models
     {
         public string Login { get; set; }
         public byte[] PasswordHash { get; set; }
-        public readonly bool IsExtended;// { get; set; }
+        public bool IsExtended { get; set; }
         public string MainDirectory { get; set; }
         private double _volume;
 
@@ -30,7 +30,7 @@ namespace AudioPlayer.Models
 
         public bool IsSimple { get; set; }
 
-        public bool UseSimple => IsExtended && !IsSimple;
+        public bool UseSimple => IsExtended && IsSimple;
         //public readonly List<Tuple<int, string>> PlayList = new List<Tuple<int, string>>();
         public User(string login, byte[] passwordHash, bool isExtended, string mainDirectory = MyPlayer.DefaultMainDirectory, bool isSimple = false)
         {
@@ -39,6 +39,10 @@ namespace AudioPlayer.Models
             IsExtended = isExtended;
             MainDirectory = mainDirectory;
             IsSimple = isSimple;
+        }
+
+        public User()
+        {
         }
 
         public override bool Equals(object obj)

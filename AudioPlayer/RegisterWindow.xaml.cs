@@ -14,7 +14,7 @@ namespace AudioPlayer
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        readonly IAuthService authService = new FileAuthService();
+        readonly IAuthService authService = new RemoteAuthService();
         public RegisterWindow()
         {
             InitializeComponent();
