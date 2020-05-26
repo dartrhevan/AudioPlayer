@@ -16,9 +16,10 @@ namespace AudioPlayer
     public partial class AutorizationWindow : Window
     {
         private bool? result = null;
-        readonly IAuthService authService = new RemoteAuthService();//();
-        public AutorizationWindow()
+        readonly IAuthService authService;// = new RemoteAuthService();//();
+        public AutorizationWindow(IAuthService authService)
         {
+            this.authService = authService;
             InitializeComponent();
         }
 
@@ -46,7 +47,7 @@ namespace AudioPlayer
 
         private void RegisterButtonOnClick(object sender, RoutedEventArgs e)
         {
-            var r = new RegisterWindow().ShowDialog();
+            var r = new RegisterWindow(authService).ShowDialog();
         }
     }
 }

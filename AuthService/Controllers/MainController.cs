@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -82,28 +83,37 @@ namespace AuthService.Controllers
         public string Test() => "szx"; 
 
         [HttpPut]
-        public string EditSettings(string login, User user)
+        [Route("Edit")]
+        [Authorize]
+        public string EditSettings([FromForm]string password, [FromForm]User user)
         {
             using (var db = new AuthDbContext())
             {
-                var u = db.Users.Find(login);
+                var u = db.Users.Find(HttpContext.User.Identity.Name);
                 if (u == null) return "Not found";
                 u.Login = user.Login ?? u.Login;
                 u.IsSimple = user.IsSimple;
                 u.Volume = user.Volume;
                 u.MainDirectory = user.MainDirectory ?? u.MainDirectory;
+                if (password != null)
+                    u.PasswordHash = AuthService.User.Encrypt(password);
                 db.Entry(u).State = EntityState.Modified;
                 db.SaveChangesAsync();
-                return "OK";
+                return "";
             }
         }
+
+        [Route("Logout")]
+        [Authorize]
+        public async void Logout() => await HttpContext.SignOutAsync();
 
         private async Task Authenticate(string userName, bool isExtended)
         {
             var id = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, isExtended ? AuthService.User.ExtendedUserRole : AuthService.User.BasicUserRole )
+                    new Claim(ClaimsIdentity.DefaultRoleClaimType, isExtended ? 
+                        AuthService.User.ExtendedUserRole : AuthService.User.BasicUserRole )
                 },
                 "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));

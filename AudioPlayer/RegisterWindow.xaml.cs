@@ -14,16 +14,17 @@ namespace AudioPlayer
     /// </summary>
     public partial class RegisterWindow : Window
     {
-        readonly IAuthService authService = new RemoteAuthService();
-        public RegisterWindow()
+        readonly IAuthService authService;// = new RemoteAuthService();
+        public RegisterWindow(IAuthService authService)
         {
+            this.authService = authService;
             InitializeComponent();
         }
 
         private async void RegisterButtonClick(object sender, RoutedEventArgs e)
         {
             //var user = new User(Login.Text, User.Encrypt(Password.Password), License.Password == "159");
-            var result = await authService.Save(Login.Text, Password.Password, License.Password);
+            var result = await authService.Register(Login.Text, Password.Password, License.Password);
             if (result == "")
                 this.Close();
             else

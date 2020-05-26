@@ -13,7 +13,6 @@ namespace AuthService
         [Key]
         [Required]
         public string Login { get; set; }
-        [Required]
         public byte[] PasswordHash { get; set; }
         public bool IsExtended { get; set; }
         public string MainDirectory { get; set; }

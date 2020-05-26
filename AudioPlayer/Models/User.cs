@@ -53,13 +53,13 @@ namespace AudioPlayer.Models
                    PasswordHash == user.PasswordHash &&
                    IsExtended == user.IsExtended;
         }
-
+        /*
         public static byte[] Encrypt(string str)
         {
             MD5 hasher = MD5.Create();
             return hasher.ComputeHash(Encoding.Default.GetBytes(str));
             // data;
-        }
+        }*/
 
         public override int GetHashCode()
         {

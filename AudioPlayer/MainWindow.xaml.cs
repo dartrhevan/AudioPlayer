@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,15 +22,21 @@ namespace AudioPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
+        readonly IAuthService authService = new RemoteAuthService();
         public readonly MyPlayer Player;
         public readonly MainPage MainPage;
         private readonly RowAlbumPage RowAlbumPage;
         public readonly IMainPage RealMainPage;// { get; set; }
         public AlbumPage Album { get; set; }
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            base.OnClosing(e);
+            authService.Logout();
+        }
 
         public MainWindow()
         {
-            var authDialog = new AutorizationWindow();
+            var authDialog = new AutorizationWindow(authService);
             var r = authDialog.ShowDialog();
             //MessageBox.Show(r.ToString());
             Player = new MyPlayer(authDialog.User);
