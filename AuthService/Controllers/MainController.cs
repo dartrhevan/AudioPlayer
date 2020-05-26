@@ -72,7 +72,7 @@ namespace AuthService.Controllers
                 var user = new User(login, AuthService.User.Encrypt(password),
                     licenseKey == AuthService.User.LicenseKey);
                 db.Users.Add(user);
-                db.SaveChangesAsync();
+                await db.SaveChangesAsync();
                 await Authenticate(user.Login, user.IsExtended);
                 return null;
             }

@@ -24,7 +24,7 @@ namespace AudioPlayer
         {
             //var user = new User(Login.Text, User.Encrypt(Password.Password), License.Password == "159");
             var result = await authService.Save(Login.Text, Password.Password, License.Password);
-            if (result == null)
+            if (result == "")
                 this.Close();
             else
                 MessageBox.Show(result);
