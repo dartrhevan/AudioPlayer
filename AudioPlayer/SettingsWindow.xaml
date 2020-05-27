@@ -20,14 +20,23 @@
             <TextBlock FontSize="22" Margin="30 0 0 0">Login:</TextBlock>
             <TextBox Name="LoginField" Margin="30 10 30 10" Width="200"/>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock FontSize="22" Margin="30 0 0 0">Current password:</TextBlock>
-            <TextBox Name="CurrentPassword" Margin="30 10 30 10" Width="200"/>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock FontSize="22" Margin="30 0 0 0">New password:</TextBlock>
-            <TextBox Name="NewPassword" Margin="30 10 30 10" Width="200"/>
-        </StackPanel>
+        <Expander Margin="30 10 30 10" Header="Password change" Name="Expander">
+            <StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="22" Margin="30 0 0 0">Current password:</TextBlock>
+                    <PasswordBox Name="CurrentPassword" Margin="30 10 30 10" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="22" Margin="30 0 0 0">New password:</TextBlock>
+                    <PasswordBox Name="NewPassword" Margin="30 10 30 10" Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontSize="22" Margin="30 0 0 0">New password confirm:</TextBlock>
+                <PasswordBox Name="NewPasswordConfirm" Margin="30 10 30 10" Width="200"/>
+            </StackPanel>
+            </StackPanel>
+        </Expander>
+       
         <StackPanel Orientation="Horizontal">
             <TextBlock FontSize="22" Margin="30 0 0 0">Volume:</TextBlock>
             <Slider Name="VolumeSLider" Margin="30 10 30 10"  Width="200" Value="0.5" Maximum="1" />
@@ -37,7 +46,10 @@
             <CheckBox Name="SimpleView" Margin="30 10 30 10"   />
         </StackPanel>
 
-        <Button FontSize="20" Margin="30 0 0 0" Width="250" HorizontalAlignment="Left">Change main directory</Button>
+        <StackPanel Orientation="Horizontal">
+            <Button FontSize="20" Margin="30 0 0 0" Width="250" HorizontalAlignment="Left" Click="ChangeDirectoryClick">Change main directory</Button>
+            <TextBlock Name="MainDir" FontSize="22" Margin="30 0 0 0">C:\MyPlayerDirectory</TextBlock>
+        </StackPanel>
         <Button HorizontalAlignment="Right" Margin="30 10 30 10"  Width="80" Click="AcceptClick">Ok</Button>
     </StackPanel>
 </Window>

@@ -22,21 +22,22 @@ namespace AudioPlayer
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly IAuthService authService = new RemoteAuthService();
+        public readonly RemoteAuthService AuthService = new RemoteAuthService();
         public readonly MyPlayer Player;
         public readonly MainPage MainPage;
         private readonly RowAlbumPage RowAlbumPage;
         public readonly IMainPage RealMainPage;// { get; set; }
         public AlbumPage Album { get; set; }
-        protected override void OnClosing(CancelEventArgs e)
+        protected override async void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            authService.Logout();
+            await AuthService.Logout();
+            AuthService.Dispose();
         }
 
         public MainWindow()
         {
-            var authDialog = new AutorizationWindow(authService);
+            var authDialog = new AutorizationWindow(AuthService);
             var r = authDialog.ShowDialog();
             //MessageBox.Show(r.ToString());
             Player = new MyPlayer(authDialog.User);

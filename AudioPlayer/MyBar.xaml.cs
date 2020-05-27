@@ -160,7 +160,8 @@ namespace AudioPlayer
 
         private void ShowOptionsWindow(object sender, RoutedEventArgs e)
         {
-            var set = new SettingsWindow(Player.CurrentUser);
+            var parent = (Parent as DockPanel).Parent as MainWindow;
+            var set = new SettingsWindow(Player.CurrentUser, parent.AuthService);
             set.ShowDialog();
         }
     }

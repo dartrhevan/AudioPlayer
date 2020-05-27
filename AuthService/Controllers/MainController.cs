@@ -85,20 +85,39 @@ namespace AuthService.Controllers
         [HttpPut]
         [Route("Edit")]
         [Authorize]
-        public string EditSettings([FromForm]string password, [FromForm]User user)
+        public async Task<string> EditSettings([FromForm]string password, [FromForm]User user)
         {
             using (var db = new AuthDbContext())
             {
-                var u = db.Users.Find(HttpContext.User.Identity.Name);
+                var u = await db.Users.FindAsync(HttpContext.User.Identity.Name);
                 if (u == null) return "Not found";
-                u.Login = user.Login ?? u.Login;
-                u.IsSimple = user.IsSimple;
-                u.Volume = user.Volume;
-                u.MainDirectory = user.MainDirectory ?? u.MainDirectory;
-                if (password != null)
-                    u.PasswordHash = AuthService.User.Encrypt(password);
-                db.Entry(u).State = EntityState.Modified;
-                db.SaveChangesAsync();
+                if (user.Login == null || u.Login == user.Login) //?? u.Login;
+                {
+                    u.IsSimple = user.IsSimple;
+                    u.Volume = user.Volume;
+                    u.MainDirectory = user.MainDirectory ?? u.MainDirectory;
+                    if (password != null)
+                        u.PasswordHash = AuthService.User.Encrypt(password);
+                    db.Entry(u).State = EntityState.Modified;
+                    await db.SaveChangesAsync();
+                }
+                else
+                {
+                    var su = db.Users.Find(user.Login);
+                    if (su != null)
+                        return "Such login exists";
+                    user.IsSimple = u.IsSimple;
+                    user.Volume = u.Volume;
+                    user.IsExtended = u.IsExtended;
+                    user.MainDirectory = user.MainDirectory ?? u.MainDirectory;
+                    user.PasswordHash = password != null ? AuthService.User.Encrypt(password) : u.PasswordHash;
+                    //db.Entry(u).State = EntityState.Modified;
+                    db.Users.Remove(u);
+                    await db.Users.AddAsync(user);
+                    await db.SaveChangesAsync();
+                    await HttpContext.SignOutAsync();
+                    await Authenticate(user.Login, user.IsExtended);
+                }
                 return "";
             }
         }
