@@ -117,6 +117,8 @@ namespace AudioPlayer.Models
 
         private IEnumerable<File> GetFiles()
         {
+            if(!currentDirectory.Exists)
+                currentDirectory.Create();
             return currentDirectory.GetFiles()
                 .Select(f =>
                 {

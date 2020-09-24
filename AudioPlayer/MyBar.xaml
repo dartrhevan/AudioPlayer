@@ -65,7 +65,7 @@
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="0" Name ="CurrentCover" Source="C:\Users\User\OneDrive\Документы\Учёба\Интерфйсы\MediaPlayer\AudioPlayer\bin\Debug\1.png" Margin="0,0,0,2" Grid.RowSpan="3" ></Image>
-            <Label Grid.Row="0" Grid.Column="1" Name="CurrentName" FontFamily="Arial" FontSize="18" Foreground="White">The song haven't selected yet</Label>
+            <Label Grid.Row="0" Grid.Column="1" Name="CurrentName" FontFamily="Arial" FontSize="18" Foreground="White">The song hasn't selected yet</Label>
             <Slider Grid.Row="1" Grid.Column="1"  Name="Progress" Minimum="0" Maximum="1" Height="20" Margin="0, 15, 0, 0" ValueChanged="ProgressValueChanged"></Slider>
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.RowDefinitions>
