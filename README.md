@@ -6,4 +6,4 @@ This player has authentication system and provides two kind of interfaces standa
 Screenshots of extended version:
 
 ![albums](https://github.com/dartrhevan/AudioPlayer/blob/master/Screenshots/Albums.png)
-![playlist](https://github.com/dartrhevan/AudioPlayer/blob/master/Screenshots/Playlist.png)
+![playlist](https://github.com/dartrhevan/AudioPlayer/blob/master/Screenshots/PlayList.png)
